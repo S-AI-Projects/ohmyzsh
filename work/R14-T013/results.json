@@ -1,0 +1,67 @@
+{
+  "task": "R14-T013",
+  "item": "git-lfs",
+  "command": "zsh -f plugins/git-lfs/tests/git-lfs.test.zsh plugins/git-lfs/git-lfs.plugin.zsh",
+  "exit_status": 0,
+  "cases": [
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "sourcing plugin adds 4 git-lfs aliases and preserves unrelated alias ll"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "glfst preserves quoted wildcards/spaces, updates .gitattributes (simulated), and leaves a.psd untouched"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "glfsls forwards lfs ls-files and leaves PWD and files unchanged"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "gplfs resolves branch via git_current_branch and calls git lfs push origin feature/login --all"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "glfsi propagates status 1 on failure and leaves aliases and files unchanged"
+    }
+  ],
+  "checks": {
+    "test exited 0": true,
+    "at least one case ran": true,
+    "summary count matches cases": true,
+    "no case failed": true,
+    "no unexpected stderr": true,
+    "a success case ran": true,
+    "a failure or edge case ran": true,
+    "plugin file unchanged": true,
+    "readme file unchanged": true,
+    "sandbox left clean": true
+  },
+  "state_before": {
+    "plugin_sha256": "ab9ed3fbeea5c32e9ad5b33e43ef2b3efb52ac26b68c7bf597ec2b2686f3721f",
+    "readme_sha256": "0b060c8e8bad6e8b7000a6994327033c98c4a480cd9d7150555691d95349ee90",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "state_after": {
+    "plugin_sha256": "ab9ed3fbeea5c32e9ad5b33e43ef2b3efb52ac26b68c7bf597ec2b2686f3721f",
+    "readme_sha256": "0b060c8e8bad6e8b7000a6994327033c98c4a480cd9d7150555691d95349ee90",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "stdout": "PASS: [success] sourcing plugin adds 4 git-lfs aliases and preserves unrelated alias ll\n  status: 0\n  state:  alias_count_before=3 alias_count_after=7 ll_after=\"ls -l\"\nPASS: [success] glfst preserves quoted wildcards/spaces, updates .gitattributes (simulated), and leaves a.psd untouched\n  status: 0 (expected 0)\n  stderr: \"\"\n  args:   argc=4 | arg=lfs | arg=track | arg=*.psd | arg=design files/*.ai (expected argc=4 | arg=lfs | arg=track | arg=*.psd | arg=design files/*.ai)\n  state:  before_count=1 after_count=2 attr_created=yes attr_after=\"*.psd filter=lfs diff=lfs merge=lfs -text\ndesign files/*.ai filter=lfs diff=lfs merge=lfs -text\" decoy_unchanged=yes\nPASS: [success] glfsls forwards lfs ls-files and leaves PWD and files unchanged\n  status: 0 (expected 0)\n  args:   argc=2 | arg=lfs | arg=ls-files (expected argc=2 | arg=lfs | arg=ls-files)\n  state:  pwd_unchanged=yes files_before=.gitattributes,a.psd files_after=.gitattributes,a.psd\nPASS: [success] gplfs resolves branch via git_current_branch and calls git lfs push origin feature/login --all\n  status: 0 (expected 0)\n  args:   argc=3 | arg=symbolic-ref | arg=--quiet | arg=HEAD | argc=5 | arg=lfs | arg=push | arg=origin | arg=feature/login | arg=--all\n  state:  files_unchanged=yes\nPASS: [edge] glfsi propagates status 1 on failure and leaves aliases and files unchanged\n  status: 1 (expected 1)\n  args:   argc=2 | arg=lfs | arg=install (expected argc=2 | arg=lfs | arg=install)\n  state:  aliases_unchanged=yes files_unchanged=yes\n5 tests, 0 failures\n",
+  "stderr": ""
+}
