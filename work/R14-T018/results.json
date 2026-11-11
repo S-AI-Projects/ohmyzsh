@@ -1,0 +1,67 @@
+{
+  "task": "R14-T018",
+  "item": "fzf",
+  "command": "zsh -f plugins/fzf/tests/fzf.test.zsh plugins/fzf/fzf.plugin.zsh",
+  "exit_status": 0,
+  "cases": [
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "empty FZF_BASE prints Cannot find diagnostic, leaves marker unset, and records PATH change"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "fzf_setup_using_base_dir returns non-zero 127 when shell/key-bindings.zsh is absent"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "corrected FZF_BASE containing shell/key-bindings.zsh succeeds with empty stderr"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "fzf_setup_using_fzf returns 1 for fzf 0.47.0 without calling fzf --zsh"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "fzf 0.56.3 initializes via fzf --zsh cleanly even with empty FZF_BASE"
+    }
+  ],
+  "checks": {
+    "test exited 0": true,
+    "at least one case ran": true,
+    "summary count matches cases": true,
+    "no case failed": true,
+    "no unexpected stderr": true,
+    "a success case ran": true,
+    "a failure or edge case ran": true,
+    "plugin file unchanged": true,
+    "readme file unchanged": true,
+    "sandbox left clean": true
+  },
+  "state_before": {
+    "plugin_sha256": "94b2b6e00e191e05649a0d37ac8689665b497b417923b5f83c58d184f77068c0",
+    "readme_sha256": "94a97c3434995efc9a6777703b1ed055759d3f80c751259965434c364ff6d963",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "state_after": {
+    "plugin_sha256": "94b2b6e00e191e05649a0d37ac8689665b497b417923b5f83c58d184f77068c0",
+    "readme_sha256": "94a97c3434995efc9a6777703b1ed055759d3f80c751259965434c364ff6d963",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "stdout": "PASS: [edge] empty FZF_BASE prints Cannot find diagnostic, leaves marker unset, and records PATH change\n  state:  st=0|marker=__UNSET__|path_gained=yes\n  stderr: \"fzf_setup_using_base_dir:source:57: no such file or directory: <sandbox>/empty_base/key-bindings.zsh\n[oh-my-zsh] fzf plugin: Cannot find fzf installation directory.\nPlease add \\`export FZF_BASE=/path/to/fzf/install/dir\\` to your .zshrc\"\nPASS: [edge] fzf_setup_using_base_dir returns non-zero 127 when shell/key-bindings.zsh is absent\n  state:  st=127|marker=__UNSET__\n  stderr: \"fzf_setup_using_base_dir:source:57: no such file or directory: <sandbox>/empty_base/key-bindings.zsh\"\nPASS: [success] corrected FZF_BASE containing shell/key-bindings.zsh succeeds with empty stderr\n  state:  st=0|marker=loaded_from_base|path_gained=yes\n  stderr: \"\"\nPASS: [edge] fzf_setup_using_fzf returns 1 for fzf 0.47.0 without calling fzf --zsh\n  state:  st=1|zsh_marker=__UNSET__\n  args:   argc=1 | arg=--version\nPASS: [success] fzf 0.56.3 initializes via fzf --zsh cleanly even with empty FZF_BASE\n  state:  st=0|zsh_marker=loaded_via_zsh_flag|base_marker=__UNSET__\n  args:   argc=1 | arg=--version | argc=1 | arg=--zsh\n5 tests, 0 failures\n",
+  "stderr": ""
+}
