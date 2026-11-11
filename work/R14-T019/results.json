@@ -1,0 +1,77 @@
+{
+  "task": "R14-T019",
+  "item": "docker",
+  "command": "zsh -f plugins/docker/tests/docker.test.zsh plugins/docker/docker.plugin.zsh",
+  "exit_status": 0,
+  "cases": [
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "missing docker defines aliases, leaves cache untouched, and dbl exits 127"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "docker 24.0.2 completion cache is generated cleanly via docker completion zsh"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "dbl, dcin, and dcls preserve quoted arguments independent of Docker daemon"
+    }
+  ],
+  "broken_plugin_check": {
+    "exit_status": 1,
+    "cases": [
+      {
+        "result": "FAIL",
+        "kind": "edge",
+        "name": "missing docker defines aliases, leaves cache untouched, and dbl exits 127"
+      },
+      {
+        "result": "PASS",
+        "kind": "success",
+        "name": "docker 24.0.2 completion cache is generated cleanly via docker completion zsh"
+      },
+      {
+        "result": "FAIL",
+        "kind": "success",
+        "name": "dbl, dcin, and dcls preserve quoted arguments independent of Docker daemon"
+      }
+    ],
+    "stdout": "FAIL: [edge] missing docker defines aliases, leaves cache untouched, and dbl exits 127\n  state:  src=0|dbl_st=127|dbl=docker bild|dcin=docker container inspect|dcls=docker container ls|cache_count=0\n  stderr: \"(eval):1: command not found: docker\"\nPASS: [success] docker 24.0.2 completion cache is generated cleanly via docker completion zsh\n  status: 0 (expected 0)\n  stderr: \"\"\n  cache:  \"#compdef docker (stub completion 24.0.2)\"\nFAIL: [success] dbl, dcin, and dcls preserve quoted arguments independent of Docker daemon\n  status: 0 (expected 0)\n  args:   argc=4 | arg=bild | arg=-t | arg=my image:1.0 | arg=ctx dir/ | argc=3 | arg=container | arg=inspect | arg=web | argc=3 | arg=container | arg=ls | arg=-a\n  state:  DOCKER_HOST=tcp://127.0.0.1:1\n3 tests, 2 failures\n",
+    "stderr": ""
+  },
+  "checks": {
+    "test exited 0": true,
+    "at least one case ran": true,
+    "summary count matches cases": true,
+    "no case failed": true,
+    "no unexpected stderr": true,
+    "a success case ran": true,
+    "a failure or edge case ran": true,
+    "failure propagates on broken plugin": true,
+    "plugin file unchanged": true,
+    "sandbox left clean": true
+  },
+  "state_before": {
+    "plugin_sha256": "929b136376b99106eed638cb6f2895db1076b269669174772685a6411de10e32",
+    "sandbox_real": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "state_after": {
+    "plugin_sha256": "929b136376b99106eed638cb6f2895db1076b269669174772685a6411de10e32",
+    "sandbox_real": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "stdout": "PASS: [edge] missing docker defines aliases, leaves cache untouched, and dbl exits 127\n  state:  src=0|dbl_st=127|dbl=docker build|dcin=docker container inspect|dcls=docker container ls|cache_count=0\n  stderr: \"(eval):1: command not found: docker\"\nPASS: [success] docker 24.0.2 completion cache is generated cleanly via docker completion zsh\n  status: 0 (expected 0)\n  stderr: \"\"\n  cache:  \"#compdef docker (stub completion 24.0.2)\"\nPASS: [success] dbl, dcin, and dcls preserve quoted arguments independent of Docker daemon\n  status: 0 (expected 0)\n  args:   argc=4 | arg=build | arg=-t | arg=my image:1.0 | arg=ctx dir/ | argc=3 | arg=container | arg=inspect | arg=web | argc=3 | arg=container | arg=ls | arg=-a\n  state:  DOCKER_HOST=tcp://127.0.0.1:1\n3 tests, 0 failures\n",
+  "stderr": ""
+}
