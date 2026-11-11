@@ -1,0 +1,67 @@
+{
+  "task": "R14-T012",
+  "item": "cp",
+  "command": "zsh -f plugins/cp/tests/cp.test.zsh plugins/cp/cp.plugin.zsh",
+  "exit_status": 0,
+  "cases": [
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "compdef registers _files completion for cpv"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "minimum argument list cpv src.txt dest/ forwards 6 fixed options plus 2 paths"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "optional -n flag, spaced path, and literal wildcard arrive as separate arguments"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "documented invalid remote path host:/src preserves -e /dev/null and returns rsync status 12"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "missing rsync executable exits 127 and leaves files untouched"
+    }
+  ],
+  "checks": {
+    "test exited 0": true,
+    "at least one case ran": true,
+    "summary count matches cases": true,
+    "no case failed": true,
+    "no unexpected stderr": true,
+    "a success case ran": true,
+    "a failure or edge case ran": true,
+    "plugin file unchanged": true,
+    "readme file unchanged": true,
+    "sandbox left clean": true
+  },
+  "state_before": {
+    "plugin_sha256": "c44751bc157c251d96534223dd060f67497df469851235fff547f4f482cbfe64",
+    "readme_sha256": "0f8d512fb14f763b1e8e2a606908eb873b35c7882d04b320182e8a93a5f442b7",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "state_after": {
+    "plugin_sha256": "c44751bc157c251d96534223dd060f67497df469851235fff547f4f482cbfe64",
+    "readme_sha256": "0f8d512fb14f763b1e8e2a606908eb873b35c7882d04b320182e8a93a5f442b7",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "stdout": "PASS: [success] compdef registers _files completion for cpv\n  status: 0 (expected 0)\n  comp:   \"_files\" (expected \"_files\")\n  args:   (none)\n  state:  source_stderr=\"\"\nPASS: [success] minimum argument list cpv src.txt dest/ forwards 6 fixed options plus 2 paths\n  status: 0 (expected 0)\n  stdout: \"\"\n  stderr: \"\"\n  args:   argc=8 | arg=-pogbr | arg=-hhh | arg=--backup-dir=/tmp/rsync-htmn | arg=-e | arg=/dev/null | arg=--progress | arg=src.txt | arg=dest/ (expected argc=8 | arg=-pogbr | arg=-hhh | arg=--backup-dir=/tmp/rsync-htmn | arg=-e | arg=/dev/null | arg=--progress | arg=src.txt | arg=dest/)\n  state:  src_unchanged=yes backup_before=absent backup_after=absent\nPASS: [success] optional -n flag, spaced path, and literal wildcard arrive as separate arguments\n  status: 0 (expected 0)\n  stdout: \"\"\n  stderr: \"\"\n  args:   argc=10 | arg=-pogbr | arg=-hhh | arg=--backup-dir=/tmp/rsync-htmn | arg=-e | arg=/dev/null | arg=--progress | arg=-n | arg=dir with space/ | arg=*.txt | arg=dest/ (expected argc=10 | arg=-pogbr | arg=-hhh | arg=--backup-dir=/tmp/rsync-htmn | arg=-e | arg=/dev/null | arg=--progress | arg=-n | arg=dir with space/ | arg=*.txt | arg=dest/)\n  state:  src_unchanged=yes backup_before=absent backup_after=absent\nPASS: [edge] documented invalid remote path host:/src preserves -e /dev/null and returns rsync status 12\n  status: 12 (expected 12)\n  stdout: \"\"\n  stderr: \"\"\n  args:   argc=8 | arg=-pogbr | arg=-hhh | arg=--backup-dir=/tmp/rsync-htmn | arg=-e | arg=/dev/null | arg=--progress | arg=host:/src | arg=dest/ (expected argc=8 | arg=-pogbr | arg=-hhh | arg=--backup-dir=/tmp/rsync-htmn | arg=-e | arg=/dev/null | arg=--progress | arg=host:/src | arg=dest/)\n  state:  src_unchanged=yes backup_before=absent backup_after=absent\nPASS: [edge] missing rsync executable exits 127 and leaves files untouched\n  status: 127 (expected 127)\n  stdout: \"\"\n  stderr: \"cpv:1: command not found: rsync\"\n  args:    (expected )\n  state:  src_unchanged=yes backup_before=absent backup_after=absent\n5 tests, 0 failures\n",
+  "stderr": ""
+}

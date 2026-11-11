@@ -9,6 +9,22 @@ To enable, add `cp` to your `plugins` array in your zshrc file:
 plugins=(... cp)
 ```
 
+## Usage
+
+Minimum invocation:
+
+```zsh
+cpv <source> <destination>
+```
+
+Any additional `rsync` options or source paths are forwarded unchanged after the fixed flags:
+
+```zsh
+cpv -n "dir with space/" dest/
+```
+
+Remote paths (such as `host:/src` or `user@host:/src`) are not supported because `-e /dev/null` disables remote shells; invoking `cpv` with a remote specification passes `-e /dev/null` to `rsync` and propagates its non-zero exit status. Because `cp` registers file completion with `compdef _files cpv`, `compinit` must be initialized before loading the plugin standalone.
+
 ## Description
 
 The enabled options for rsync are:
