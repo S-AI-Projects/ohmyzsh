@@ -1,0 +1,64 @@
+{
+  "task": "R14-T016",
+  "item": "zoxide",
+  "command": "zsh -f plugins/zoxide/tests/zoxide.test.zsh plugins/zoxide/zoxide.plugin.zsh",
+  "exit_status": 0,
+  "cases": [
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "unset ZOXIDE_CMD_OVERRIDE uses default z and evaluates zoxide init output"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "ZOXIDE_CMD_OVERRIDE=j passes j to --cmd"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "empty ZOXIDE_CMD_OVERRIDE falls back to z"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "ZOXIDE_CMD_OVERRIDE with spaces arrives as one argument"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "missing zoxide prints install hint, exits 0, and leaves ZOXIDE_FIXTURE unset"
+    }
+  ],
+  "checks": {
+    "test exited 0": true,
+    "at least one case ran": true,
+    "summary count matches cases": true,
+    "no case failed": true,
+    "no unexpected stderr": true,
+    "a success case ran": true,
+    "a failure or edge case ran": true,
+    "plugin file unchanged": true,
+    "sandbox left clean": true
+  },
+  "state_before": {
+    "plugin_sha256": "db0e81525e705d4d168f9650b2b87d1dfda31f4238076a73e595ccf6151b181e",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "state_after": {
+    "plugin_sha256": "db0e81525e705d4d168f9650b2b87d1dfda31f4238076a73e595ccf6151b181e",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "stdout": "PASS: [success] unset ZOXIDE_CMD_OVERRIDE uses default z and evaluates zoxide init output\n  status: 0 (expected 0)\n  stdout: \"\" (expected \"\")\n  stderr: \"\" (expected \"\")\n  args:   argc=4 | arg=init | arg=--cmd | arg=z | arg=zsh (expected argc=4 | arg=init | arg=--cmd | arg=z | arg=zsh)\n  state:  fixture_before=__UNSET__ fixture_after=loaded (expected loaded)\nPASS: [success] ZOXIDE_CMD_OVERRIDE=j passes j to --cmd\n  status: 0 (expected 0)\n  stdout: \"\" (expected \"\")\n  stderr: \"\" (expected \"\")\n  args:   argc=4 | arg=init | arg=--cmd | arg=j | arg=zsh (expected argc=4 | arg=init | arg=--cmd | arg=j | arg=zsh)\n  state:  fixture_before=__UNSET__ fixture_after=loaded (expected loaded)\nPASS: [edge] empty ZOXIDE_CMD_OVERRIDE falls back to z\n  status: 0 (expected 0)\n  stdout: \"\" (expected \"\")\n  stderr: \"\" (expected \"\")\n  args:   argc=4 | arg=init | arg=--cmd | arg=z | arg=zsh (expected argc=4 | arg=init | arg=--cmd | arg=z | arg=zsh)\n  state:  fixture_before=__UNSET__ fixture_after=loaded (expected loaded)\nPASS: [edge] ZOXIDE_CMD_OVERRIDE with spaces arrives as one argument\n  status: 0 (expected 0)\n  stdout: \"\" (expected \"\")\n  stderr: \"\" (expected \"\")\n  args:   argc=4 | arg=init | arg=--cmd | arg=my cd | arg=zsh (expected argc=4 | arg=init | arg=--cmd | arg=my cd | arg=zsh)\n  state:  fixture_before=__UNSET__ fixture_after=loaded (expected loaded)\nPASS: [edge] missing zoxide prints install hint, exits 0, and leaves ZOXIDE_FIXTURE unset\n  status: 0 (expected 0)\n  stdout: \"[oh-my-zsh] zoxide not found, please install it from https://github.com/ajeetdsouza/zoxide\" (expected \"[oh-my-zsh] zoxide not found, please install it from https://github.com/ajeetdsouza/zoxide\")\n  stderr: \"\" (expected \"\")\n  args:    (expected )\n  state:  fixture_before=__UNSET__ fixture_after=__UNSET__ (expected __UNSET__)\n5 tests, 0 failures\n",
+  "stderr": ""
+}
