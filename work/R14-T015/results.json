@@ -1,0 +1,72 @@
+{
+  "task": "R14-T015",
+  "item": "git",
+  "command": "zsh -f plugins/git/tests/git.test.zsh plugins/git/git.plugin.zsh",
+  "exit_status": 0,
+  "cases": [
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "missing git loads cleanly, g exits 127, and grt returns 0 in place"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "gfa adapts --jobs=10 based on stubbed git version (2.7.0 vs 2.45.1)"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "g preserves quoted spaced filenames across stub boundary"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "grt changes PWD from subfolder to repository root"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "ggpur resolves current branch and accepts explicit branch argument"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "grt outside a repository stays in PWD and returns 0"
+    }
+  ],
+  "checks": {
+    "test exited 0": true,
+    "at least one case ran": true,
+    "summary count matches cases": true,
+    "no case failed": true,
+    "no unexpected stderr": true,
+    "a success case ran": true,
+    "a failure or edge case ran": true,
+    "plugin file unchanged": true,
+    "readme file unchanged": true,
+    "sandbox left clean": true
+  },
+  "state_before": {
+    "plugin_sha256": "e64568613b7859f5c4052373dfb4bf8a702f83401001294aa9b2309ab0b013d1",
+    "readme_sha256": "c1ab99a6de1d826aff77af70e6cc591e30d3940ae99e556a01b49a2373b6e5ac",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "state_after": {
+    "plugin_sha256": "e64568613b7859f5c4052373dfb4bf8a702f83401001294aa9b2309ab0b013d1",
+    "readme_sha256": "c1ab99a6de1d826aff77af70e6cc591e30d3940ae99e556a01b49a2373b6e5ac",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "stdout": "PASS: [edge] missing git loads cleanly, g exits 127, and grt returns 0 in place\n  state:  src=0|g=127|grt=0|same=yes|gfa=git fetch --all --tags --prune --jobs=10\n  stderr: \"(eval):1: command not found: git\"\nPASS: [edge] gfa adapts --jobs=10 based on stubbed git version (2.7.0 vs 2.45.1)\n  state:  gfa_2_7_0=\"git fetch --all --tags --prune\" gfa_2_45_1=\"git fetch --all --tags --prune --jobs=10\"\nPASS: [success] g preserves quoted spaced filenames across stub boundary\n  status: 0 (expected 0)\n  args:   argc=3 | arg=status | arg=-sb | arg=file with space.txt\nPASS: [success] grt changes PWD from subfolder to repository root\n  status: 0 (expected 0)\n  state:  pwd_before=<sandbox>/repo/sub/deep pwd_after=<sandbox>/repo\n  args:   argc=2 | arg=rev-parse | arg=--show-toplevel\nPASS: [success] ggpur resolves current branch and accepts explicit branch argument\n  status: 0 (expected 0)\n  args:   argc=3 | arg=symbolic-ref | arg=--quiet | arg=HEAD | argc=4 | arg=pull | arg=--rebase | arg=origin | arg=feature/login | argc=4 | arg=pull | arg=--rebase | arg=origin | arg=release/1.0\nPASS: [edge] grt outside a repository stays in PWD and returns 0\n  status: 0 (expected 0)\n  state:  pwd_before=<sandbox>/outside pwd_after=<sandbox>/outside\n  args:   argc=2 | arg=rev-parse | arg=--show-toplevel\n6 tests, 0 failures\n",
+  "stderr": ""
+}

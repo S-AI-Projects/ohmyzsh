@@ -10,6 +10,8 @@ plugins=(... git)
 
 ## Aliases
 
+Note: `grt` changes to the repository root inside a Git repository; outside a repository it falls back to `.`, stays in the current directory, and returns `0`.
+
 | Alias                  | Command                                                                                                                         |
 | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------ |
 | `grt`                  | `cd "$(git rev-parse --show-toplevel \|\| echo .)"`                                                                             |
