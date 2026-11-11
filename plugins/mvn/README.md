@@ -11,8 +11,13 @@ plugins=(... mvn)
 
 ## Aliases
 
-The plugin aliases mvn to a function that calls `mvnw` (the [Maven Wrapper](https://github.com/takari/maven-wrapper))
-if it's found, or the mvn command otherwise.
+The plugin aliases `mvn` to `mvn-or-mvnw`, which calls `mvnw` (the [Maven Wrapper](https://github.com/takari/maven-wrapper)) if an executable wrapper is found, or `command mvn` otherwise.
+
+### Maven wrapper lookup
+
+- Starting in `$PWD`, `mvn-or-mvnw` walks up parent directories until `/` looking for an executable `mvnw` file (`-x`).
+- When an executable `mvnw` is found, it prints ``Running `<path>/mvnw`...`` to `stderr`, forwards all arguments unchanged, and returns the wrapper's exit status without calling `mvn`.
+- If no executable `mvnw` is found (including when `mvnw` exists without execute permission), it falls back to `command mvn` with all arguments unchanged, prints no wrapper notice, and returns `mvn`'s exit status.
 
 | Alias                | Command                                         |
 |:---------------------|:------------------------------------------------|
