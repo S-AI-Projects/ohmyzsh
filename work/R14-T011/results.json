@@ -1,0 +1,72 @@
+{
+  "task": "R14-T011",
+  "item": "mvn",
+  "command": "zsh -f plugins/mvn/tests/mvn.test.zsh plugins/mvn/mvn.plugin.zsh",
+  "exit_status": 0,
+  "cases": [
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "mvnboot -Dx=\"a b\" from subfolder invokes executable root mvnw with 2 args and stderr notice"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "mvnag without mvnw falls back to mvn stub with archetype:generate and empty stderr"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "wrapper exit status 3 passes through mvnboot unchanged"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "non-executable mvnw is skipped and falls back to mvn stub"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "bare mvn with no arguments forwards argc=0 to mvn stub"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "missing mvn on PATH without mvnw exits 127 and preserves shell state"
+    }
+  ],
+  "checks": {
+    "test exited 0": true,
+    "at least one case ran": true,
+    "summary count matches cases": true,
+    "no case failed": true,
+    "no unexpected stderr": true,
+    "a success case ran": true,
+    "a failure or edge case ran": true,
+    "plugin file unchanged": true,
+    "readme file unchanged": true,
+    "sandbox left clean": true
+  },
+  "state_before": {
+    "plugin_sha256": "823fee7c947409324bfc005de7520af81a8893c69662a9e726a917fb039d81a8",
+    "readme_sha256": "14fb9d046ded1c3afea7ebe65d2ab3f24ad125f16b7e55d9ecc0459e89e1aaa5",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "state_after": {
+    "plugin_sha256": "823fee7c947409324bfc005de7520af81a8893c69662a9e726a917fb039d81a8",
+    "readme_sha256": "14fb9d046ded1c3afea7ebe65d2ab3f24ad125f16b7e55d9ecc0459e89e1aaa5",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "stdout": "PASS: [success] mvnboot -Dx=\"a b\" from subfolder invokes executable root mvnw with 2 args and stderr notice\n  status: 0 (expected 0, ok=1)\n  output: stdout=\"\" stderr=\"Running \\`<sandbox>/proj/mvnw\\`...\" (ok=1)\n  mvn:    \n  mvnw:   target=mvnw | argc=2 | arg=spring-boot:run | arg=-Dx=a b\n  state:  pwd_unchanged=yes dir_leaked=0 (ok=1)\nPASS: [success] mvnag without mvnw falls back to mvn stub with archetype:generate and empty stderr\n  status: 0 (expected 0, ok=1)\n  output: stdout=\"\" stderr=\"\" (ok=1)\n  mvn:    target=mvn | argc=1 | arg=archetype:generate\n  mvnw:   \n  state:  pwd_unchanged=yes dir_leaked=0 (ok=1)\nPASS: [success] wrapper exit status 3 passes through mvnboot unchanged\n  status: 3 (expected 3, ok=1)\n  output: stdout=\"\" stderr=\"Running \\`<sandbox>/proj/mvnw\\`...\" (ok=1)\n  mvn:    \n  mvnw:   target=mvnw | argc=1 | arg=spring-boot:run\n  state:  pwd_unchanged=yes dir_leaked=0 (ok=1)\nPASS: [edge] non-executable mvnw is skipped and falls back to mvn stub\n  status: 0 (expected 0, ok=1)\n  output: stdout=\"\" stderr=\"\" (ok=1)\n  mvn:    target=mvn | argc=1 | arg=-q\n  mvnw:   \n  state:  pwd_unchanged=yes dir_leaked=0 (ok=1)\nPASS: [edge] bare mvn with no arguments forwards argc=0 to mvn stub\n  status: 0 (expected 0, ok=1)\n  output: stdout=\"\" stderr=\"\" (ok=1)\n  mvn:    target=mvn | argc=0\n  mvnw:   \n  state:  pwd_unchanged=yes dir_leaked=0 (ok=1)\nPASS: [edge] missing mvn on PATH without mvnw exits 127 and preserves shell state\n  status: 127 (expected 127, ok=1)\n  output: stdout=\"\" stderr=\"mvn-or-mvnw:12: command not found: mvn\" (ok=1)\n  mvn:    \n  mvnw:   \n  state:  pwd_unchanged=yes dir_leaked=0 (ok=1)\n6 tests, 0 failures\n",
+  "stderr": ""
+}
