@@ -61,6 +61,7 @@ if [[ ! -f "$ZSH_CACHE_DIR/completions/_docker" ]]; then
   _comps[docker]=_docker
 fi
 
+autoload -Uz is-at-least
 zmodload -F zsh/files b:zf_mv
 () {
 
