@@ -1,0 +1,64 @@
+{
+  "task": "R14-T014",
+  "item": "autojump",
+  "command": "zsh -f plugins/autojump/tests/autojump.test.zsh plugins/autojump/autojump.plugin.zsh",
+  "exit_status": 0,
+  "cases": [
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "HOME containing spaces and [x]* sources exact autojump.zsh without touching decoy"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "brew --prefix fallback handles prefix with spaces and passes single --prefix arg"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "quoted paths survive sh_word_split and glob_subst without expanding into decoy"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "pre-existing found=1 still initializes found=0 and reports missing autojump"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "missing autojump and brew prints install notice, exits 0, and cleans up locals"
+    }
+  ],
+  "checks": {
+    "test exited 0": true,
+    "at least one case ran": true,
+    "summary count matches cases": true,
+    "no case failed": true,
+    "no unexpected stderr": true,
+    "a success case ran": true,
+    "a failure or edge case ran": true,
+    "plugin file unchanged": true,
+    "sandbox left clean": true
+  },
+  "state_before": {
+    "plugin_sha256": "a519c9e8635792427198742c51315c6b9dfe76b2f2359e5d490fe830180d5a7f",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "state_after": {
+    "plugin_sha256": "a519c9e8635792427198742c51315c6b9dfe76b2f2359e5d490fe830180d5a7f",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "stdout": "PASS: [success] HOME containing spaces and [x]* sources exact autojump.zsh without touching decoy\n  result: st=0|marker=<sandbox>/home dir [x]*/.autojump/etc/profile.d/autojump.zsh|decoy=0|leaked=0,0,0\n  stdout: \"\" stderr: \"\"\n  state:  decoy_unchanged=yes\nPASS: [success] brew --prefix fallback handles prefix with spaces and passes single --prefix arg\n  result: st=0|brew=<sandbox>/brew prefix [y]*/etc/profile.d/autojump.sh|leaked=0,0,0\n  args:   argc=1 | arg=--prefix\n  stdout: \"\" stderr: \"\"\nPASS: [edge] quoted paths survive sh_word_split and glob_subst without expanding into decoy\n  result: st=0|marker=<sandbox>/home dir [x]*/.autojump/etc/profile.d/autojump.zsh|decoy=0|leaked=0,0,0\n  stdout: \"\" stderr: \"\"\n  state:  decoy_unchanged=yes\nPASS: [edge] pre-existing found=1 still initializes found=0 and reports missing autojump\n  result: st=0|leaked=0,0,0\n  stdout: \"[oh-my-zsh] autojump not found. Please install it first.\" stderr: \"\"\nPASS: [edge] missing autojump and brew prints install notice, exits 0, and cleans up locals\n  result: st=0|leaked=0,0,0\n  stdout: \"[oh-my-zsh] autojump not found. Please install it first.\" stderr: \"\"\n5 tests, 0 failures\n",
+  "stderr": ""
+}
