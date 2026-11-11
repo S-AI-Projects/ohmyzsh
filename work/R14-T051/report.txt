@@ -1,0 +1,156 @@
+=================================================================
+ Task R14-T051: docker-compose Command Contract Verification
+=================================================================
+
+Timestamp: 2026-11-11T18:53:11.306861+00:00
+Git Commit: b509b1c6ed0c1ba37de12cbd37f30b2b2f61193a (student/e26b07f0534)
+Zsh Version: zsh 5.9 (arm64-apple-darwin25.0)
+Python Version: 3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]
+
+Summary: 18/18 passed (0 failed)
+
+Test Results Detail:
+-----------------------------------------------------------------
+[PASS] legacy_dco_noargs: Legacy dco without arguments invokes docker-compose with no args
+       Mode: legacy | Alias: dco
+       Inputs: []
+       Expected command: docker-compose []
+       Actual command:   docker-compose []
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] legacy_dco_with_args: Legacy dco forwards arguments and preserves spaces/quoting
+       Mode: legacy | Alias: dco
+       Inputs: ['up', '-d', 'web service']
+       Expected command: docker-compose ['up', '-d', 'web service']
+       Actual command:   docker-compose ['up', '-d', 'web service']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] legacy_dcb_noargs: Legacy dcb without arguments invokes docker-compose build
+       Mode: legacy | Alias: dcb
+       Inputs: []
+       Expected command: docker-compose ['build']
+       Actual command:   docker-compose ['build']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] legacy_dcb_with_args: Legacy dcb forwards build args with spaces
+       Mode: legacy | Alias: dcb
+       Inputs: ['--build-arg', 'KEY=value with spaces']
+       Expected command: docker-compose ['build', '--build-arg', 'KEY=value with spaces']
+       Actual command:   docker-compose ['build', '--build-arg', 'KEY=value with spaces']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] legacy_dcc_noargs: Legacy dcc without arguments invokes docker-compose config
+       Mode: legacy | Alias: dcc
+       Inputs: []
+       Expected command: docker-compose ['config']
+       Actual command:   docker-compose ['config']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] legacy_dcc_with_args: Legacy dcc forwards config options with spaces
+       Mode: legacy | Alias: dcc
+       Inputs: ['--file', 'compose test.yml', '--services']
+       Expected command: docker-compose ['config', '--file', 'compose test.yml', '--services']
+       Actual command:   docker-compose ['config', '--file', 'compose test.yml', '--services']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] legacy_dco_exit_status_propagation: Legacy dco propagates non-zero exit status from underlying command
+       Mode: legacy | Alias: dco
+       Inputs: ['ps']
+       Expected command: docker-compose ['ps']
+       Actual command:   docker-compose ['ps']
+       Expected status:  42 | Actual status: 42
+       Shell hygiene ($dccmd unset): True
+
+[PASS] modern_dco_noargs: Modern dco without arguments invokes docker compose
+       Mode: modern | Alias: dco
+       Inputs: []
+       Expected command: docker ['compose']
+       Actual command:   docker ['compose']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] modern_dco_with_args: Modern dco forwards arguments preserving spaces
+       Mode: modern | Alias: dco
+       Inputs: ['up', '-d', 'web service']
+       Expected command: docker ['compose', 'up', '-d', 'web service']
+       Actual command:   docker ['compose', 'up', '-d', 'web service']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] modern_dcb_noargs: Modern dcb without arguments invokes docker compose build
+       Mode: modern | Alias: dcb
+       Inputs: []
+       Expected command: docker ['compose', 'build']
+       Actual command:   docker ['compose', 'build']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] modern_dcb_with_args: Modern dcb forwards build args preserving spaces
+       Mode: modern | Alias: dcb
+       Inputs: ['--build-arg', 'APP_ENV=local dev']
+       Expected command: docker ['compose', 'build', '--build-arg', 'APP_ENV=local dev']
+       Actual command:   docker ['compose', 'build', '--build-arg', 'APP_ENV=local dev']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] modern_dcc_noargs: Modern dcc without arguments invokes docker compose config
+       Mode: modern | Alias: dcc
+       Inputs: []
+       Expected command: docker ['compose', 'config']
+       Actual command:   docker ['compose', 'config']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] modern_dcc_with_args: Modern dcc forwards config options preserving spaces
+       Mode: modern | Alias: dcc
+       Inputs: ['--file', 'docker compose.yml', '--resolve-image-digests']
+       Expected command: docker ['compose', 'config', '--file', 'docker compose.yml', '--resolve-image-digests']
+       Actual command:   docker ['compose', 'config', '--file', 'docker compose.yml', '--resolve-image-digests']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] modern_dcb_exit_status_propagation: Modern dcb propagates non-zero exit status from underlying command
+       Mode: modern | Alias: dcb
+       Inputs: []
+       Expected command: docker ['compose', 'build']
+       Actual command:   docker ['compose', 'build']
+       Expected status:  7 | Actual status: 7
+       Shell hygiene ($dccmd unset): True
+
+[PASS] broken_symlink_dco_fallback: Broken symlink docker-compose safely falls back to docker compose
+       Mode: broken | Alias: dco
+       Inputs: ['ps']
+       Expected command: docker ['compose', 'ps']
+       Actual command:   docker ['compose', 'ps']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] broken_symlink_dcb_fallback: Broken symlink docker-compose safely falls back to docker compose build
+       Mode: broken | Alias: dcb
+       Inputs: []
+       Expected command: docker ['compose', 'build']
+       Actual command:   docker ['compose', 'build']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] broken_symlink_dcc_fallback: Broken symlink docker-compose safely falls back to docker compose config
+       Mode: broken | Alias: dcc
+       Inputs: ['--services']
+       Expected command: docker ['compose', 'config', '--services']
+       Actual command:   docker ['compose', 'config', '--services']
+       Expected status:  0 | Actual status: 0
+       Shell hygiene ($dccmd unset): True
+
+[PASS] broken_symlink_dcc_exit_status_propagation: Broken symlink mode propagates non-zero exit status
+       Mode: broken | Alias: dcc
+       Inputs: []
+       Expected command: docker ['compose', 'config']
+       Actual command:   docker ['compose', 'config']
+       Expected status:  1 | Actual status: 1
+       Shell hygiene ($dccmd unset): True
