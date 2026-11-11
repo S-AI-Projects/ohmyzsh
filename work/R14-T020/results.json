@@ -1,0 +1,81 @@
+{
+  "task": "R14-T020",
+  "item": "npm",
+  "command": "zsh -f plugins/npm/tests/npm.test.zsh plugins/npm/npm.plugin.zsh",
+  "exit_status": 0,
+  "cases": [
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "when npm is present, stale cache file is deleted and _npm_completion is registered"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "when npm is missing, completion is skipped, cache file is kept, and aliases remain defined"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "npmD, npmS, and npmg preserve flags, quoted arguments, and trailing-space alias expansion"
+    }
+  ],
+  "mutant_check": {
+    "diff_line_numbers": [
+      2
+    ],
+    "exit_status": 1,
+    "cases": [
+      {
+        "result": "FAIL",
+        "kind": "success",
+        "name": "when npm is present, stale cache file is deleted and _npm_completion is registered"
+      },
+      {
+        "result": "FAIL",
+        "kind": "edge",
+        "name": "when npm is missing, completion is skipped, cache file is kept, and aliases remain defined"
+      },
+      {
+        "result": "PASS",
+        "kind": "success",
+        "name": "npmD, npmS, and npmg preserve flags, quoted arguments, and trailing-space alias expansion"
+      }
+    ],
+    "stdout": "FAIL: [success] when npm is present, stale cache file is deleted and _npm_completion is registered\n  status: 0 (expected 0)\n  state:  stale_before=yes result=\"comp=_npm|stale=yes|npmg=1\"\nFAIL: [edge] when npm is missing, completion is skipped, cache file is kept, and aliases remain defined\n  status: 0 (expected 0)\n  state:  initial_comp=\"_npm\" stale_before=yes result=\"comp=_npm_completion|stale=no|npmg=npm i -g |npmS=npm i -S |npmD=npm i -D \"\nPASS: [success] npmD, npmS, and npmg preserve flags, quoted arguments, and trailing-space alias expansion\n  status: 0 (expected 0)\n  args:   argc=4 | arg=i | arg=-D | arg=jest | arg=my pkg | argc=3 | arg=i | arg=-S | arg=react | argc=3 | arg=i | arg=-g | arg=typescript | argc=3 | arg=i | arg=-g | arg=left-pad\n3 tests, 2 failures\n",
+    "stderr": ""
+  },
+  "checks": {
+    "test exited 0": true,
+    "at least one case ran": true,
+    "summary count matches cases": true,
+    "no case failed": true,
+    "no unexpected stderr": true,
+    "a success case ran": true,
+    "a failure or edge case ran": true,
+    "mutant differs on exactly 1 line": true,
+    "mutant rejected (non-zero exit)": true,
+    "plugin file unchanged": true,
+    "sandbox left clean": true
+  },
+  "state_before": {
+    "plugin_sha256": "01f2ccd7c8e67c8cb00e582eecca004324abe815816f0a8e848c3b659b13b104",
+    "sandbox_real": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "state_after": {
+    "plugin_sha256": "01f2ccd7c8e67c8cb00e582eecca004324abe815816f0a8e848c3b659b13b104",
+    "sandbox_real": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "stdout": "PASS: [success] when npm is present, stale cache file is deleted and _npm_completion is registered\n  status: 0 (expected 0)\n  state:  stale_before=yes result=\"comp=_npm_completion|stale=no|npmg=1\"\nPASS: [edge] when npm is missing, completion is skipped, cache file is kept, and aliases remain defined\n  status: 0 (expected 0)\n  state:  initial_comp=\"_npm\" stale_before=yes result=\"comp=_npm|stale=yes|npmg=npm i -g |npmS=npm i -S |npmD=npm i -D \"\nPASS: [success] npmD, npmS, and npmg preserve flags, quoted arguments, and trailing-space alias expansion\n  status: 0 (expected 0)\n  args:   argc=4 | arg=i | arg=-D | arg=jest | arg=my pkg | argc=3 | arg=i | arg=-S | arg=react | argc=3 | arg=i | arg=-g | arg=typescript | argc=3 | arg=i | arg=-g | arg=left-pad\n3 tests, 0 failures\n",
+  "stderr": ""
+}

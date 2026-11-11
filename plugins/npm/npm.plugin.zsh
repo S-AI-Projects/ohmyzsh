@@ -1,3 +1,4 @@
+# Completion is set up only when npm is installed; the aliases below are always defined.
 (( $+commands[npm] )) && {
   command rm -f "${ZSH_CACHE_DIR:-$ZSH/cache}/npm_completion"
 
