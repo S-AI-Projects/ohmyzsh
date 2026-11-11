@@ -1,0 +1,67 @@
+{
+  "task": "R14-T017",
+  "item": "history",
+  "command": "zsh -f plugins/history/tests/history.test.zsh plugins/history/history.plugin.zsh",
+  "exit_status": 0,
+  "cases": [
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "README example command output matches README output block"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "README state verification h lists all three setup events unchanged"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "hl pipes full history into less stub with zero arguments"
+    },
+    {
+      "result": "PASS",
+      "kind": "success",
+      "name": "hsi searches history case-insensitively with grep -i"
+    },
+    {
+      "result": "PASS",
+      "kind": "edge",
+      "name": "hs with no matching event prints nothing, returns 1, and preserves history"
+    }
+  ],
+  "checks": {
+    "test exited 0": true,
+    "at least one case ran": true,
+    "summary count matches cases": true,
+    "no case failed": true,
+    "no unexpected stderr": true,
+    "a success case ran": true,
+    "a failure or edge case ran": true,
+    "plugin file unchanged": true,
+    "readme file unchanged": true,
+    "sandbox left clean": true
+  },
+  "state_before": {
+    "plugin_sha256": "f6aa58b56aa161df7d3ef779b3cd0fc0c60c79a55b6590489baaf820eece0c30",
+    "readme_sha256": "b6c6d456fe9fa54e993352c435941851f5a4d7b1cc8143294f476394808aa841",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "state_after": {
+    "plugin_sha256": "f6aa58b56aa161df7d3ef779b3cd0fc0c60c79a55b6590489baaf820eece0c30",
+    "readme_sha256": "b6c6d456fe9fa54e993352c435941851f5a4d7b1cc8143294f476394808aa841",
+    "sandbox": [
+      "cache",
+      "home",
+      "tmp",
+      "zdot"
+    ]
+  },
+  "stdout": "PASS: [success] README example command output matches README output block\n  status: 0 (expected 0)\n  stdout: \"    1  git status\n    3  git commit -m \\\"docs\\\"\" (expected \"    1  git status\n    3  git commit -m \\\"docs\\\"\")\n  stderr: \"\" (expected \"\")\n  args:   argc=1 | arg=git (expected argc=1 | arg=git)\n  state:  history_events_before=3 history_events_after=3\nPASS: [success] README state verification h lists all three setup events unchanged\n  status: 0 (expected 0)\n  stdout: \"    1  git status\n    2  ls -la\n    3  git commit -m \\\"docs\\\"\" (expected \"    1  git status\n    2  ls -la\n    3  git commit -m \\\"docs\\\"\")\n  stderr: \"\" (expected \"\")\n  args:    (expected )\n  state:  history_events_before=3 history_events_after=3\nPASS: [success] hl pipes full history into less stub with zero arguments\n  status: 0 (expected 0)\n  stdout: \"    1  git status\n    2  ls -la\n    3  git commit -m \\\"docs\\\"\" (expected \"    1  git status\n    2  ls -la\n    3  git commit -m \\\"docs\\\"\")\n  stderr: \"\" (expected \"\")\n  args:   argc=0 (expected argc=0)\n  state:  history_events_before=3 history_events_after=3\nPASS: [success] hsi searches history case-insensitively with grep -i\n  status: 0 (expected 0)\n  stdout: \"    1  git status\n    3  git commit -m \\\"docs\\\"\" (expected \"    1  git status\n    3  git commit -m \\\"docs\\\"\")\n  stderr: \"\" (expected \"\")\n  args:   argc=2 | arg=-i | arg=GIT (expected argc=2 | arg=-i | arg=GIT)\n  state:  history_events_before=3 history_events_after=3\nPASS: [edge] hs with no matching event prints nothing, returns 1, and preserves history\n  status: 1 (expected 1)\n  stdout: \"\" (expected \"\")\n  stderr: \"\" (expected \"\")\n  args:   argc=1 | arg=no-such-command (expected argc=1 | arg=no-such-command)\n  state:  history_events_before=3 history_events_after=3\n5 tests, 0 failures\n",
+  "stderr": ""
+}
