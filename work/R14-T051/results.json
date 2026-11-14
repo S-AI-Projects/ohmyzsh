@@ -1,0 +1,635 @@
+{
+  "task_id": "R14-T051",
+  "title": "Specify the command contract: docker-compose",
+  "repository": "S-AI-Projects/ohmyzsh",
+  "issue": "https://github.com/S-AI-Projects/ohmyzsh/issues/6",
+  "timestamp": "2026-11-11T18:53:11.306861+00:00",
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin25.0)",
+    "python": "3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "git_commit": "b509b1c6ed0c1ba37de12cbd37f30b2b2f61193a",
+    "git_branch": "student/e26b07f0534"
+  },
+  "summary": {
+    "total_tests": 18,
+    "passed": 18,
+    "failed": 0,
+    "overall_status": "PASS"
+  },
+  "tests": [
+    {
+      "test_id": "legacy_dco_noargs",
+      "description": "Legacy dco without arguments invokes docker-compose with no args",
+      "mode": "legacy",
+      "alias": "dco",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dco",
+        "args": []
+      },
+      "expected": {
+        "alias": "docker-compose",
+        "command": "docker-compose",
+        "args": [],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker-compose",
+        "command": "docker-compose",
+        "args": [],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "legacy_dco_with_args",
+      "description": "Legacy dco forwards arguments and preserves spaces/quoting",
+      "mode": "legacy",
+      "alias": "dco",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dco",
+        "args": [
+          "up",
+          "-d",
+          "web service"
+        ]
+      },
+      "expected": {
+        "alias": "docker-compose",
+        "command": "docker-compose",
+        "args": [
+          "up",
+          "-d",
+          "web service"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker-compose",
+        "command": "docker-compose",
+        "args": [
+          "up",
+          "-d",
+          "web service"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "legacy_dcb_noargs",
+      "description": "Legacy dcb without arguments invokes docker-compose build",
+      "mode": "legacy",
+      "alias": "dcb",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dcb",
+        "args": []
+      },
+      "expected": {
+        "alias": "docker-compose build",
+        "command": "docker-compose",
+        "args": [
+          "build"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker-compose build",
+        "command": "docker-compose",
+        "args": [
+          "build"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "legacy_dcb_with_args",
+      "description": "Legacy dcb forwards build args with spaces",
+      "mode": "legacy",
+      "alias": "dcb",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dcb",
+        "args": [
+          "--build-arg",
+          "KEY=value with spaces"
+        ]
+      },
+      "expected": {
+        "alias": "docker-compose build",
+        "command": "docker-compose",
+        "args": [
+          "build",
+          "--build-arg",
+          "KEY=value with spaces"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker-compose build",
+        "command": "docker-compose",
+        "args": [
+          "build",
+          "--build-arg",
+          "KEY=value with spaces"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "legacy_dcc_noargs",
+      "description": "Legacy dcc without arguments invokes docker-compose config",
+      "mode": "legacy",
+      "alias": "dcc",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dcc",
+        "args": []
+      },
+      "expected": {
+        "alias": "docker-compose config",
+        "command": "docker-compose",
+        "args": [
+          "config"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker-compose config",
+        "command": "docker-compose",
+        "args": [
+          "config"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "legacy_dcc_with_args",
+      "description": "Legacy dcc forwards config options with spaces",
+      "mode": "legacy",
+      "alias": "dcc",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dcc",
+        "args": [
+          "--file",
+          "compose test.yml",
+          "--services"
+        ]
+      },
+      "expected": {
+        "alias": "docker-compose config",
+        "command": "docker-compose",
+        "args": [
+          "config",
+          "--file",
+          "compose test.yml",
+          "--services"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker-compose config",
+        "command": "docker-compose",
+        "args": [
+          "config",
+          "--file",
+          "compose test.yml",
+          "--services"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "legacy_dco_exit_status_propagation",
+      "description": "Legacy dco propagates non-zero exit status from underlying command",
+      "mode": "legacy",
+      "alias": "dco",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dco",
+        "args": [
+          "ps"
+        ]
+      },
+      "expected": {
+        "alias": "docker-compose",
+        "command": "docker-compose",
+        "args": [
+          "ps"
+        ],
+        "status": 42,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker-compose",
+        "command": "docker-compose",
+        "args": [
+          "ps"
+        ],
+        "status": 42,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "modern_dco_noargs",
+      "description": "Modern dco without arguments invokes docker compose",
+      "mode": "modern",
+      "alias": "dco",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dco",
+        "args": []
+      },
+      "expected": {
+        "alias": "docker compose",
+        "command": "docker",
+        "args": [
+          "compose"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker compose",
+        "command": "docker",
+        "args": [
+          "compose"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "modern_dco_with_args",
+      "description": "Modern dco forwards arguments preserving spaces",
+      "mode": "modern",
+      "alias": "dco",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dco",
+        "args": [
+          "up",
+          "-d",
+          "web service"
+        ]
+      },
+      "expected": {
+        "alias": "docker compose",
+        "command": "docker",
+        "args": [
+          "compose",
+          "up",
+          "-d",
+          "web service"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker compose",
+        "command": "docker",
+        "args": [
+          "compose",
+          "up",
+          "-d",
+          "web service"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "modern_dcb_noargs",
+      "description": "Modern dcb without arguments invokes docker compose build",
+      "mode": "modern",
+      "alias": "dcb",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dcb",
+        "args": []
+      },
+      "expected": {
+        "alias": "docker compose build",
+        "command": "docker",
+        "args": [
+          "compose",
+          "build"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker compose build",
+        "command": "docker",
+        "args": [
+          "compose",
+          "build"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "modern_dcb_with_args",
+      "description": "Modern dcb forwards build args preserving spaces",
+      "mode": "modern",
+      "alias": "dcb",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dcb",
+        "args": [
+          "--build-arg",
+          "APP_ENV=local dev"
+        ]
+      },
+      "expected": {
+        "alias": "docker compose build",
+        "command": "docker",
+        "args": [
+          "compose",
+          "build",
+          "--build-arg",
+          "APP_ENV=local dev"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker compose build",
+        "command": "docker",
+        "args": [
+          "compose",
+          "build",
+          "--build-arg",
+          "APP_ENV=local dev"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "modern_dcc_noargs",
+      "description": "Modern dcc without arguments invokes docker compose config",
+      "mode": "modern",
+      "alias": "dcc",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dcc",
+        "args": []
+      },
+      "expected": {
+        "alias": "docker compose config",
+        "command": "docker",
+        "args": [
+          "compose",
+          "config"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker compose config",
+        "command": "docker",
+        "args": [
+          "compose",
+          "config"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "modern_dcc_with_args",
+      "description": "Modern dcc forwards config options preserving spaces",
+      "mode": "modern",
+      "alias": "dcc",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dcc",
+        "args": [
+          "--file",
+          "docker compose.yml",
+          "--resolve-image-digests"
+        ]
+      },
+      "expected": {
+        "alias": "docker compose config",
+        "command": "docker",
+        "args": [
+          "compose",
+          "config",
+          "--file",
+          "docker compose.yml",
+          "--resolve-image-digests"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker compose config",
+        "command": "docker",
+        "args": [
+          "compose",
+          "config",
+          "--file",
+          "docker compose.yml",
+          "--resolve-image-digests"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "modern_dcb_exit_status_propagation",
+      "description": "Modern dcb propagates non-zero exit status from underlying command",
+      "mode": "modern",
+      "alias": "dcb",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dcb",
+        "args": []
+      },
+      "expected": {
+        "alias": "docker compose build",
+        "command": "docker",
+        "args": [
+          "compose",
+          "build"
+        ],
+        "status": 7,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker compose build",
+        "command": "docker",
+        "args": [
+          "compose",
+          "build"
+        ],
+        "status": 7,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "broken_symlink_dco_fallback",
+      "description": "Broken symlink docker-compose safely falls back to docker compose",
+      "mode": "broken",
+      "alias": "dco",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dco",
+        "args": [
+          "ps"
+        ]
+      },
+      "expected": {
+        "alias": "docker compose",
+        "command": "docker",
+        "args": [
+          "compose",
+          "ps"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker compose",
+        "command": "docker",
+        "args": [
+          "compose",
+          "ps"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "broken_symlink_dcb_fallback",
+      "description": "Broken symlink docker-compose safely falls back to docker compose build",
+      "mode": "broken",
+      "alias": "dcb",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dcb",
+        "args": []
+      },
+      "expected": {
+        "alias": "docker compose build",
+        "command": "docker",
+        "args": [
+          "compose",
+          "build"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker compose build",
+        "command": "docker",
+        "args": [
+          "compose",
+          "build"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "broken_symlink_dcc_fallback",
+      "description": "Broken symlink docker-compose safely falls back to docker compose config",
+      "mode": "broken",
+      "alias": "dcc",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dcc",
+        "args": [
+          "--services"
+        ]
+      },
+      "expected": {
+        "alias": "docker compose config",
+        "command": "docker",
+        "args": [
+          "compose",
+          "config",
+          "--services"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker compose config",
+        "command": "docker",
+        "args": [
+          "compose",
+          "config",
+          "--services"
+        ],
+        "status": 0,
+        "dccmd_unset": true
+      },
+      "errors": []
+    },
+    {
+      "test_id": "broken_symlink_dcc_exit_status_propagation",
+      "description": "Broken symlink mode propagates non-zero exit status",
+      "mode": "broken",
+      "alias": "dcc",
+      "status": "PASS",
+      "inputs": {
+        "alias": "dcc",
+        "args": []
+      },
+      "expected": {
+        "alias": "docker compose config",
+        "command": "docker",
+        "args": [
+          "compose",
+          "config"
+        ],
+        "status": 1,
+        "dccmd_unset": true
+      },
+      "actual": {
+        "alias": "docker compose config",
+        "command": "docker",
+        "args": [
+          "compose",
+          "config"
+        ],
+        "status": 1,
+        "dccmd_unset": true
+      },
+      "errors": []
+    }
+  ]
+}
