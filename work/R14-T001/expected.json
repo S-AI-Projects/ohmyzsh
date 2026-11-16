@@ -1,0 +1,9 @@
+{
+  "required_case_types": [
+    "ordinary success",
+    "documented failure or edge state"
+  ],
+  "minimum_case_count": 2,
+  "expected_syntax_exit_status": 0,
+  "zero_cases_rejected": true
+}

@@ -1,15 +1,15 @@
 # rails command wrapper
 function _rails_command () {
   if [ -e "bin/stubs/rails" ]; then
-    bin/stubs/rails $@
+    bin/stubs/rails "$@"
   elif [ -e "bin/rails" ]; then
-    bin/rails $@
+    bin/rails "$@"
   elif [ -e "script/rails" ]; then
-    ruby script/rails $@
+    ruby script/rails "$@"
   elif [ -e "script/server" ]; then
-    ruby script/$@
+    ruby script/"$@"
   else
-    command rails $@
+    command rails "$@"
   fi
 }
 
@@ -19,13 +19,13 @@ compdef _rails_command=rails
 # rake command wrapper
 function _rake_command () {
   if [ -e "bin/stubs/rake" ]; then
-    bin/stubs/rake $@
+    bin/stubs/rake "$@"
   elif [ -e "bin/rake" ]; then
-    bin/rake $@
+    bin/rake "$@"
   elif type bundle &> /dev/null && [[ -e "Gemfile" || -e "gems.rb" ]]; then
-    bundle exec rake $@
+    bundle exec rake "$@"
   else
-    command rake $@
+    command rake "$@"
   fi
 }
 

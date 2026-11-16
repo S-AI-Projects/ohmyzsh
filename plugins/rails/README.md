@@ -148,3 +148,14 @@ prefix `rk` for backwards compatibility.
 | `sstat` | `thin --stats "/thin/stats" start` |
 
 - `remote_console <server> <directory>`: runs `ruby script/console production` on a remote server.
+
+## Tests
+
+The Rails plugin wrapper checks can be run with:
+
+```zsh
+zsh -f plugins/rails/tests/rails.test.zsh "$PWD"
+```
+
+They use temporary project files and stub executables; no Rails app, database, or
+running service is required.

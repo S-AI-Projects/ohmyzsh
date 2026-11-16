@@ -1,0 +1,43 @@
+{
+  "inputs": {
+    "plugin": "plugins/rails/rails.plugin.zsh",
+    "test": "plugins/rails/tests/rails.test.zsh",
+    "runner": "python3 work/R14-T001/check.py",
+    "fixture": "zsh -f launched with temporary ZDOTDIR; temporary project; stubbed PATH commands rails/rake/tail/ruby/bundle"
+  },
+  "expected": {
+    "syntax_exit_status": 0,
+    "required_case_types": [
+      "ordinary success",
+      "documented failure or edge state"
+    ],
+    "minimum_case_count": 2,
+    "repository_status_before_equals_after": true
+  },
+  "actual": {
+    "syntax_exit_status": 0,
+    "syntax_output": "",
+    "test_exit_status": 0,
+    "test_output": "PASS: rails local executable ordinary success | output=\"stub-output:local-rails\" | status=0 | argv=\"local-rails\n\\\"routes\\\"\n\\\"--grep\\\"\n\\\"admin routes\\\"\"\nPASS: rails repository state unchanged | before=\"/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tmp.up2IU3dGaJ/app\n/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tmp.up2IU3dGaJ/app/bin\n/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tmp.up2IU3dGaJ/app/bin/rails\" | after=\"/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tmp.up2IU3dGaJ/app\n/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tmp.up2IU3dGaJ/app/bin\n/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tmp.up2IU3dGaJ/app/bin/rails\"\nPASS: rake missing-Gemfile edge | output=\"stub-output:rake\" | status=0 | argv=\"rake\n\\\"-T\\\"\"\nPASS: rake missing-project state unchanged | before=\"/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tmp.up2IU3dGaJ/app\n/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tmp.up2IU3dGaJ/app/bin\n/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tmp.up2IU3dGaJ/app/bin/rails\" | after=\"/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tmp.up2IU3dGaJ/app\n/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tmp.up2IU3dGaJ/app/bin\n/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tmp.up2IU3dGaJ/app/bin/rails\"\nPASS: rails empty-args failure status propagation | output=\"stub-output:local-rails\" | status=7 | argv=\"local-rails\n\\\"\\\"\"\nPASS: devlog alias expansion | output=\"stub-output:tail\" | status=0 | argv=\"tail\n\\\"-f\\\"\n\\\"log/development.log\\\"\"\n4 tests, 0 failures\n",
+    "observed_test_names": [
+      "rails local executable ordinary success",
+      "rake missing-Gemfile edge",
+      "rails empty-args failure status propagation",
+      "devlog alias expansion"
+    ],
+    "test_summary": "4 tests, 0 failures",
+    "repository_status_before": [
+      " M plugins/rails/tests/rails.test.zsh",
+      " M work/R14-T001/results.json"
+    ],
+    "repository_status_after": [
+      " M plugins/rails/tests/rails.test.zsh",
+      " M work/R14-T001/results.json"
+    ]
+  },
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin25.0)",
+    "python": "3.15.2"
+  },
+  "errors": []
+}

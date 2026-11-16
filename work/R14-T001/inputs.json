@@ -1,0 +1,6 @@
+{
+  "plugin": "plugins/rails/rails.plugin.zsh",
+  "test": "plugins/rails/tests/rails.test.zsh",
+  "runner": "python3 work/R14-T001/check.py",
+  "fixture": "zsh -f launched with temporary ZDOTDIR; temporary project; stubbed PATH commands rails/rake/tail/ruby/bundle"
+}
