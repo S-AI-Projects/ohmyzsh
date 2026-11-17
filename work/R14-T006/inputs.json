@@ -1,0 +1,8 @@
+{
+  "completion_file": "plugins/autopep8/_autopep8",
+  "fixture": "plugins/autopep8/tests/autopep8.test.zsh",
+  "runner": "python3 work/R14-T006/check.py",
+  "bootstrap": "zsh -f with temporary HOME, ZDOTDIR, PATH and working directory",
+  "_arguments": "stub captures actual completion specifications as separate arguments",
+  "external_autopep8": "not invoked; this completion only defines specs"
+}

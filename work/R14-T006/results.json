@@ -1,0 +1,371 @@
+{
+  "inputs": {
+    "completion_file": "plugins/autopep8/_autopep8",
+    "fixture": "plugins/autopep8/tests/autopep8.test.zsh",
+    "runner": "python3 work/R14-T006/check.py",
+    "bootstrap": "zsh -f with temporary HOME, ZDOTDIR, PATH and working directory",
+    "_arguments": "stub captures actual completion specifications as separate arguments",
+    "external_autopep8": "not invoked; this completion only defines specs"
+  },
+  "expected": {
+    "syntax_exit_status": 0,
+    "cases": {
+      "success": 0,
+      "argument-error": 37
+    },
+    "characterized_options": {
+      "--help": [
+        "show this help message and exit",
+        ":"
+      ],
+      "-h": [
+        "show this help message and exit",
+        ":"
+      ],
+      "--version": [
+        "show program's version number and exit",
+        ":"
+      ],
+      "--verbose": [
+        "print verbose messages; multiple -v result in more verbose messages",
+        ""
+      ],
+      "-v": [
+        "print verbose messages; multiple -v result in more verbose messages",
+        ""
+      ],
+      "--diff": [
+        "print the diff for the fixed source",
+        ""
+      ],
+      "-d": [
+        "print the diff for the fixed source",
+        ""
+      ],
+      "--in-place": [
+        "make changes to files in place",
+        ""
+      ],
+      "-i": [
+        "make changes to files in place",
+        ""
+      ],
+      "--recursive": [
+        "run recursively; must be used with --in-place or --diff",
+        ""
+      ],
+      "-r": [
+        "run recursively; must be used with --in-place or --diff",
+        ""
+      ],
+      "--jobs": [
+        "number of parallel jobs; match CPU count if value is less than 1",
+        "::n        number of parallel jobs; match CPU count if value is:_files"
+      ],
+      "-j": [
+        "number of parallel jobs; match CPU count if value is less than 1",
+        "::n        number of parallel jobs; match CPU count if value is:_files"
+      ],
+      "--pep8-passes": [
+        "maximum number of additional pep8 passes (default: 100)",
+        "::n:_files"
+      ],
+      "-p": [
+        "maximum number of additional pep8 passes (default: 100)",
+        "::n:_files"
+      ],
+      "-a": [
+        "-a result in more aggressive changes",
+        "::result:_files"
+      ],
+      "--exclude": [
+        "exclude files/directories that match these comma- separated globs",
+        "::globs:_files"
+      ],
+      "--list-fixes": [
+        "list codes for fixes; used by --ignore and --select",
+        ""
+      ],
+      "--ignore": [
+        "do not fix these errors/warnings (default E226,E24)",
+        "::errors:_files"
+      ],
+      "--select": [
+        "fix only these errors/warnings (e.g. E4,W)",
+        "::errors:_files"
+      ],
+      "--max-line-length": [
+        "set maximum allowed line length (default: 79)",
+        "::n:_files"
+      ],
+      "*": [
+        null,
+        "::args:_files"
+      ]
+    },
+    "repository_status_before_equals_after": true
+  },
+  "actual": {
+    "syntax_exit_status": 0,
+    "syntax_output": "",
+    "cases": [
+      {
+        "case": "success",
+        "expected_completion_status": 0,
+        "process_exit_status": 0,
+        "passed_named_assertion": true,
+        "arguments_received_by__arguments": [
+          "-s",
+          "-S",
+          "--help[show this help message and exit]:",
+          "-h[show this help message and exit]:",
+          "--version[show program's version number and exit]:",
+          "--verbose[print verbose messages; multiple -v result in more verbose messages]",
+          "-v[print verbose messages; multiple -v result in more verbose messages]",
+          "--diff[print the diff for the fixed source]",
+          "-d[print the diff for the fixed source]",
+          "--in-place[make changes to files in place]",
+          "-i[make changes to files in place]",
+          "--recursive[run recursively; must be used with --in-place or --diff]",
+          "-r[run recursively; must be used with --in-place or --diff]",
+          "--jobs[number of parallel jobs; match CPU count if value is less than 1]::n        number of parallel jobs; match CPU count if value is:_files",
+          "-j[number of parallel jobs; match CPU count if value is less than 1]::n        number of parallel jobs; match CPU count if value is:_files",
+          "--pep8-passes[maximum number of additional pep8 passes (default: 100)]::n:_files",
+          "-p[maximum number of additional pep8 passes (default: 100)]::n:_files",
+          "-a[-a result in more aggressive changes]::result:_files",
+          "--exclude[exclude files/directories that match these comma- separated globs]::globs:_files",
+          "--list-fixes[list codes for fixes; used by --ignore and --select]",
+          "--ignore[do not fix these errors/warnings (default E226,E24)]::errors:_files",
+          "--select[fix only these errors/warnings (e.g. E4,W)]::errors:_files",
+          "--max-line-length[set maximum allowed line length (default: 79)]::n:_files",
+          "*::args:_files"
+        ],
+        "argument_count": 24,
+        "normalized_options": {
+          "--help": [
+            "show this help message and exit",
+            ":"
+          ],
+          "-h": [
+            "show this help message and exit",
+            ":"
+          ],
+          "--version": [
+            "show program's version number and exit",
+            ":"
+          ],
+          "--verbose": [
+            "print verbose messages; multiple -v result in more verbose messages",
+            ""
+          ],
+          "-v": [
+            "print verbose messages; multiple -v result in more verbose messages",
+            ""
+          ],
+          "--diff": [
+            "print the diff for the fixed source",
+            ""
+          ],
+          "-d": [
+            "print the diff for the fixed source",
+            ""
+          ],
+          "--in-place": [
+            "make changes to files in place",
+            ""
+          ],
+          "-i": [
+            "make changes to files in place",
+            ""
+          ],
+          "--recursive": [
+            "run recursively; must be used with --in-place or --diff",
+            ""
+          ],
+          "-r": [
+            "run recursively; must be used with --in-place or --diff",
+            ""
+          ],
+          "--jobs": [
+            "number of parallel jobs; match CPU count if value is less than 1",
+            "::n        number of parallel jobs; match CPU count if value is:_files"
+          ],
+          "-j": [
+            "number of parallel jobs; match CPU count if value is less than 1",
+            "::n        number of parallel jobs; match CPU count if value is:_files"
+          ],
+          "--pep8-passes": [
+            "maximum number of additional pep8 passes (default: 100)",
+            "::n:_files"
+          ],
+          "-p": [
+            "maximum number of additional pep8 passes (default: 100)",
+            "::n:_files"
+          ],
+          "-a": [
+            "-a result in more aggressive changes",
+            "::result:_files"
+          ],
+          "--exclude": [
+            "exclude files/directories that match these comma- separated globs",
+            "::globs:_files"
+          ],
+          "--list-fixes": [
+            "list codes for fixes; used by --ignore and --select",
+            ""
+          ],
+          "--ignore": [
+            "do not fix these errors/warnings (default E226,E24)",
+            "::errors:_files"
+          ],
+          "--select": [
+            "fix only these errors/warnings (e.g. E4,W)",
+            "::errors:_files"
+          ],
+          "--max-line-length": [
+            "set maximum allowed line length (default: 79)",
+            "::n:_files"
+          ],
+          "*": [
+            null,
+            "::args:_files"
+          ]
+        },
+        "output": "PASS: success | exit_status=0 | state_before=\"PWD=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-success-rdyvw4l9/working directory with spaces\nPATH=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-success-rdyvw4l9/bin\nZDOTDIR=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-success-rdyvw4l9/zdotdir\nHOME=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-success-rdyvw4l9/home\" | state_after=\"PWD=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-success-rdyvw4l9/working directory with spaces\nPATH=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-success-rdyvw4l9/bin\nZDOTDIR=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-success-rdyvw4l9/zdotdir\nHOME=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-success-rdyvw4l9/home\"\n",
+        "log_error": null
+      },
+      {
+        "case": "argument-error",
+        "expected_completion_status": 37,
+        "process_exit_status": 0,
+        "passed_named_assertion": true,
+        "arguments_received_by__arguments": [
+          "-s",
+          "-S",
+          "--help[show this help message and exit]:",
+          "-h[show this help message and exit]:",
+          "--version[show program's version number and exit]:",
+          "--verbose[print verbose messages; multiple -v result in more verbose messages]",
+          "-v[print verbose messages; multiple -v result in more verbose messages]",
+          "--diff[print the diff for the fixed source]",
+          "-d[print the diff for the fixed source]",
+          "--in-place[make changes to files in place]",
+          "-i[make changes to files in place]",
+          "--recursive[run recursively; must be used with --in-place or --diff]",
+          "-r[run recursively; must be used with --in-place or --diff]",
+          "--jobs[number of parallel jobs; match CPU count if value is less than 1]::n        number of parallel jobs; match CPU count if value is:_files",
+          "-j[number of parallel jobs; match CPU count if value is less than 1]::n        number of parallel jobs; match CPU count if value is:_files",
+          "--pep8-passes[maximum number of additional pep8 passes (default: 100)]::n:_files",
+          "-p[maximum number of additional pep8 passes (default: 100)]::n:_files",
+          "-a[-a result in more aggressive changes]::result:_files",
+          "--exclude[exclude files/directories that match these comma- separated globs]::globs:_files",
+          "--list-fixes[list codes for fixes; used by --ignore and --select]",
+          "--ignore[do not fix these errors/warnings (default E226,E24)]::errors:_files",
+          "--select[fix only these errors/warnings (e.g. E4,W)]::errors:_files",
+          "--max-line-length[set maximum allowed line length (default: 79)]::n:_files",
+          "*::args:_files"
+        ],
+        "argument_count": 24,
+        "normalized_options": {
+          "--help": [
+            "show this help message and exit",
+            ":"
+          ],
+          "-h": [
+            "show this help message and exit",
+            ":"
+          ],
+          "--version": [
+            "show program's version number and exit",
+            ":"
+          ],
+          "--verbose": [
+            "print verbose messages; multiple -v result in more verbose messages",
+            ""
+          ],
+          "-v": [
+            "print verbose messages; multiple -v result in more verbose messages",
+            ""
+          ],
+          "--diff": [
+            "print the diff for the fixed source",
+            ""
+          ],
+          "-d": [
+            "print the diff for the fixed source",
+            ""
+          ],
+          "--in-place": [
+            "make changes to files in place",
+            ""
+          ],
+          "-i": [
+            "make changes to files in place",
+            ""
+          ],
+          "--recursive": [
+            "run recursively; must be used with --in-place or --diff",
+            ""
+          ],
+          "-r": [
+            "run recursively; must be used with --in-place or --diff",
+            ""
+          ],
+          "--jobs": [
+            "number of parallel jobs; match CPU count if value is less than 1",
+            "::n        number of parallel jobs; match CPU count if value is:_files"
+          ],
+          "-j": [
+            "number of parallel jobs; match CPU count if value is less than 1",
+            "::n        number of parallel jobs; match CPU count if value is:_files"
+          ],
+          "--pep8-passes": [
+            "maximum number of additional pep8 passes (default: 100)",
+            "::n:_files"
+          ],
+          "-p": [
+            "maximum number of additional pep8 passes (default: 100)",
+            "::n:_files"
+          ],
+          "-a": [
+            "-a result in more aggressive changes",
+            "::result:_files"
+          ],
+          "--exclude": [
+            "exclude files/directories that match these comma- separated globs",
+            "::globs:_files"
+          ],
+          "--list-fixes": [
+            "list codes for fixes; used by --ignore and --select",
+            ""
+          ],
+          "--ignore": [
+            "do not fix these errors/warnings (default E226,E24)",
+            "::errors:_files"
+          ],
+          "--select": [
+            "fix only these errors/warnings (e.g. E4,W)",
+            "::errors:_files"
+          ],
+          "--max-line-length": [
+            "set maximum allowed line length (default: 79)",
+            "::n:_files"
+          ],
+          "*": [
+            null,
+            "::args:_files"
+          ]
+        },
+        "output": "PASS: argument-error | exit_status=37 | state_before=\"PWD=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-argument-error-8w7opofr/working directory with spaces\nPATH=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-argument-error-8w7opofr/bin\nZDOTDIR=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-argument-error-8w7opofr/zdotdir\nHOME=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-argument-error-8w7opofr/home\" | state_after=\"PWD=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-argument-error-8w7opofr/working directory with spaces\nPATH=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-argument-error-8w7opofr/bin\nZDOTDIR=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-argument-error-8w7opofr/zdotdir\nHOME=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/autopep8-argument-error-8w7opofr/home\"\n",
+        "log_error": null
+      }
+    ],
+    "repository_status_before": [],
+    "repository_status_after": []
+  },
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin25.0)",
+    "python": "3.15.2"
+  },
+  "errors": []
+}
