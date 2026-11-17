@@ -1,0 +1,86 @@
+{
+  "inputs": {
+    "plugin": "plugins/asdf/asdf.plugin.zsh",
+    "shell_test": "plugins/asdf/tests/asdf.test.zsh",
+    "runner": "python3 work/R14-T005/check.py",
+    "bootstrap": "zsh -f, explicit plugin source, temporary ZDOTDIR and HOME",
+    "working_directory": "per-case temporary directory with spaces",
+    "external_command": "temporary PATH containing only the asdf stub in success case; empty in missing-dependency case",
+    "stubbed_arguments": [
+      "completion",
+      "zsh"
+    ]
+  },
+  "expected": {
+    "syntax_exit_status": 0,
+    "assertions": [
+      "asdf is available: local default, shim path, completion and argv are correct",
+      "asdf is unavailable: plugin returns without changing shell state"
+    ],
+    "case_count": 2,
+    "success_sets_local_data_dir_shims_and_completion": true,
+    "missing_dependency_leaves_shell_state_unchanged": true,
+    "temporary_working_tree_unchanged": true,
+    "repository_status_before_equals_after": true
+  },
+  "actual": {
+    "syntax_exit_status": 0,
+    "syntax_output": "/Users/avikakalraiya/ohmyzsh/plugins/asdf/asdf.plugin.zsh:16: nice(5) failed: operation not permitted\n",
+    "cases": [
+      {
+        "case": "success",
+        "expected_assertion": "asdf is available: local default, shim path, completion and argv are correct",
+        "exit_status": 0,
+        "passed_named_assertion": true,
+        "output": "/Users/avikakalraiya/ohmyzsh/plugins/asdf/asdf.plugin.zsh:16: nice(5) failed: operation not permitted\nPASS: success | source_status=0 | asdf_status=0 | state_before=\"ASDF_DATA_DIR=<unset>\nPATH=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/asdf-success-zyu0xnll/bin\nPWD=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/asdf-success-zyu0xnll/working directory with spaces\nasdf_completion_mapping=<unset>\ncompletion_file=absent\nunrelated=preserve-this-value\" | state_after=\"ASDF_DATA_DIR=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/asdf-success-zyu0xnll/temporary home/.asdf\nPATH=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/asdf-success-zyu0xnll/temporary home/.asdf/shims:/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/asdf-success-zyu0xnll/bin\nPWD=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/asdf-success-zyu0xnll/working directory with spaces\nasdf_completion_mapping=_asdf\ncompletion_file=present\nunrelated=preserve-this-value\" | argv=\"COUNT:2\n\\\"completion\\\"\n\\\"zsh\\\"\nEXIT:0\" | completion=\"#compdef asdf\"\n",
+        "asdf_argv_log_lines": [
+          "COUNT:2",
+          "\"completion\"",
+          "\"zsh\"",
+          "EXIT:0"
+        ],
+        "asdf_exit_status": "0",
+        "completion_file_contents": "#compdef asdf\n",
+        "working_tree_before": {
+          "unrelated.txt": "must remain unchanged\n"
+        },
+        "working_tree_after": {
+          "unrelated.txt": "must remain unchanged\n"
+        },
+        "working_tree_unchanged": true
+      },
+      {
+        "case": "missing-dependency",
+        "expected_assertion": "asdf is unavailable: plugin returns without changing shell state",
+        "exit_status": 0,
+        "passed_named_assertion": true,
+        "output": "PASS: missing-dependency | source_status=0 | asdf_status=not-run | state_before=\"ASDF_DATA_DIR=<unset>\nPATH=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/asdf-missing-dependency-6kgxoh0r/bin\nPWD=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/asdf-missing-dependency-6kgxoh0r/working directory with spaces\nasdf_completion_mapping=<unset>\ncompletion_file=absent\nunrelated=preserve-this-value\" | state_after=\"ASDF_DATA_DIR=<unset>\nPATH=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/asdf-missing-dependency-6kgxoh0r/bin\nPWD=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/asdf-missing-dependency-6kgxoh0r/working directory with spaces\nasdf_completion_mapping=<unset>\ncompletion_file=absent\nunrelated=preserve-this-value\" | argv=\"<no invocation>\" | completion=\"<absent>\"\n",
+        "asdf_argv_log_lines": [],
+        "asdf_exit_status": null,
+        "completion_file_contents": null,
+        "working_tree_before": {
+          "unrelated.txt": "must remain unchanged\n"
+        },
+        "working_tree_after": {
+          "unrelated.txt": "must remain unchanged\n"
+        },
+        "working_tree_unchanged": true
+      }
+    ],
+    "repository_status_before": [
+      " M plugins/asdf/README.md",
+      "?? plugins/asdf/tests/",
+      "?? work/"
+    ],
+    "repository_status_after": [
+      " M plugins/asdf/README.md",
+      "?? plugins/asdf/tests/",
+      "?? work/"
+    ]
+  },
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin25.0)",
+    "python": "3.15.2"
+  },
+  "errors": []
+}

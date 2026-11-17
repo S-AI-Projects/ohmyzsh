@@ -1,0 +1,12 @@
+{
+  "syntax_exit_status": 0,
+  "assertions": [
+    "asdf is available: local default, shim path, completion and argv are correct",
+    "asdf is unavailable: plugin returns without changing shell state"
+  ],
+  "case_count": 2,
+  "success_sets_local_data_dir_shims_and_completion": true,
+  "missing_dependency_leaves_shell_state_unchanged": true,
+  "temporary_working_tree_unchanged": true,
+  "repository_status_before_equals_after": true
+}

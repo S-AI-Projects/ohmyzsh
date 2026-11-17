@@ -11,6 +11,11 @@ Adds integration with [asdf](https://github.com/asdf-vm/asdf), the extendable ve
 plugins=(asdf)
 ```
 
+When `asdf` is available on `$PATH`, the plugin defaults `ASDF_DATA_DIR` to
+`$HOME/.asdf`, prepends its `shims` directory to `$PATH`, and generates zsh
+completion data. If `asdf` is unavailable, initialization returns without
+changing those settings.
+
 ## Usage
 
 Refer to the [asdf plugin documentation](https://asdf-vm.com/guide/getting-started.html#_4-install-a-plugin) for information on how to add a plugin and install the many runtime versions for it.
@@ -42,6 +47,17 @@ asdf set -u nodejs 16.5.0   # -u is shorthand for --home
 
 For more commands, run `asdf help` or refer to the
 [asdf CLI documentation](https://asdf-vm.com/manage/commands.html#all-commands).
+
+## Tests
+
+Run the isolated initialization checks with:
+
+```zsh
+python3 work/R14-T005/check.py
+```
+
+The checks use a temporary home directory, working directory, cache and `asdf`
+stub; they do not use an installed asdf or modify your shell configuration.
 
 ## Maintainer
 
