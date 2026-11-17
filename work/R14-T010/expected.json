@@ -1,0 +1,24 @@
+{
+  "cases": [
+    {
+      "name": "normal-command",
+      "BUFFER": "tldr git",
+      "fixture_exit_status": 0
+    },
+    {
+      "name": "existing-tldr-prefix",
+      "BUFFER": "tldr --help",
+      "fixture_exit_status": 0
+    },
+    {
+      "name": "empty-buffer-history",
+      "BUFFER": "tldr git",
+      "fixture_exit_status": 0
+    },
+    {
+      "name": "mutant-rejected-tldrish",
+      "BUFFER": "tldr tldrish",
+      "fixture_exit_status": 42
+    }
+  ]
+}

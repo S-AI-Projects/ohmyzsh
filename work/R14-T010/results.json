@@ -1,0 +1,140 @@
+{
+  "test_names": [
+    "normal-command",
+    "existing-tldr-prefix",
+    "empty-buffer-history",
+    "mutant-rejected-tldrish"
+  ],
+  "syntax_check": {
+    "command": "zsh -n plugins/tldr/tldr.plugin.zsh",
+    "exit_status": 0
+  },
+  "mutant": {
+    "condition_before": "[[ \"$BUFFER\" = tldr\\ * ]] && return",
+    "condition_after": "[[ \"$BUFFER\" = tldr* ]] && return",
+    "mutation_is_temporary": true
+  },
+  "cases": [
+    {
+      "name": "normal-command",
+      "input": {
+        "BUFFER": "git status",
+        "history_buffer": ""
+      },
+      "expected": {
+        "BUFFER": "tldr git",
+        "fixture_exit_status": 0
+      },
+      "actual": {
+        "fixture_exit_status": 0,
+        "stdout": "case=normal-command\nfunction_status=0\nbefore_buffer=git status\nafter_buffer=tldr git\nbefore_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-normal-command-38neqw24/working directory with spaces\nafter_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-normal-command-38neqw24/working directory with spaces\nbefore_path=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-normal-command-38neqw24/bin\nafter_path=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-normal-command-38neqw24/bin\nzle_calls=-N tldr-command-line\nbindkey_calls=\\etldr tldr-command-line\n",
+        "stderr": "",
+        "state_before": {
+          "BUFFER": "git status",
+          "PWD": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-normal-command-38neqw24/working directory with spaces",
+          "PATH": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-normal-command-38neqw24/bin"
+        },
+        "state_after": {
+          "BUFFER": "tldr git",
+          "PWD": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-normal-command-38neqw24/working directory with spaces",
+          "PATH": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-normal-command-38neqw24/bin"
+        },
+        "repository_before": [],
+        "repository_after": [],
+        "temporary_directory_removed": true
+      }
+    },
+    {
+      "name": "existing-tldr-prefix",
+      "input": {
+        "BUFFER": "tldr --help",
+        "history_buffer": ""
+      },
+      "expected": {
+        "BUFFER": "tldr --help",
+        "fixture_exit_status": 0
+      },
+      "actual": {
+        "fixture_exit_status": 0,
+        "stdout": "case=existing-tldr-prefix\nfunction_status=0\nbefore_buffer=tldr --help\nafter_buffer=tldr --help\nbefore_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-existing-tldr-prefix-ayjr16q8/working directory with spaces\nafter_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-existing-tldr-prefix-ayjr16q8/working directory with spaces\nbefore_path=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-existing-tldr-prefix-ayjr16q8/bin\nafter_path=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-existing-tldr-prefix-ayjr16q8/bin\nzle_calls=-N tldr-command-line\nbindkey_calls=\\etldr tldr-command-line\n",
+        "stderr": "",
+        "state_before": {
+          "BUFFER": "tldr --help",
+          "PWD": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-existing-tldr-prefix-ayjr16q8/working directory with spaces",
+          "PATH": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-existing-tldr-prefix-ayjr16q8/bin"
+        },
+        "state_after": {
+          "BUFFER": "tldr --help",
+          "PWD": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-existing-tldr-prefix-ayjr16q8/working directory with spaces",
+          "PATH": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-existing-tldr-prefix-ayjr16q8/bin"
+        },
+        "repository_before": [],
+        "repository_after": [],
+        "temporary_directory_removed": true
+      }
+    },
+    {
+      "name": "empty-buffer-history",
+      "input": {
+        "BUFFER": "",
+        "history_buffer": "git status"
+      },
+      "expected": {
+        "BUFFER": "tldr git",
+        "fixture_exit_status": 0
+      },
+      "actual": {
+        "fixture_exit_status": 0,
+        "stdout": "case=empty-buffer-history\nfunction_status=0\nbefore_buffer=\nafter_buffer=tldr git\nbefore_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-empty-buffer-history-5mxb3l3s/working directory with spaces\nafter_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-empty-buffer-history-5mxb3l3s/working directory with spaces\nbefore_path=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-empty-buffer-history-5mxb3l3s/bin\nafter_path=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-empty-buffer-history-5mxb3l3s/bin\nzle_calls=-N tldr-command-line|up-history\nbindkey_calls=\\etldr tldr-command-line\n",
+        "stderr": "",
+        "state_before": {
+          "BUFFER": "",
+          "PWD": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-empty-buffer-history-5mxb3l3s/working directory with spaces",
+          "PATH": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-empty-buffer-history-5mxb3l3s/bin"
+        },
+        "state_after": {
+          "BUFFER": "tldr git",
+          "PWD": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-empty-buffer-history-5mxb3l3s/working directory with spaces",
+          "PATH": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-empty-buffer-history-5mxb3l3s/bin"
+        },
+        "repository_before": [],
+        "repository_after": [],
+        "temporary_directory_removed": true
+      }
+    },
+    {
+      "name": "mutant-rejected-tldrish",
+      "input": {
+        "BUFFER": "tldrish",
+        "history_buffer": ""
+      },
+      "expected": {
+        "BUFFER": "tldr tldrish",
+        "fixture_exit_status": 42
+      },
+      "actual": {
+        "fixture_exit_status": 42,
+        "stdout": "case=mutant-rejected-tldrish\nfunction_status=0\nbefore_buffer=tldrish\nafter_buffer=tldrish\nbefore_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-mutant-rejected-tldrish-4hsawr16/working directory with spaces\nafter_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-mutant-rejected-tldrish-4hsawr16/working directory with spaces\nbefore_path=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-mutant-rejected-tldrish-4hsawr16/bin\nafter_path=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-mutant-rejected-tldrish-4hsawr16/bin\nzle_calls=-N tldr-command-line\nbindkey_calls=\\etldr tldr-command-line\n",
+        "stderr": "BUFFER assertion failed: expected \"tldr tldrish\", got \"tldrish\"\n",
+        "state_before": {
+          "BUFFER": "tldrish",
+          "PWD": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-mutant-rejected-tldrish-4hsawr16/working directory with spaces",
+          "PATH": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-mutant-rejected-tldrish-4hsawr16/bin"
+        },
+        "state_after": {
+          "BUFFER": "tldrish",
+          "PWD": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-mutant-rejected-tldrish-4hsawr16/working directory with spaces",
+          "PATH": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/tldr-mutant-rejected-tldrish-4hsawr16/bin"
+        },
+        "repository_before": [],
+        "repository_after": [],
+        "temporary_directory_removed": true
+      }
+    }
+  ],
+  "tool_versions": {
+    "python": "3.15.2 (main, Oct 25 2026, 16:57:51) [Clang 21.0.0 (clang-2100.3.34.2)]",
+    "zsh": "zsh 5.9 (arm64-apple-darwin25.0)",
+    "git": "git version 2.50.1 (Apple Git-155)"
+  }
+}

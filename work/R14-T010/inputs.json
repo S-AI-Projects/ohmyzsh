@@ -1,0 +1,6 @@
+{
+  "normal": "git status",
+  "existing_prefix": "tldr --help",
+  "history": "git status",
+  "mutant_reject_input": "tldrish"
+}

@@ -1,0 +1,4 @@
+The command-line widget should prepend `tldr` to a normal command, leave an
+existing `tldr ` command unchanged, and load the previous command when BUFFER
+is empty. A one-condition mutant that treats every `tldr*` prefix as already
+handled must be rejected for the valid input `tldrish`.
