@@ -64,6 +64,28 @@ ensures the `bdr` alias runs without warnings.
 | `bup`    | `brew upgrade`                          | Upgrade outdated, unpinned brews.                                     |
 | `buz`    | `brew uninstall --zap`                  | Remove all files associated with a cask.                              |
 
+## Troubleshooting `bci`
+
+The `bci` alias expands to `brew info --cask`; it still needs a cask name. If
+you run `bci` by itself, Homebrew reports that the argument is missing and
+returns a non-zero exit status. Add the cask token to the invocation:
+
+```zsh
+% bci
+Error: no cask name was provided
+% echo $?
+2
+
+% bci firefox
+firefox: 130.0
+% echo $?
+0
+```
+
+The exact diagnostic and exit status can vary by Homebrew version. The focused
+fixture stubs `brew` to exercise the missing-argument failure and corrected
+invocation without contacting Homebrew or changing installed packages.
+
 ## Completion
 
 This plugin configures paths with Homebrew's completion functions automatically, so you don't need to do it

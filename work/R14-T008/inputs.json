@@ -1,0 +1,10 @@
+{
+  "failure_command": [
+    "bci"
+  ],
+  "corrected_command": [
+    "bci",
+    "firefox"
+  ],
+  "temp_path_contains_spaces": true
+}

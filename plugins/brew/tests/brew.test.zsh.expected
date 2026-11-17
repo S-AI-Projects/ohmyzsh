@@ -1,0 +1,4 @@
+The no-argument `bci` alias reaches the stub's missing-cask failure branch,
+prints its diagnostic, and returns status 2. The corrected `bci firefox`
+invocation prints `firefox: 130.0` and returns status 0. The recorded brew
+arguments are `info --cask` and `info --cask firefox`; PWD stays unchanged.

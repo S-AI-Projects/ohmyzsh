@@ -1,0 +1,54 @@
+{
+  "test_names": [
+    "bci-missing-cask",
+    "bci-corrected-cask"
+  ],
+  "syntax_check": {
+    "command": "zsh -n plugins/brew/brew.plugin.zsh",
+    "exit_status": 0
+  },
+  "expected": {
+    "argv": [
+      [
+        "info",
+        "--cask"
+      ],
+      [
+        "info",
+        "--cask",
+        "firefox"
+      ]
+    ],
+    "failure_status": 2,
+    "failure_stderr": "Error: no cask name was provided (use: bci <cask>)",
+    "success_status": 0,
+    "success_stdout": "firefox: 130.0",
+    "pwd": "unchanged"
+  },
+  "actual": {
+    "fixture_exit_status": 0,
+    "argv": [
+      [
+        "info",
+        "--cask"
+      ],
+      [
+        "info",
+        "--cask",
+        "firefox"
+      ]
+    ],
+    "stdout": "failure_status=2\nfailure_stdout=\nfailure_stderr=Error: no cask name was provided (use: bci <cask>)\nsuccess_status=0\nsuccess_stdout=firefox: 130.0\nsuccess_stderr=\nbefore_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/brew-bci-v2whvl8s/working directory with spaces\nafter_failure_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/brew-bci-v2whvl8s/working directory with spaces\nafter_success_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/brew-bci-v2whvl8s/working directory with spaces\n",
+    "stderr": "",
+    "state_before": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/brew-bci-v2whvl8s/working directory with spaces",
+    "state_after_failure": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/brew-bci-v2whvl8s/working directory with spaces",
+    "state_after_success": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/brew-bci-v2whvl8s/working directory with spaces",
+    "repository_before": [],
+    "repository_after": []
+  },
+  "tool_versions": {
+    "python": "3.15.2 (main, Oct 25 2026, 16:57:51) [Clang 21.0.0 (clang-2100.3.34.2)]",
+    "zsh": "zsh 5.9 (arm64-apple-darwin25.0)",
+    "git": "git version 2.50.1 (Apple Git-155)"
+  }
+}

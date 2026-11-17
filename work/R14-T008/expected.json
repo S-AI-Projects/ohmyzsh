@@ -1,0 +1,18 @@
+{
+  "argv": [
+    [
+      "info",
+      "--cask"
+    ],
+    [
+      "info",
+      "--cask",
+      "firefox"
+    ]
+  ],
+  "failure_status": 2,
+  "failure_stderr": "Error: no cask name was provided (use: bci <cask>)",
+  "success_status": 0,
+  "success_stdout": "firefox: 130.0",
+  "pwd": "unchanged"
+}
