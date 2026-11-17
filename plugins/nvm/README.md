@@ -44,6 +44,10 @@ zstyle ':omz:plugins:nvm' lazy-cmd eslint prettier typescript ...
 
 There will be a function `_omz_nvm_load` available to load `nvm` without executing any other trigger command.
 
+`lazy-cmd` is only used when lazy startup is enabled. Setting `lazy-cmd` without
+`zstyle ':omz:plugins:nvm' lazy yes` is an invalid configuration: the plugin ignores
+the custom trigger list and loads nvm immediately.
+
 #### `.nvmrc` autoload
 
 Note: _if used at the same time as `lazy`, `autoload` will start working only after nvm has been lazy-loaded_
@@ -58,3 +62,14 @@ zstyle ':omz:plugins:nvm' silent-autoload yes # optionally remove the output gen
 ```
 
 Note: _this will not remove regular `nvm` output_
+
+## Tests
+
+Run the isolated plugin initialization checks with:
+
+```zsh
+python3 work/R14-T002/check.py
+```
+
+The checks use temporary NVM files and command stubs; they do not install Node.js
+or modify your shell configuration.

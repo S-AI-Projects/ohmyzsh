@@ -1,0 +1,7 @@
+{
+  "plugin": "plugins/nvm/nvm.plugin.zsh",
+  "shell_test": "plugins/nvm/tests/nvm.test.zsh",
+  "runner": "python3 work/R14-T002/check.py",
+  "isolation": "zsh -f with per-case temporary ZDOTDIR and NVM_TEST_ROOT",
+  "stubs": "temporary nvm.sh, bash_completion, and custom_tool command"
+}

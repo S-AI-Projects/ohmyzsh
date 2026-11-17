@@ -1,0 +1,61 @@
+{
+  "inputs": {
+    "plugin": "plugins/nvm/nvm.plugin.zsh",
+    "shell_test": "plugins/nvm/tests/nvm.test.zsh",
+    "runner": "python3 work/R14-T002/check.py",
+    "isolation": "zsh -f with per-case temporary ZDOTDIR and NVM_TEST_ROOT",
+    "stubs": "temporary nvm.sh, bash_completion, and custom_tool command"
+  },
+  "expected": {
+    "syntax_exit_status": 0,
+    "case_names": [
+      "nvm minimum lazy trigger",
+      "nvm optional lazy command argument",
+      "documented invalid combination (lazy-cmd without lazy)"
+    ],
+    "case_count": 3,
+    "repository_status_before_equals_after": true
+  },
+  "actual": {
+    "syntax_exit_status": 0,
+    "syntax_output": "",
+    "cases": [
+      {
+        "case": "minimum",
+        "expected_test_name": "nvm minimum lazy trigger",
+        "exit_status": 0,
+        "passed_named_assertion": true,
+        "output": "PASS: nvm minimum lazy trigger | output=\"nvm-output\" | status=0 | argv=\"COMMAND:nvm\nCOUNT:0\" | state_before=nvm_loaded=0,completion_loaded=0 | state_after=nvm_loaded=1,completion_loaded=1\n"
+      },
+      {
+        "case": "optional",
+        "expected_test_name": "nvm optional lazy command argument",
+        "exit_status": 0,
+        "passed_named_assertion": true,
+        "output": "PASS: nvm optional lazy command argument | output=\"custom-output\" | status=0 | argv=\"COMMAND:custom_tool\nCOUNT:2\n\\\"--version\\\"\n\\\"two words\\\"\" | state_before=nvm_loaded=0,completion_loaded=0 | state_after=nvm_loaded=1,completion_loaded=1\n"
+      },
+      {
+        "case": "invalid-combination",
+        "expected_test_name": "documented invalid combination (lazy-cmd without lazy)",
+        "exit_status": 0,
+        "passed_named_assertion": true,
+        "output": "PASS: documented invalid combination (lazy-cmd without lazy) | output=none | status=0 | argv=none | state_before=nvm_loaded=0,completion_loaded=0 | state_after=nvm_loaded=1,completion_loaded=1\n"
+      }
+    ],
+    "repository_status_before": [
+      " M plugins/nvm/README.md",
+      "?? plugins/nvm/tests/",
+      "?? work/"
+    ],
+    "repository_status_after": [
+      " M plugins/nvm/README.md",
+      "?? plugins/nvm/tests/",
+      "?? work/"
+    ]
+  },
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin25.0)",
+    "python": "3.15.2"
+  },
+  "errors": []
+}

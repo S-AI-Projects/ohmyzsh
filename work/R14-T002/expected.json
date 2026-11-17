@@ -1,0 +1,10 @@
+{
+  "syntax_exit_status": 0,
+  "case_names": [
+    "nvm minimum lazy trigger",
+    "nvm optional lazy command argument",
+    "documented invalid combination (lazy-cmd without lazy)"
+  ],
+  "case_count": 3,
+  "repository_status_before_equals_after": true
+}
