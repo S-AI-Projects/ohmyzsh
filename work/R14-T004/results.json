@@ -1,0 +1,81 @@
+{
+  "inputs": {
+    "plugin": "plugins/man/man.plugin.zsh",
+    "shell_test": "plugins/man/tests/man.test.zsh",
+    "runner": "python3 work/R14-T004/check.py",
+    "invocation": "zsh -f with temporary ZDOTDIR and a temporary working directory containing spaces",
+    "command_stub": "temporary PATH entry named man; no system man pages are opened",
+    "arguments": [
+      "viewer",
+      "manual files/*.md"
+    ],
+    "protected_state": "temporary workspace file names and contents before/after widget and command execution"
+  },
+  "expected": {
+    "syntax_exit_status": 0,
+    "assertions": [
+      "quoted path with spaces and matching wildcard remains one literal argument",
+      "quoted path with spaces and unmatched wildcard remains one literal argument"
+    ],
+    "case_count": 2,
+    "argument_boundaries_preserved": true,
+    "wildcards_not_expanded": true,
+    "unrelated_files_unchanged": true,
+    "repository_status_before_equals_after": true
+  },
+  "actual": {
+    "syntax_exit_status": 0,
+    "syntax_output": "",
+    "cases": [
+      {
+        "case": "matched-wildcard",
+        "expected_assertion": "quoted path with spaces and matching wildcard remains one literal argument",
+        "exit_status": 0,
+        "passed_named_assertion": true,
+        "workspace_files_before": {
+          "manual files/first.md": "first manual\n",
+          "manual files/second.md": "second manual\n",
+          "unrelated.txt": "must remain unchanged\n"
+        },
+        "workspace_files_after": {
+          "manual files/first.md": "first manual\n",
+          "manual files/second.md": "second manual\n",
+          "unrelated.txt": "must remain unchanged\n"
+        },
+        "workspace_unchanged": true,
+        "output": "PASS: matched-wildcard | widget_status=0 | command_status=0 | output=\"stub-man-output\" | BUFFER_before=\"viewer \\\"manual files/*.md\\\"\" | BUFFER_after=\"man viewer manual\\\\ files/\\\\*.md\" | argv=\"BEGIN\nCOUNT:1\n\\\"viewer-manual files/*.md\\\"\nBEGIN\nCOUNT:2\n\\\"viewer\\\"\n\\\"manual files/*.md\\\"\" | state_before=\"PWD=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/man-matched-wildcard-b8jv_vqm/working directory with spaces\nDIR:\\\"manual files\\\"\nFILE:\\\"first.md\\\":first manual\nFILE:\\\"second.md\\\":second manual\nFILE:\\\"unrelated.txt\\\":must remain unchanged\" | state_after=\"PWD=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/man-matched-wildcard-b8jv_vqm/working directory with spaces\nDIR:\\\"manual files\\\"\nFILE:\\\"first.md\\\":first manual\nFILE:\\\"second.md\\\":second manual\nFILE:\\\"unrelated.txt\\\":must remain unchanged\"\n"
+      },
+      {
+        "case": "unmatched-wildcard",
+        "expected_assertion": "quoted path with spaces and unmatched wildcard remains one literal argument",
+        "exit_status": 0,
+        "passed_named_assertion": true,
+        "workspace_files_before": {
+          "unrelated.txt": "must remain unchanged\n"
+        },
+        "workspace_files_after": {
+          "unrelated.txt": "must remain unchanged\n"
+        },
+        "workspace_unchanged": true,
+        "output": "PASS: unmatched-wildcard | widget_status=0 | command_status=0 | output=\"stub-man-output\" | BUFFER_before=\"viewer \\\"manual files/no-match*.md\\\"\" | BUFFER_after=\"man viewer manual\\\\ files/no-match\\\\*.md\" | argv=\"BEGIN\nCOUNT:1\n\\\"viewer-manual files/no-match*.md\\\"\nBEGIN\nCOUNT:2\n\\\"viewer\\\"\n\\\"manual files/no-match*.md\\\"\" | state_before=\"PWD=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/man-unmatched-wildcard-dfdui3oi/working directory with spaces\nDIR:\\\"manual files\\\"\nFILE:\\\"unrelated.txt\\\":must remain unchanged\" | state_after=\"PWD=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/man-unmatched-wildcard-dfdui3oi/working directory with spaces\nDIR:\\\"manual files\\\"\nFILE:\\\"unrelated.txt\\\":must remain unchanged\"\n"
+      }
+    ],
+    "repository_status_before": [
+      " M plugins/man/README.md",
+      " M plugins/man/man.plugin.zsh",
+      "?? plugins/man/tests/",
+      "?? work/"
+    ],
+    "repository_status_after": [
+      " M plugins/man/README.md",
+      " M plugins/man/man.plugin.zsh",
+      "?? plugins/man/tests/",
+      "?? work/"
+    ]
+  },
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin25.0)",
+    "python": "3.15.2"
+  },
+  "errors": []
+}

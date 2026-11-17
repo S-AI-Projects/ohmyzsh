@@ -1,0 +1,12 @@
+{
+  "syntax_exit_status": 0,
+  "assertions": [
+    "quoted path with spaces and matching wildcard remains one literal argument",
+    "quoted path with spaces and unmatched wildcard remains one literal argument"
+  ],
+  "case_count": 2,
+  "argument_boundaries_preserved": true,
+  "wildcards_not_expanded": true,
+  "unrelated_files_unchanged": true,
+  "repository_status_before_equals_after": true
+}

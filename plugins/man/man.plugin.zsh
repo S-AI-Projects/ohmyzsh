@@ -22,13 +22,13 @@ man-command-line() {
     # get command and possible subcommand
     # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion-Flags
     local -a args
-    args=(${${(Az)BUFFER}[1]} ${${(Az)BUFFER}[2]})
+    args=("${(@Q)${(@z)BUFFER}}")
 
     # check if man page exists for command and first argument
     if man "${args[1]}-${args[2]}" >/dev/null 2>&1; then
-        BUFFER="man $args"
+        BUFFER="man ${(j: :)${(@q)args[1,2]}}"
     else
-        BUFFER="man ${args[1]}"
+        BUFFER="man ${(q)args[1]}"
     fi
 }
 

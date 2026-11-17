@@ -1,0 +1,12 @@
+{
+  "plugin": "plugins/man/man.plugin.zsh",
+  "shell_test": "plugins/man/tests/man.test.zsh",
+  "runner": "python3 work/R14-T004/check.py",
+  "invocation": "zsh -f with temporary ZDOTDIR and a temporary working directory containing spaces",
+  "command_stub": "temporary PATH entry named man; no system man pages are opened",
+  "arguments": [
+    "viewer",
+    "manual files/*.md"
+  ],
+  "protected_state": "temporary workspace file names and contents before/after widget and command execution"
+}
