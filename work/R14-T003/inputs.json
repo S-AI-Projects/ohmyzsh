@@ -1,0 +1,8 @@
+{
+  "plugin": "plugins/ant/ant.plugin.zsh",
+  "shell_test": "plugins/ant/tests/ant.test.zsh",
+  "runner": "python3 work/R14-T003/check.py",
+  "invocation": "zsh -f with temporary ZDOTDIR and ANT_TEST_ROOT",
+  "external_commands": "none; plugin initialization only sets ANT_ARGS",
+  "unrelated_state": "ANT_TEST_UNRELATED=keep-this-value"
+}

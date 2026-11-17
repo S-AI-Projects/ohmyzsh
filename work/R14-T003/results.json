@@ -1,0 +1,48 @@
+{
+  "inputs": {
+    "plugin": "plugins/ant/ant.plugin.zsh",
+    "shell_test": "plugins/ant/tests/ant.test.zsh",
+    "runner": "python3 work/R14-T003/check.py",
+    "invocation": "zsh -f with temporary ZDOTDIR and ANT_TEST_ROOT",
+    "external_commands": "none; plugin initialization only sets ANT_ARGS",
+    "unrelated_state": "ANT_TEST_UNRELATED=keep-this-value"
+  },
+  "expected": {
+    "syntax_exit_status": 0,
+    "assertions": [
+      "Ant plugin supplies the default colored logger",
+      "Ant plugin preserves a custom ANT_ARGS value"
+    ],
+    "case_count": 2,
+    "custom_ANT_ARGS_preserved": true,
+    "unrelated_shell_state_unchanged": true,
+    "repository_status_before_equals_after": true
+  },
+  "actual": {
+    "syntax_exit_status": 0,
+    "syntax_output": "",
+    "cases": [
+      {
+        "case": "default",
+        "expected_assertion": "Ant plugin supplies the default colored logger",
+        "exit_status": 0,
+        "passed_named_assertion": true,
+        "output": "PASS: default | exit=0 | ANT_ARGS_before=\"<unset>\" | ANT_ARGS_after=\"-logger org.apache.tools.ant.listener.AnsiColorLogger\" | unrelated_before=\"keep-this-value\" | unrelated_after=\"keep-this-value\"\n"
+      },
+      {
+        "case": "preserve-custom",
+        "expected_assertion": "Ant plugin preserves a custom ANT_ARGS value",
+        "exit_status": 0,
+        "passed_named_assertion": true,
+        "output": "PASS: preserve-custom | exit=0 | ANT_ARGS_before=\"-verbose -Dmessage=two words\" | ANT_ARGS_after=\"-verbose -Dmessage=two words\" | unrelated_before=\"keep-this-value\" | unrelated_after=\"keep-this-value\"\n"
+      }
+    ],
+    "repository_status_before": [],
+    "repository_status_after": []
+  },
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin25.0)",
+    "python": "3.15.2"
+  },
+  "errors": []
+}

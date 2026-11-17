@@ -1,0 +1,11 @@
+{
+  "syntax_exit_status": 0,
+  "assertions": [
+    "Ant plugin supplies the default colored logger",
+    "Ant plugin preserves a custom ANT_ARGS value"
+  ],
+  "case_count": 2,
+  "custom_ANT_ARGS_preserved": true,
+  "unrelated_shell_state_unchanged": true,
+  "repository_status_before_equals_after": true
+}
