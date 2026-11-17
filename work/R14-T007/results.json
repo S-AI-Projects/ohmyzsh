@@ -1,0 +1,85 @@
+{
+  "test_names": [
+    "success",
+    "missing-command"
+  ],
+  "syntax_check": {
+    "command": "zsh -n plugins/zoxide/zoxide.plugin.zsh",
+    "exit_status": 0
+  },
+  "cases": [
+    {
+      "name": "success",
+      "input": {
+        "cwd": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-success-z3l66s_4/working directory with spaces",
+        "target": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-success-z3l66s_4/my project",
+        "path": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-success-z3l66s_4/bin"
+      },
+      "expected": {
+        "exit_status": 0,
+        "argv": [
+          [
+            "add",
+            "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-success-z3l66s_4/my project"
+          ],
+          [
+            "init",
+            "--cmd",
+            "z",
+            "zsh"
+          ]
+        ],
+        "state": "PWD changes to target"
+      },
+      "actual": {
+        "exit_status": 0,
+        "argv": [
+          [
+            "add",
+            "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-success-z3l66s_4/my project"
+          ],
+          [
+            "init",
+            "--cmd",
+            "z",
+            "zsh"
+          ]
+        ],
+        "stdout": "setup_status=0\nbootstrap_status=0\ncommand_output=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-success-z3l66s_4/my project\ncommand_status=0\nbefore_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-success-z3l66s_4/working directory with spaces\nafter_pwd=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-success-z3l66s_4/my project\n",
+        "stderr": "",
+        "state_before": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-success-z3l66s_4/working directory with spaces",
+        "state_after": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-success-z3l66s_4/my project",
+        "repository_before": [],
+        "repository_after": []
+      }
+    },
+    {
+      "name": "missing-command",
+      "input": {
+        "cwd": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-missing-command-w2nhyq87/working directory with spaces",
+        "target": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-missing-command-w2nhyq87/my project",
+        "path": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-missing-command-w2nhyq87/bin"
+      },
+      "expected": {
+        "exit_status": 0,
+        "argv": [],
+        "state": "PWD unchanged; z function absent"
+      },
+      "actual": {
+        "exit_status": 0,
+        "argv": [],
+        "stdout": "[oh-my-zsh] zoxide not found, please install it from https://github.com/ajeetdsouza/zoxide\nbootstrap_status=0\nfunction_z=0\nbefore_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-missing-command-w2nhyq87/working directory with spaces\nafter_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-missing-command-w2nhyq87/working directory with spaces\n",
+        "stderr": "",
+        "state_before": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-missing-command-w2nhyq87/working directory with spaces",
+        "state_after": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/zoxide-missing-command-w2nhyq87/working directory with spaces",
+        "repository_before": [],
+        "repository_after": []
+      }
+    }
+  ],
+  "tool_versions": {
+    "python": "3.15.2 (main, Oct 25 2026, 16:57:51) [Clang 21.0.0 (clang-2100.3.34.2)]",
+    "zsh": "zsh 5.9 (arm64-apple-darwin25.0)",
+    "git": "git version 2.50.1 (Apple Git-155)"
+  }
+}

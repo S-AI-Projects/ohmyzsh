@@ -1,0 +1,4 @@
+The success case registers the temporary project path, loads zoxide's generated
+z function, runs `z 'my project'`, prints the exact target path, and changes
+PWD to that path. The missing-command case prints the plugin's install warning,
+defines no z function, and leaves PWD unchanged. Both test cases must return 0.
