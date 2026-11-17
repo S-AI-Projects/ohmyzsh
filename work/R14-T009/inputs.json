@@ -1,0 +1,7 @@
+{
+  "cases": [
+    "success",
+    "cli-failure"
+  ],
+  "services": "not required"
+}

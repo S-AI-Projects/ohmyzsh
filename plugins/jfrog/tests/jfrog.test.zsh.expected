@@ -1,0 +1,6 @@
+The success case runs the JFrog completion command with
+`--generate-bash-completion`, returns two suggestions, and leaves PATH and PWD
+unchanged. The CLI failure case returns 19 with no suggestions; the plugin
+uses its file-completion fallback, whose stub returns 23. The fixture asserts
+that status, diagnostic, argv, and unchanged shell state. The Python check
+must fail if either fixture or the plugin syntax check fails.

@@ -1,0 +1,22 @@
+{
+  "cases": [
+    {
+      "jfrog": {
+        "argv": [
+          "--generate-bash-completion"
+        ],
+        "exit_status": 0
+      },
+      "fixture_exit_status": 0
+    },
+    {
+      "jfrog": {
+        "argv": [
+          "--generate-bash-completion"
+        ],
+        "exit_status": 19
+      },
+      "fixture_exit_status": 0
+    }
+  ]
+}

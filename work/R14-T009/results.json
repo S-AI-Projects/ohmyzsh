@@ -1,0 +1,96 @@
+{
+  "test_names": [
+    "success",
+    "cli-failure"
+  ],
+  "syntax_check": {
+    "command": "zsh -n plugins/jfrog/jfrog.plugin.zsh",
+    "exit_status": 0
+  },
+  "cases": [
+    {
+      "name": "success",
+      "input": {
+        "cwd": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-success-bm2r0x7y/working directory with spaces",
+        "path": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-success-bm2r0x7y/bin",
+        "zdotdir": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-success-bm2r0x7y/zdotdir"
+      },
+      "expected": {
+        "jfrog": {
+          "argv": [
+            "--generate-bash-completion"
+          ],
+          "exit_status": 0
+        },
+        "fixture_exit_status": 0
+      },
+      "actual": {
+        "jfrog": {
+          "argv": [
+            "--generate-bash-completion"
+          ],
+          "exit_status": 0
+        },
+        "fixture_exit_status": 0,
+        "completion_status": 0,
+        "stdout": "case=success\ncompletion_status=0\ndescribe_calls=1\ncandidate_count=2\ncandidate=repo-one\ncandidate=repo two\nfile_calls=0\ncompletion_stderr=\nbefore_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-success-bm2r0x7y/working directory with spaces\nafter_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-success-bm2r0x7y/working directory with spaces\nbefore_path=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-success-bm2r0x7y/bin\nafter_path=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-success-bm2r0x7y/bin\n",
+        "stderr": "",
+        "state_before": {
+          "PWD": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-success-bm2r0x7y/working directory with spaces",
+          "PATH": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-success-bm2r0x7y/bin"
+        },
+        "state_after": {
+          "PWD": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-success-bm2r0x7y/working directory with spaces",
+          "PATH": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-success-bm2r0x7y/bin"
+        },
+        "repository_before": [],
+        "repository_after": []
+      }
+    },
+    {
+      "name": "cli-failure",
+      "input": {
+        "cwd": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-cli-failure-cx6wpo9q/working directory with spaces",
+        "path": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-cli-failure-cx6wpo9q/bin",
+        "zdotdir": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-cli-failure-cx6wpo9q/zdotdir"
+      },
+      "expected": {
+        "jfrog": {
+          "argv": [
+            "--generate-bash-completion"
+          ],
+          "exit_status": 19
+        },
+        "fixture_exit_status": 0
+      },
+      "actual": {
+        "jfrog": {
+          "argv": [
+            "--generate-bash-completion"
+          ],
+          "exit_status": 19
+        },
+        "fixture_exit_status": 0,
+        "completion_status": 23,
+        "stdout": "case=cli-failure\ncompletion_status=23\ndescribe_calls=1\ncandidate_count=0\nfile_calls=1\ncompletion_stderr=simulated JFrog CLI failure\nbefore_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-cli-failure-cx6wpo9q/working directory with spaces\nafter_pwd=/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-cli-failure-cx6wpo9q/working directory with spaces\nbefore_path=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-cli-failure-cx6wpo9q/bin\nafter_path=/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-cli-failure-cx6wpo9q/bin\n",
+        "stderr": "",
+        "state_before": {
+          "PWD": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-cli-failure-cx6wpo9q/working directory with spaces",
+          "PATH": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-cli-failure-cx6wpo9q/bin"
+        },
+        "state_after": {
+          "PWD": "/private/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-cli-failure-cx6wpo9q/working directory with spaces",
+          "PATH": "/var/folders/0r/yrqbjj7d0219tww5md2vsn9r0000gn/T/jfrog-cli-failure-cx6wpo9q/bin"
+        },
+        "repository_before": [],
+        "repository_after": []
+      }
+    }
+  ],
+  "tool_versions": {
+    "python": "3.15.2 (main, Oct 25 2026, 16:57:51) [Clang 21.0.0 (clang-2100.3.34.2)]",
+    "zsh": "zsh 5.9 (arm64-apple-darwin25.0)",
+    "git": "git version 2.50.1 (Apple Git-155)"
+  },
+  "cleanup": "Temporary HOME, ZDOTDIR, PATH, working directory, stub CLI, and logs removed by TemporaryDirectory."
+}
