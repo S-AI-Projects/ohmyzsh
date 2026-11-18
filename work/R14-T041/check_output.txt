@@ -1,0 +1,27 @@
+============================================================
+R14-T041 · Command-contract tests: plugins/node/node-docs
+============================================================
+
+[Syntax] zsh -n plugins/node/node.plugin.zsh
+  [32mPASS[0m  plugin passes zsh -n syntax check
+
+[Test 1] node-docs <section> → correct URL passed to open_command
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  URL contains 'v20.11.0/api/fs.html'
+        actual URL : 'https://nodejs.org/docs/v20.11.0/api/fs.html'
+        exit status: 0
+
+[Test 2] node-docs (no args) → defaults to 'all' section
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  URL defaults to 'all.html' (fragment: 'v18.0.0/api/all.html')
+        actual URL : 'https://nodejs.org/docs/v18.0.0/api/all.html'
+        exit status: 0
+
+[Test 3] node absent → URL is not silently built with empty version
+  [32mPASS[0m  URL does not contain empty/undefined version segment
+        URL received : 'https://nodejs.org/docs/v26.10.0/api/http.html'
+        exit status  : 0
+
+============================================================
+RESULT: All checks PASSED
+============================================================
