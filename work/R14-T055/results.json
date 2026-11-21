@@ -1,0 +1,214 @@
+{
+  "task_id": "R14-T055",
+  "item": "plugins/brew",
+  "timestamp": "2026-11-21T18:43:52.188287+00:00",
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "python": "3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "git_commit": "222cffae680286ae07a17181f234e6593e58a109",
+    "git_branch": "student/e26b07f0665/R14-T055"
+  },
+  "summary": {
+    "total": 10,
+    "passed": 10,
+    "failed": 0,
+    "has_success_assertion": true,
+    "has_failure_or_missing_assertion": true
+  },
+  "tests": [
+    {
+      "test_id": "T01_missing_dep_silent",
+      "description": "Missing dependency: brew not in PATH and locations disabled, plugin exits cleanly",
+      "mode": "missing_dep_silent",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": null,
+      "actual_command": null,
+      "expected_args": null,
+      "actual_args": null,
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T02_missing_dep_invalid_location",
+      "description": "Missing dependency: BREW_LOCATION is not executable, reports error",
+      "mode": "missing_dep_invalid_location",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": null,
+      "actual_command": null,
+      "expected_args": null,
+      "actual_args": null,
+      "stdout": "[oh-my-zsh] /var/folders/fk/tntrxbls71j1pbvt156xgcbm0000gn/T/tmp.aCKfiX9ug0/nonexistent/brew is not executable",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T03_custom_brew_location_success",
+      "description": "Custom BREW_LOCATION: valid executable evaluated via shellenv",
+      "mode": "exec_success",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "brew",
+      "actual_command": "brew",
+      "expected_args": [
+        "shellenv"
+      ],
+      "actual_args": [
+        "shellenv"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T04_entry_ba_basic",
+      "description": "Entry point ba: expands to 'brew autoremove'",
+      "mode": "alias_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "brew",
+      "actual_command": "brew",
+      "expected_args": [
+        "autoremove"
+      ],
+      "actual_args": [
+        "autoremove"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T05_entry_ba_with_flags",
+      "description": "Entry point ba: preserves flags '--dry-run'",
+      "mode": "alias_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "brew",
+      "actual_command": "brew",
+      "expected_args": [
+        "autoremove",
+        "--dry-run"
+      ],
+      "actual_args": [
+        "autoremove",
+        "--dry-run"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T06_entry_bcfg_basic",
+      "description": "Entry point bcfg: expands to 'brew config'",
+      "mode": "alias_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "brew",
+      "actual_command": "brew",
+      "expected_args": [
+        "config"
+      ],
+      "actual_args": [
+        "config"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T07_entry_bci_single_cask",
+      "description": "Entry point bci: expands to 'brew info --cask <cask>'",
+      "mode": "alias_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "brew",
+      "actual_command": "brew",
+      "expected_args": [
+        "info",
+        "--cask",
+        "google-chrome"
+      ],
+      "actual_args": [
+        "info",
+        "--cask",
+        "google-chrome"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T08_entry_bci_quoted_with_spaces",
+      "description": "Entry point bci: preserves quoted arguments with spaces",
+      "mode": "alias_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "brew",
+      "actual_command": "brew",
+      "expected_args": [
+        "info",
+        "--cask",
+        "visual studio code"
+      ],
+      "actual_args": [
+        "info",
+        "--cask",
+        "visual studio code"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T09_failure_invalid_option",
+      "description": "Failure propagation: bcfg with invalid option propagates exit status 2",
+      "mode": "alias_failure",
+      "passed": true,
+      "expected_status": 2,
+      "actual_status": 2,
+      "expected_command": "brew",
+      "actual_command": "brew",
+      "expected_args": [
+        "config",
+        "--invalid-flag"
+      ],
+      "actual_args": [
+        "config",
+        "--invalid-flag"
+      ],
+      "stdout": "",
+      "stderr": "brew: invalid option: --invalid-flag",
+      "errors": []
+    },
+    {
+      "test_id": "T10_environment_sbin_setup",
+      "description": "Environment configuration: adds $HOMEBREW_PREFIX/sbin to PATH",
+      "mode": "env_setup",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "brew",
+      "actual_command": "brew",
+      "expected_args": [
+        "--prefix"
+      ],
+      "actual_args": [
+        "--prefix"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    }
+  ]
+}
