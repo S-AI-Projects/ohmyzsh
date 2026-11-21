@@ -15,7 +15,7 @@ The pip plugin caches the names of available pip packages from the PyPI index.
 To trigger the caching process, try to complete `pip install`,
 or you can run `zsh-pip-cache-packages` directly.
 
-To reset the cache, run `zsh-pip-clear-cache` and it will be rebuilt next
+To reset the cache, run `zsh-pip-clear-cache` and it will be rebuilt
 the next time you autocomplete `pip install`.
 
 ## Aliases
@@ -34,3 +34,12 @@ the next time you autocomplete `pip install`.
 | pipir    | `pip install -r requirements.txt`                                                 | Install packages from `requirements.txt` file |
 | pipupall | `pip list --outdated \| awk 'NR > 2 { print $1 }' \| xargs pip install --upgrade` | Update all installed packages                 |
 | pipunall | `pip list --format freeze \| cut -d= -f1 \| xargs pip uninstall`                  | Uninstall all installed packages              |
+
+
+## Testing
+
+The argument contracts and execution boundaries for `pipi`, `pipu`, and `pipun` are tested using the native fixture suite:
+
+```zsh
+zsh -df plugins/pip/tests/pip.test.zsh
+```
