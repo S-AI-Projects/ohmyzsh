@@ -1,0 +1,159 @@
+=================================================================
+ Task R14-T052: pip Argument Boundaries Contract Verification
+=================================================================
+
+Timestamp: 2026-11-21T17:13:35.949621+00:00
+Git Commit: 50ac4407401a153cf24fe3422ca6ab6977a67eb9 (student/e26b07f0665/R62-T046)
+Zsh Version: zsh 5.9 (arm64-apple-darwin26.0)
+Python Version: 3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]
+
+Summary: 20/20 passed (0 failed)
+         13 success cases, 7 failure/edge cases
+
+Test Results Detail:
+-----------------------------------------------------------------
+[PASS] pipi_min_args: pipi with minimum accepted arguments (single package)
+       Mode: pip_mode | Alias: pipi
+       Inputs: ['requests']
+       Expected command: pip ['install', 'requests']
+       Actual command:   pip ['install', 'requests']
+       Expected status:  0 | Actual status: 0
+
+[PASS] pipi_optional_flag: pipi with optional flag --no-deps
+       Mode: pip_mode | Alias: pipi
+       Inputs: ['requests', '--no-deps']
+       Expected command: pip ['install', 'requests', '--no-deps']
+       Actual command:   pip ['install', 'requests', '--no-deps']
+       Expected status:  0 | Actual status: 0
+
+[PASS] pipi_quoted_and_spaces: pipi preserves spaces and quotes in arguments
+       Mode: pip_mode | Alias: pipi
+       Inputs: ['requests >= 2.28.0', '--target', '/path with spaces']
+       Expected command: pip ['install', 'requests >= 2.28.0', '--target', '/path with spaces']
+       Actual command:   pip ['install', 'requests >= 2.28.0', '--target', '/path with spaces']
+       Expected status:  0 | Actual status: 0
+
+[PASS] pipi_noglob_brackets: pipi with bracket extra syntax preserves noglob literal argument
+       Mode: pip_mode | Alias: pipi
+       Inputs: ['requests[security]']
+       Expected command: pip ['install', 'requests[security]']
+       Actual command:   pip ['install', 'requests[security]']
+       Expected status:  0 | Actual status: 0
+
+[PASS] pipi_invalid_combination_user_prefix: pipi rejects documented mutually exclusive combination (--user and --prefix)
+       Mode: pip_mode | Alias: pipi
+       Inputs: ['--user', '--prefix', '/opt/custom', 'requests']
+       Expected command: pip ['install', '--user', '--prefix', '/opt/custom', 'requests']
+       Actual command:   pip ['install', '--user', '--prefix', '/opt/custom', 'requests']
+       Expected status:  1 | Actual status: 1
+       Actual stderr:    ERROR: Can not combine '--user' and '--prefix' as they imply different installation locations
+
+[PASS] pipi_bare_invocation_failure: pipi bare invocation without requirements triggers documented failure
+       Mode: pip_mode | Alias: pipi
+       Inputs: []
+       Expected command: pip ['install']
+       Actual command:   pip ['install']
+       Expected status:  1 | Actual status: 1
+       Actual stderr:    ERROR: You must give at least one requirement to install (see "pip help install")
+
+[PASS] pipu_min_args: pipu with minimum accepted arguments (single package)
+       Mode: pip_mode | Alias: pipu
+       Inputs: ['requests']
+       Expected command: pip ['install', '--upgrade', 'requests']
+       Actual command:   pip ['install', '--upgrade', 'requests']
+       Expected status:  0 | Actual status: 0
+
+[PASS] pipu_optional_flag: pipu with optional flag --no-deps
+       Mode: pip_mode | Alias: pipu
+       Inputs: ['requests', '--no-deps']
+       Expected command: pip ['install', '--upgrade', 'requests', '--no-deps']
+       Actual command:   pip ['install', '--upgrade', 'requests', '--no-deps']
+       Expected status:  0 | Actual status: 0
+
+[PASS] pipu_quoted_and_spaces: pipu preserves version specifier spaces and option arguments
+       Mode: pip_mode | Alias: pipu
+       Inputs: ['requests >= 2.28.0']
+       Expected command: pip ['install', '--upgrade', 'requests >= 2.28.0']
+       Actual command:   pip ['install', '--upgrade', 'requests >= 2.28.0']
+       Expected status:  0 | Actual status: 0
+
+[PASS] pipu_invalid_combination_user_prefix: pipu rejects documented mutually exclusive combination (--user and --prefix)
+       Mode: pip_mode | Alias: pipu
+       Inputs: ['--user', '--prefix', '/opt/custom', 'requests']
+       Expected command: pip ['install', '--upgrade', '--user', '--prefix', '/opt/custom', 'requests']
+       Actual command:   pip ['install', '--upgrade', '--user', '--prefix', '/opt/custom', 'requests']
+       Expected status:  1 | Actual status: 1
+       Actual stderr:    ERROR: Can not combine '--user' and '--prefix' as they imply different installation locations
+
+[PASS] pipu_bare_invocation_failure: pipu bare invocation without requirements triggers documented failure
+       Mode: pip_mode | Alias: pipu
+       Inputs: []
+       Expected command: pip ['install', '--upgrade']
+       Actual command:   pip ['install', '--upgrade']
+       Expected status:  1 | Actual status: 1
+       Actual stderr:    ERROR: You must give at least one requirement to install (see "pip help install")
+
+[PASS] pipun_min_args: pipun with minimum accepted arguments (single package)
+       Mode: pip_mode | Alias: pipun
+       Inputs: ['requests']
+       Expected command: pip ['uninstall', 'requests']
+       Actual command:   pip ['uninstall', 'requests']
+       Expected status:  0 | Actual status: 0
+
+[PASS] pipun_optional_flag_yes: pipun with optional confirmation flag -y
+       Mode: pip_mode | Alias: pipun
+       Inputs: ['-y', 'requests']
+       Expected command: pip ['uninstall', '-y', 'requests']
+       Actual command:   pip ['uninstall', '-y', 'requests']
+       Expected status:  0 | Actual status: 0
+
+[PASS] pipun_quoted_spaces: pipun preserves quoted package name with spaces
+       Mode: pip_mode | Alias: pipun
+       Inputs: ['custom package name']
+       Expected command: pip ['uninstall', 'custom package name']
+       Actual command:   pip ['uninstall', 'custom package name']
+       Expected status:  0 | Actual status: 0
+
+[PASS] pipun_invalid_option: pipun rejects documented invalid option --no-cache-dir
+       Mode: pip_mode | Alias: pipun
+       Inputs: ['--no-cache-dir', 'requests']
+       Expected command: pip ['uninstall', '--no-cache-dir', 'requests']
+       Actual command:   pip ['uninstall', '--no-cache-dir', 'requests']
+       Expected status:  2 | Actual status: 2
+       Actual stderr:    ERROR: no such option: --no-cache-dir
+
+[PASS] pipun_bare_invocation_failure: pipun bare invocation without requirements triggers documented failure
+       Mode: pip_mode | Alias: pipun
+       Inputs: []
+       Expected command: pip ['uninstall']
+       Actual command:   pip ['uninstall']
+       Expected status:  1 | Actual status: 1
+       Actual stderr:    ERROR: You must give at least one requirement to uninstall (see "pip help uninstall")
+
+[PASS] pip3_fallback_pipi: pipi invokes pip3 when pip binary is missing from PATH
+       Mode: pip3_only_mode | Alias: pipi
+       Inputs: ['requests']
+       Expected command: pip3 ['install', 'requests']
+       Actual command:   pip3 ['install', 'requests']
+       Expected status:  0 | Actual status: 0
+
+[PASS] pip3_fallback_pipu: pipu invokes pip3 when pip binary is missing from PATH
+       Mode: pip3_only_mode | Alias: pipu
+       Inputs: ['requests']
+       Expected command: pip3 ['install', '--upgrade', 'requests']
+       Actual command:   pip3 ['install', '--upgrade', 'requests']
+       Expected status:  0 | Actual status: 0
+
+[PASS] pip3_fallback_pipun: pipun invokes pip3 when pip binary is missing from PATH
+       Mode: pip3_only_mode | Alias: pipun
+       Inputs: ['requests']
+       Expected command: pip3 ['uninstall', 'requests']
+       Actual command:   pip3 ['uninstall', 'requests']
+       Expected status:  0 | Actual status: 0
+
+[PASS] exit_status_propagation: pipi propagates arbitrary non-zero exit status (code 42)
+       Mode: pip_mode | Alias: pipi
+       Inputs: ['requests']
+       Expected command: pip ['install', 'requests']
+       Actual command:   pip ['install', 'requests']
+       Expected status:  42 | Actual status: 42

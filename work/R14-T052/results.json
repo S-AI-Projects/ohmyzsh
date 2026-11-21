@@ -1,0 +1,659 @@
+{
+  "task_id": "R14-T052",
+  "title": "Exercise argument boundaries: pip",
+  "repository": "S-AI-Projects/ohmyzsh",
+  "issue": "https://github.com/S-AI-Projects/ohmyzsh/issues/52",
+  "timestamp": "2026-11-21T17:13:35.949621+00:00",
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "python": "3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "git_commit": "50ac4407401a153cf24fe3422ca6ab6977a67eb9",
+    "git_branch": "student/e26b07f0665/R62-T046"
+  },
+  "summary": {
+    "total_tests": 20,
+    "passed": 20,
+    "failed": 0,
+    "success_cases": 13,
+    "failure_edge_cases": 7,
+    "overall_status": "PASS"
+  },
+  "tests": [
+    {
+      "test_id": "pipi_min_args",
+      "description": "pipi with minimum accepted arguments (single package)",
+      "mode": "pip_mode",
+      "alias": "pipi",
+      "inputs": {
+        "args": [
+          "requests"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "install",
+          "requests"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "install",
+          "requests"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipi_optional_flag",
+      "description": "pipi with optional flag --no-deps",
+      "mode": "pip_mode",
+      "alias": "pipi",
+      "inputs": {
+        "args": [
+          "requests",
+          "--no-deps"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "install",
+          "requests",
+          "--no-deps"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "install",
+          "requests",
+          "--no-deps"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipi_quoted_and_spaces",
+      "description": "pipi preserves spaces and quotes in arguments",
+      "mode": "pip_mode",
+      "alias": "pipi",
+      "inputs": {
+        "args": [
+          "requests >= 2.28.0",
+          "--target",
+          "/path with spaces"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "install",
+          "requests >= 2.28.0",
+          "--target",
+          "/path with spaces"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "install",
+          "requests >= 2.28.0",
+          "--target",
+          "/path with spaces"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipi_noglob_brackets",
+      "description": "pipi with bracket extra syntax preserves noglob literal argument",
+      "mode": "pip_mode",
+      "alias": "pipi",
+      "inputs": {
+        "args": [
+          "requests[security]"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "install",
+          "requests[security]"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "install",
+          "requests[security]"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipi_invalid_combination_user_prefix",
+      "description": "pipi rejects documented mutually exclusive combination (--user and --prefix)",
+      "mode": "pip_mode",
+      "alias": "pipi",
+      "inputs": {
+        "args": [
+          "--user",
+          "--prefix",
+          "/opt/custom",
+          "requests"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "install",
+          "--user",
+          "--prefix",
+          "/opt/custom",
+          "requests"
+        ],
+        "status": 1
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "install",
+          "--user",
+          "--prefix",
+          "/opt/custom",
+          "requests"
+        ],
+        "status": 1,
+        "stderr": "ERROR: Can not combine '--user' and '--prefix' as they imply different installation locations\n"
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipi_bare_invocation_failure",
+      "description": "pipi bare invocation without requirements triggers documented failure",
+      "mode": "pip_mode",
+      "alias": "pipi",
+      "inputs": {
+        "args": []
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "install"
+        ],
+        "status": 1
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "install"
+        ],
+        "status": 1,
+        "stderr": "ERROR: You must give at least one requirement to install (see \"pip help install\")\n"
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipu_min_args",
+      "description": "pipu with minimum accepted arguments (single package)",
+      "mode": "pip_mode",
+      "alias": "pipu",
+      "inputs": {
+        "args": [
+          "requests"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "install",
+          "--upgrade",
+          "requests"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "install",
+          "--upgrade",
+          "requests"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipu_optional_flag",
+      "description": "pipu with optional flag --no-deps",
+      "mode": "pip_mode",
+      "alias": "pipu",
+      "inputs": {
+        "args": [
+          "requests",
+          "--no-deps"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "install",
+          "--upgrade",
+          "requests",
+          "--no-deps"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "install",
+          "--upgrade",
+          "requests",
+          "--no-deps"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipu_quoted_and_spaces",
+      "description": "pipu preserves version specifier spaces and option arguments",
+      "mode": "pip_mode",
+      "alias": "pipu",
+      "inputs": {
+        "args": [
+          "requests >= 2.28.0"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "install",
+          "--upgrade",
+          "requests >= 2.28.0"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "install",
+          "--upgrade",
+          "requests >= 2.28.0"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipu_invalid_combination_user_prefix",
+      "description": "pipu rejects documented mutually exclusive combination (--user and --prefix)",
+      "mode": "pip_mode",
+      "alias": "pipu",
+      "inputs": {
+        "args": [
+          "--user",
+          "--prefix",
+          "/opt/custom",
+          "requests"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "install",
+          "--upgrade",
+          "--user",
+          "--prefix",
+          "/opt/custom",
+          "requests"
+        ],
+        "status": 1
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "install",
+          "--upgrade",
+          "--user",
+          "--prefix",
+          "/opt/custom",
+          "requests"
+        ],
+        "status": 1,
+        "stderr": "ERROR: Can not combine '--user' and '--prefix' as they imply different installation locations\n"
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipu_bare_invocation_failure",
+      "description": "pipu bare invocation without requirements triggers documented failure",
+      "mode": "pip_mode",
+      "alias": "pipu",
+      "inputs": {
+        "args": []
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "install",
+          "--upgrade"
+        ],
+        "status": 1
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "install",
+          "--upgrade"
+        ],
+        "status": 1,
+        "stderr": "ERROR: You must give at least one requirement to install (see \"pip help install\")\n"
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipun_min_args",
+      "description": "pipun with minimum accepted arguments (single package)",
+      "mode": "pip_mode",
+      "alias": "pipun",
+      "inputs": {
+        "args": [
+          "requests"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "uninstall",
+          "requests"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "uninstall",
+          "requests"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipun_optional_flag_yes",
+      "description": "pipun with optional confirmation flag -y",
+      "mode": "pip_mode",
+      "alias": "pipun",
+      "inputs": {
+        "args": [
+          "-y",
+          "requests"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "uninstall",
+          "-y",
+          "requests"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "uninstall",
+          "-y",
+          "requests"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipun_quoted_spaces",
+      "description": "pipun preserves quoted package name with spaces",
+      "mode": "pip_mode",
+      "alias": "pipun",
+      "inputs": {
+        "args": [
+          "custom package name"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "uninstall",
+          "custom package name"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "uninstall",
+          "custom package name"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipun_invalid_option",
+      "description": "pipun rejects documented invalid option --no-cache-dir",
+      "mode": "pip_mode",
+      "alias": "pipun",
+      "inputs": {
+        "args": [
+          "--no-cache-dir",
+          "requests"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "uninstall",
+          "--no-cache-dir",
+          "requests"
+        ],
+        "status": 2
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "uninstall",
+          "--no-cache-dir",
+          "requests"
+        ],
+        "status": 2,
+        "stderr": "ERROR: no such option: --no-cache-dir\n"
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pipun_bare_invocation_failure",
+      "description": "pipun bare invocation without requirements triggers documented failure",
+      "mode": "pip_mode",
+      "alias": "pipun",
+      "inputs": {
+        "args": []
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "uninstall"
+        ],
+        "status": 1
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "uninstall"
+        ],
+        "status": 1,
+        "stderr": "ERROR: You must give at least one requirement to uninstall (see \"pip help uninstall\")\n"
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pip3_fallback_pipi",
+      "description": "pipi invokes pip3 when pip binary is missing from PATH",
+      "mode": "pip3_only_mode",
+      "alias": "pipi",
+      "inputs": {
+        "args": [
+          "requests"
+        ]
+      },
+      "expected": {
+        "command": "pip3",
+        "args": [
+          "install",
+          "requests"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip3",
+        "args": [
+          "install",
+          "requests"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pip3_fallback_pipu",
+      "description": "pipu invokes pip3 when pip binary is missing from PATH",
+      "mode": "pip3_only_mode",
+      "alias": "pipu",
+      "inputs": {
+        "args": [
+          "requests"
+        ]
+      },
+      "expected": {
+        "command": "pip3",
+        "args": [
+          "install",
+          "--upgrade",
+          "requests"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip3",
+        "args": [
+          "install",
+          "--upgrade",
+          "requests"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pip3_fallback_pipun",
+      "description": "pipun invokes pip3 when pip binary is missing from PATH",
+      "mode": "pip3_only_mode",
+      "alias": "pipun",
+      "inputs": {
+        "args": [
+          "requests"
+        ]
+      },
+      "expected": {
+        "command": "pip3",
+        "args": [
+          "uninstall",
+          "requests"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "pip3",
+        "args": [
+          "uninstall",
+          "requests"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "exit_status_propagation",
+      "description": "pipi propagates arbitrary non-zero exit status (code 42)",
+      "mode": "pip_mode",
+      "alias": "pipi",
+      "inputs": {
+        "args": [
+          "requests"
+        ]
+      },
+      "expected": {
+        "command": "pip",
+        "args": [
+          "install",
+          "requests"
+        ],
+        "status": 42
+      },
+      "actual": {
+        "command": "pip",
+        "args": [
+          "install",
+          "requests"
+        ],
+        "status": 42,
+        "stderr": ""
+      },
+      "status": "PASS",
+      "errors": []
+    }
+  ]
+}
