@@ -15,7 +15,9 @@ If `brew` is not found in the PATH, this plugin will attempt to find it in commo
 `HOMEBREW_PREFIX="$(brew --prefix)"` if not previously defined for convenience.
 
 In case you installed `brew` in a non-common location, you can still set `BREW_LOCATION` variable pointing to
-the `brew` binary before sourcing `oh-my-zsh.sh` and it'll set up the environment.
+the `brew` binary before sourcing `oh-my-zsh.sh` and it'll set up the environment. You can also customize
+the searched fallback locations by setting the `ZSH_BREW_LOCATIONS` array before sourcing `oh-my-zsh.sh`
+(or set `ZSH_BREW_LOCATIONS=()` to disable automatic filesystem scanning).
 
 ### sbin directory
 
@@ -72,3 +74,12 @@ manually. See: https://docs.brew.sh/Shell-Completion#configuring-completions-in-
 With the release of Homebrew 1.0, they decided to bundle the zsh completion as part of the brew installation,
 so we no longer ship it with the brew plugin; now it only has brew aliases. If you find that brew completion
 no longer works, make sure you have your Homebrew installation fully up to date.
+
+## Testing
+
+The plugin includes an isolated automated test suite that tests path resolution, alias expansion (`ba`, `bcfg`, `bci`), missing-dependency edge cases, and argument preservation using temporary directories and stub commands without invoking real Homebrew commands:
+
+```zsh
+zsh -df plugins/brew/tests/brew.test.zsh
+```
+

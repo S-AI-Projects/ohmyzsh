@@ -4,16 +4,29 @@ if (( ! $+commands[brew] )); then
       echo "[oh-my-zsh] $BREW_LOCATION is not executable"
       return
     fi
-  elif [[ -x /opt/homebrew/bin/brew ]]; then
-    BREW_LOCATION="/opt/homebrew/bin/brew"
-  elif [[ -x /usr/local/bin/brew ]]; then
-    BREW_LOCATION="/usr/local/bin/brew"
-  elif [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
-    BREW_LOCATION="/home/linuxbrew/.linuxbrew/bin/brew"
-  elif [[ -x "$HOME/.linuxbrew/bin/brew" ]]; then
-    BREW_LOCATION="$HOME/.linuxbrew/bin/brew"
   else
-    return
+    local -a brew_locations
+    if (( ${+ZSH_BREW_LOCATIONS} )); then
+      brew_locations=("${(@)ZSH_BREW_LOCATIONS}")
+    else
+      brew_locations=(
+        /opt/homebrew/bin/brew
+        /usr/local/bin/brew
+        /home/linuxbrew/.linuxbrew/bin/brew
+        "$HOME/.linuxbrew/bin/brew"
+      )
+    fi
+
+    for loc in "${brew_locations[@]}"; do
+      if [[ -n "$loc" && -x "$loc" ]]; then
+        BREW_LOCATION="$loc"
+        break
+      fi
+    done
+
+    if [[ -z "$BREW_LOCATION" ]]; then
+      return
+    fi
   fi
 
   # Only add Homebrew installation to PATH, MANPATH, and INFOPATH if brew is
