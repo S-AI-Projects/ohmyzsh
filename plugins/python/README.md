@@ -66,3 +66,12 @@ Array of virtual environment names to be checked, in order, by `vrun` and `auto_
 This means these functions will load the first existing virtual environment in this list.
 Duplicate names are ignored.
 
+
+
+## Testing
+
+The argument boundaries, quoting preservation, and wildcard behavior for the Python plugin aliases and functions (`pyfind`, `pygrep`, `pyserver`, `pyclean`) are verified with the native test fixture:
+
+```zsh
+zsh -df plugins/python/tests/python.test.zsh
+```

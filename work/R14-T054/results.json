@@ -1,0 +1,221 @@
+{
+  "task_id": "R14-T054",
+  "title": "Preserve quoted arguments: python",
+  "repository": "S-AI-Projects/ohmyzsh",
+  "issue": "https://github.com/S-AI-Projects/ohmyzsh/issues/54",
+  "timestamp": "2026-11-21T18:07:30.926766+00:00",
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "python": "3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "git_commit": "5e442d7d4ce4fef196eb557fd5b0896d7c70cd05",
+    "git_branch": "student/e26b07f0665/R14-T054"
+  },
+  "summary": {
+    "total_tests": 6,
+    "passed": 6,
+    "failed": 0,
+    "success_cases": 5,
+    "failure_edge_cases": 1,
+    "overall_status": "PASS"
+  },
+  "tests": [
+    {
+      "test_id": "pyfind_spaces_and_wildcard",
+      "description": "pyfind preserves wildcard pattern and spaced path argument intact",
+      "mode": "alias_exec",
+      "alias": "pyfind",
+      "expected": {
+        "command": "find",
+        "args": [
+          ".",
+          "-name",
+          "*.py",
+          "-path",
+          "*/test dir with spaces/*"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "find",
+        "args": [
+          ".",
+          "-name",
+          "*.py",
+          "-path",
+          "*/test dir with spaces/*"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "decoy_files_preserved": true,
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pygrep_pattern_spaces_and_wildcard",
+      "description": "pygrep preserves quoted search pattern with wildcard and spaced path",
+      "mode": "alias_exec",
+      "alias": "pygrep",
+      "expected": {
+        "command": "grep",
+        "args": [
+          "-nr",
+          "--include=*.py",
+          "class *Controller",
+          "my code folder"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "grep",
+        "args": [
+          "-nr",
+          "--include=*.py",
+          "class *Controller",
+          "my code folder"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "decoy_files_preserved": true,
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pyserver_directory_spaces",
+      "description": "pyserver forwards directory option with spaces and port argument intact",
+      "mode": "alias_exec",
+      "alias": "pyserver",
+      "expected": {
+        "command": "python3",
+        "args": [
+          "-m",
+          "http.server",
+          "--directory",
+          "public html",
+          "8080"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "python3",
+        "args": [
+          "-m",
+          "http.server",
+          "--directory",
+          "public html",
+          "8080"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "decoy_files_preserved": true,
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pyclean_directories_with_spaces",
+      "description": "pyclean passes spaced directory paths as distinct arguments to find",
+      "mode": "function_exec",
+      "alias": "pyclean",
+      "expected": {
+        "command": "find",
+        "args": [
+          "app folder one",
+          "app folder two",
+          "-depth",
+          "-type",
+          "d",
+          "-name",
+          ".pytest_cache",
+          "-exec",
+          "rm",
+          "-r",
+          "{}",
+          "+"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "find",
+        "args": [
+          "app folder one",
+          "app folder two",
+          "-depth",
+          "-type",
+          "d",
+          "-name",
+          ".pytest_cache",
+          "-exec",
+          "rm",
+          "-r",
+          "{}",
+          "+"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "decoy_files_preserved": true,
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pygrep_invalid_flag_failure",
+      "description": "pygrep propagates failure exit code 2 on invalid option without affecting files",
+      "mode": "failure_edge",
+      "alias": "pygrep",
+      "expected": {
+        "command": "grep",
+        "args": [
+          "-nr",
+          "--include=*.py",
+          "--invalid-flag",
+          "pattern"
+        ],
+        "status": 2
+      },
+      "actual": {
+        "command": "grep",
+        "args": [
+          "-nr",
+          "--include=*.py",
+          "--invalid-flag",
+          "pattern"
+        ],
+        "status": 2,
+        "stderr": "grep: unrecognized option '--invalid-flag'\n"
+      },
+      "decoy_files_preserved": true,
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "test_id": "pyfind_in_spaced_directory",
+      "description": "pyfind executes from within a spaced directory path preserving dot context",
+      "mode": "alias_exec",
+      "alias": "pyfind",
+      "expected": {
+        "command": "find",
+        "args": [
+          ".",
+          "-name",
+          "*.py"
+        ],
+        "status": 0
+      },
+      "actual": {
+        "command": "find",
+        "args": [
+          ".",
+          "-name",
+          "*.py"
+        ],
+        "status": 0,
+        "stderr": ""
+      },
+      "decoy_files_preserved": true,
+      "status": "PASS",
+      "errors": []
+    }
+  ]
+}
