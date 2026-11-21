@@ -47,7 +47,7 @@ plugins=(... podman)
 | prm!    | `podman container rm --force`                 | Force the removal of a running container (uses SIGKILL)                                  |
 | pst     | `podman container start`                      | Start one or more stopped containers                                                     |
 | prs     | `podman container restart`                    | Restart one or more containers                                                           |
-| psta    | `podman stop $(podman ps -q)`                 | Stop all running containers                                                              |
+| psta    | `podman stop $(podman ps --quiet)`            | Stop all running containers                                                              |
 | pstp    | `podman container stop`                       | Stop one or more running containers                                                      |
 | ptop    | `podman top`                                  | Display the running processes of a container                                             |
 | pvi     | `podman volume inspect`                       | Display detailed information about one or more volumes                                   |
@@ -55,3 +55,12 @@ plugins=(... podman)
 | pvprune | `podman volume prune`                         | Cleanup dangling volumes                                                                 |
 | pxc     | `podman container exec`                       | Run a new command in a running container                                                 |
 | pxcit   | `podman container exec --interactive --tty`   | Run a new command in a running container in an interactive shell                         |
+
+
+## Testing
+
+The state transitions and command contracts for the Podman plugin aliases (`pbl`, `pcin`, `pcls`) are verified with the native test fixture:
+
+```zsh
+zsh -df plugins/podman/tests/podman.test.zsh
+```
