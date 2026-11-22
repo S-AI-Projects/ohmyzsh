@@ -3,6 +3,11 @@
 # Author: Ian Chesal (github.com/ianchesal)         #
 #####################################################
 
+if [[ -n "${CLOUDSDK_HOME}" && ! -d "${CLOUDSDK_HOME}" ]]; then
+  echo "[oh-my-zsh] gcloud: CLOUDSDK_HOME '${CLOUDSDK_HOME}' directory not found"
+  return 1
+fi
+
 if [[ -z "${CLOUDSDK_HOME}" ]]; then
   search_locations=(
     "$HOME/google-cloud-sdk"

@@ -1,0 +1,57 @@
+=================================================================
+ Oh My Zsh - R14-T058 Verification Report: plugins/gcloud
+=================================================================
+
+Timestamp:    2026-11-22T17:14:38.880442+00:00
+Git Branch:   student/e26b07f0665/R14-T058
+Git Commit:   7462a3d3494adf7b4dbe76296b20c519ab5f580b
+Zsh Version:  zsh 5.9 (arm64-apple-darwin26.0)
+Python:       3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]
+
+Syntax Check: PASS (zsh -n plugins/gcloud/gcloud.plugin.zsh)
+
+Test Results Summary:
+  - Total:   7
+  - Passed:  7
+  - Failed:  0
+
+Test Assertions Detail:
+  [PASS] T01_failure_invalid_cloudsdk_home: Failing invocation: invalid CLOUDSDK_HOME reports diagnostic error and returns 1
+         Mode: failure_diagnostic
+         Expected Status: 1 | Actual Status: 1
+         Stdout: [oh-my-zsh] gcloud: CLOUDSDK_HOME '/var/folders/fk/tntrxbls71j1pbvt156xgcbm0000gn/T/tmp.r5Tu4aYBe3/nonexistent/google-cloud-sdk' directory not found
+  [PASS] T02_consequent_command_failure: Failing command: gcloud invocation without valid SDK fails with status 127
+         Mode: missing_cmd
+         Expected Status: 127 | Actual Status: 127
+         Stdout: [oh-my-zsh] gcloud: CLOUDSDK_HOME '/var/folders/fk/tntrxbls71j1pbvt156xgcbm0000gn/T/tmp.r5Tu4aYBe3/nonexistent/google-cloud-sdk' directory not found
+         Stderr: (eval):1: command not found: gcloud
+  [PASS] T03_corrected_invocation_success: Corrected invocation: valid CLOUDSDK_HOME loads path.zsh.inc and completion.zsh.inc
+         Mode: init_success
+         Expected Status: 0 | Actual Status: 0
+  [PASS] T04_gcloud_command_execution: Corrected command: gcloud --version executes with exit status 0
+         Mode: cmd_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: gcloud ['--version']
+         Actual Command:   gcloud ['--version']
+         Stdout: Google Cloud SDK 499.0.0
+alpha 2024.11.15
+beta 2024.11.15
+  [PASS] T05_argument_quoting_with_spaces: Argument handling: preserves multi-word quoted argument boundaries
+         Mode: cmd_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: gcloud ['compute', 'instances', 'list', '--project', 'production web cluster']
+         Actual Command:   gcloud ['compute', 'instances', 'list', '--project', 'production web cluster']
+         Stdout: gcloud command executed successfully
+  [PASS] T06_failure_invalid_flag: Failure propagation: invalid flag propagates exit status 2
+         Mode: cmd_failure
+         Expected Status: 2 | Actual Status: 2
+         Expected Command: gcloud ['--invalid-flag']
+         Actual Command:   gcloud ['--invalid-flag']
+         Stderr: ERROR: (gcloud) unrecognized argument: --invalid-flag
+  [PASS] T07_missing_sdk_clean_exit: Unset CLOUDSDK_HOME: exits cleanly without error when SDK not in search locations
+         Mode: init_clean
+         Expected Status: 0 | Actual Status: 0
+
+=================================================================
+All assertions passed. Failure branch and corrected invocation verified.
+=================================================================
