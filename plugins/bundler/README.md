@@ -25,6 +25,15 @@ plugins=(... bundler)
 | `bu`   | `bundle update`   | Update your gems to the latest available versions          |
 | `bua`  | `bundle update --all` | Update all gems to the latest available versions      |
 
+### Alias Argument Contract & State Transitions
+
+| Alias  | Command        | Argument forwarding & state behavior                                   |
+| ------ | -------------- | ---------------------------------------------------------------------- |
+| `ba`   | `bundle add`   | Forwards gem name and flags (e.g. `ba rack --group test`); updates Gemfile. |
+| `bck`  | `bundle check` | Forwards flags (e.g. `bck --path <dir>`); exits non-zero if unsatisfied. |
+| `bcn`  | `bundle clean` | Forwards clean flags (e.g. `bcn --force`); removes unused gems.       |
+
+
 ## Gem wrapper
 
 The plugin adds a wrapper for common gems, which:
