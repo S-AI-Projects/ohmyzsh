@@ -1,0 +1,43 @@
+============================================================
+R14-T044 · Path-quoting tests: plugins/gh
+Entry points: gh completion --shell zsh (completion init)
+============================================================
+
+[Syntax] zsh -n plugins/gh/gh.plugin.zsh
+  [32mPASS[0m  plugin passes zsh -n syntax check
+
+[Test 1] SUCCESS — simple cache dir; completion args exact; file written
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  gh called with 'completion'
+  [32mPASS[0m  gh called with '--shell'
+  [32mPASS[0m  gh called with 'zsh'
+  [32mPASS[0m  completion file written to cache dir
+        gh argv    : ['completion', '--shell', 'zsh']
+        comp file  : exists
+        exit status: 0
+
+[Test 2] EDGE — ZSH_CACHE_DIR contains spaces; completion file still written
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  completion file written (path with spaces)
+        cache dir  : '/var/folders/81/dz1h3c5d2_lfm5jfm133g10h0000gn/T/r14t044_n4rzcqql/my cache dir with spaces'
+        comp file  : exists
+        exit status: 0
+
+[Test 3] BOUNDARY — gh arg containing wildcard '*' is NOT glob-expanded
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  wildcard arg preserved as literal (not glob-expanded)
+  [32mPASS[0m  no decoy filenames appear in argv (glob not expanded)
+        gh argv    : ['pr', 'list', '--search', 'type:pr *.yaml']
+        exit status: 0
+
+[Test 4] BOUNDARY — unrelated cache files unchanged after plugin loads
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  unrelated file still exists
+  [32mPASS[0m  unrelated file content unchanged
+        unrelated file : _kubectl
+        content intact : True
+        exit status    : 0
+
+============================================================
+RESULT: All checks PASSED
+============================================================
