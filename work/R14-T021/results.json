@@ -1,0 +1,107 @@
+{
+  "task": "R14-T021",
+  "plugin": "git-commit",
+  "timestamp": "2026-11-22T18:43:00Z",
+  "tool_versions": {
+    "python": "3.13.x",
+    "platform": "macOS-26.0-arm64",
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "git": "git version 2.54.0 (Apple Git-157)"
+  },
+  "native_check": {
+    "name": "zsh_syntax_check",
+    "command": "zsh -n plugins/git-commit/git-commit.plugin.zsh",
+    "exit": 0,
+    "stderr": "",
+    "passed": true,
+    "elapsed_s": 0.004
+  },
+  "tests": [
+    {
+      "name": "basic_feat_success",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "feat: add login page",
+      "expected": "feat: add login page",
+      "notes": "basic type, no scope"
+    },
+    {
+      "name": "fix_with_scope",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "fix(router): correct redirect",
+      "expected": "fix(router): correct redirect",
+      "notes": "type + scope"
+    },
+    {
+      "name": "feat_attention_flag",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "feat!: break api",
+      "expected": "feat!: break api",
+      "notes": "type + attention"
+    },
+    {
+      "name": "rev_maps_to_revert",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "revert: rollback v2",
+      "expected": "revert: rollback v2",
+      "notes": "rev alias \u2192 revert type"
+    },
+    {
+      "name": "fix_scope_attention",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "fix(api)!: drop endpoint",
+      "expected": "fix(api)!: drop endpoint",
+      "notes": "scope + attention"
+    },
+    {
+      "name": "missing_scope_value",
+      "status": "PASS",
+      "exit": "1",
+      "actual": "Missing scope!",
+      "expected": "Missing scope!",
+      "notes": "edge: -s with no value"
+    },
+    {
+      "name": "empty_message_whitespace",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "git_called=1 msg='feat:  '",
+      "expected": "git called with space msg",
+      "notes": "documented: no empty-msg guard"
+    },
+    {
+      "name": "no_arguments_state",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "git_called=1 msg='feat:'",
+      "expected": "git called, msg='feat:'",
+      "notes": "documented: missing-message state"
+    },
+    {
+      "name": "plugin_syntax_check",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "zsh -n exit=0",
+      "expected": "exit=0",
+      "notes": "plugin file parses cleanly"
+    },
+    {
+      "name": "git_commands_executable",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "all scripts executable",
+      "expected": "all scripts executable",
+      "notes": ""
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "passed": 10,
+    "failed": 0,
+    "overall": "PASS"
+  }
+}
