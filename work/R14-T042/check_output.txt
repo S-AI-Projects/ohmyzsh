@@ -1,0 +1,53 @@
+============================================================
+R14-T042 · Argument-boundary tests: plugins/aws
+Entry points: agp, agr, _aws_update_state
+============================================================
+
+[Syntax] zsh -n plugins/aws/aws.plugin.zsh
+  [32mPASS[0m  plugin passes zsh -n syntax check
+
+[Test 1] agp — AWS_PROFILE set → prints profile name; exit 0
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  output is profile name 'my-dev-profile'
+        args       : AWS_PROFILE=my-dev-profile  (no positional args)
+        output     : 'my-dev-profile'
+        exit status: 0
+
+[Test 2] agr — AWS_REGION set → prints region; exit 0
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  output is region 'us-east-1'
+        args       : AWS_REGION=us-east-1  (no positional args)
+        output     : 'us-east-1'
+        exit status: 0
+
+[Test 3] agp EDGE — AWS_PROFILE unset → empty output; exit 0
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  output is empty (no profile set)
+        args       : (AWS_PROFILE unset, no positional args)
+        output     : ''
+        exit status: 0
+
+[Test 4] agr EDGE — AWS_REGION unset → empty output; exit 0
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  output is empty (no region set)
+        args       : (AWS_REGION unset, no positional args)
+        output     : ''
+        exit status: 0
+
+[Test 5] _aws_update_state BOUNDARY — state enabled, missing dir → exit 1
+  [32mPASS[0m  _aws_update_state returns exit 1 when parent dir missing
+  [32mPASS[0m  state file was NOT created (dir missing)
+        AWS_STATE_FILE : /var/folders/81/dz1h3c5d2_lfm5jfm133g10h0000gn/T/r14t042_s9bkbawz/nonexistent_dir/state_file
+        inner exit     : 1
+        file exists    : False
+
+[Test 6] _aws_update_state BOUNDARY — state disabled → no-op; exit 0
+  [32mPASS[0m  _aws_update_state exit 0 when disabled
+  [32mPASS[0m  state file not written when disabled
+        AWS_PROFILE_STATE_ENABLED : false
+        inner exit                : 0
+        file created              : False
+
+============================================================
+RESULT: All checks PASSED
+============================================================

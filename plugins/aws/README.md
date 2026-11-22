@@ -30,8 +30,10 @@ plugins=(... aws)
    Run `acp` without arguments to clear the profile.
 
 * `agp`: gets the current value of `$AWS_PROFILE`.
+  Takes **no arguments**. Prints the profile name (or an empty line if unset). Always exits 0.
 
 * `agr`: gets the current value of `$AWS_REGION`.
+  Takes **no arguments**. Prints the region name (or an empty line if unset). Always exits 0.
 
 * `aws_change_access_key`: changes the AWS access key of a profile.
 
@@ -51,6 +53,21 @@ plugins=(... aws)
   This option might slow down your shell startup time.
   By default the state file path is `/tmp/.aws_current_profile`. This means that the state won't survive a reboot or otherwise GC.
   You can control the state file path using the `AWS_STATE_FILE` environment variable.
+
+## Argument contract
+
+The following table documents the precise argument boundaries and exit-status
+guarantees for the entry points tested in R14-T042:
+
+| Function | Arguments | Env var read | Output | Exit status |
+|----------|-----------|--------------|--------|-------------|
+| `agp` | none | `$AWS_PROFILE` | Current profile name, or empty string | Always 0 |
+| `agr` | none | `$AWS_REGION` | Current region name, or empty string | Always 0 |
+| `_aws_update_state` | none | `$AWS_PROFILE_STATE_ENABLED`, `$AWS_STATE_FILE`, `$AWS_PROFILE`, `$AWS_REGION` | Nothing (side-effect only) | 0 (disabled or success); 1 if `$AWS_STATE_FILE`'s parent directory does not exist |
+
+> [!NOTE]
+> `_aws_update_state` is an internal helper called by `asp` and `asr`. It is
+> a no-op when `AWS_PROFILE_STATE_ENABLED` is not set to `true`.
 
 ## Theme
 
