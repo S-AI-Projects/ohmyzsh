@@ -1,0 +1,91 @@
+{
+  "task": "R14-T023",
+  "plugin": "bundler",
+  "timestamp": "2026-11-22T19:20:05Z",
+  "tool_versions": {
+    "python": "3.9.6",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "git": "git version 2.54.0 (Apple Git-157)"
+  },
+  "native_check": {
+    "name": "zsh_syntax_check",
+    "command": "zsh -n /private/tmp/ohmyzsh/plugins/bundler/bundler.plugin.zsh",
+    "exit": 0,
+    "stderr": "",
+    "passed": true,
+    "elapsed_s": 0.0035
+  },
+  "tests": [
+    {
+      "name": "sourcing_state_transition",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "ba defined, unrelated_alias preserved",
+      "expected": "ba='bundle add', unrelated preserved",
+      "notes": "shell definition transition verified"
+    },
+    {
+      "name": "ba_ordinary_success",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=[add rake --group test], unrelated state preserved",
+      "expected": "argv=[add rake --group test]",
+      "notes": "ba forwards gem name and flags; unrelated state intact"
+    },
+    {
+      "name": "bck_ordinary_success",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=[check --path vendor/bundle]",
+      "expected": "argv=[check --path vendor/bundle]",
+      "notes": "bck forwards check flags"
+    },
+    {
+      "name": "bcn_ordinary_success",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=[clean --force]",
+      "expected": "argv=[clean --force]",
+      "notes": "bcn forwards clean flags"
+    },
+    {
+      "name": "bck_unsatisfied_dependencies_failure",
+      "status": "PASS",
+      "exit": "1",
+      "actual": "exit=1 (simulated unsatisfied dependencies)",
+      "expected": "exit=1",
+      "notes": "documented edge/failure: unsatisfied gems report non-zero"
+    },
+    {
+      "name": "ba_failure_exit_propagation",
+      "status": "PASS",
+      "exit": "2",
+      "actual": "exit=2",
+      "expected": "exit=2",
+      "notes": "documented edge: bundle add failure exit code propagates"
+    },
+    {
+      "name": "within_bundled_project_transition",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "without=1, with=0",
+      "expected": "without=1, with=0",
+      "notes": "state transition on Gemfile presence"
+    },
+    {
+      "name": "state_isolation",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "sandbox=/var/folders/x_/llqg6qrj0nbgz_0zxy9ky80c0000gn/T/tmp.PjavoU7n4N/home",
+      "expected": "isolated from /Users/kg",
+      "notes": "no user state altered"
+    }
+  ],
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "overall": "PASS"
+  }
+}
