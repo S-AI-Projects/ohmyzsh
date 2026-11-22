@@ -1,0 +1,123 @@
+{
+  "task": "R14-T022",
+  "plugin": "composer",
+  "timestamp": "2026-11-22T19:05:47Z",
+  "tool_versions": {
+    "python": "3.13.x",
+    "platform": "macOS-26.0-arm64",
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "git": "git version 2.54.0 (Apple Git-157)"
+  },
+  "native_check": {
+    "name": "zsh_syntax_check",
+    "command": "zsh -n plugins/composer/composer.plugin.zsh",
+    "exit": 0,
+    "stderr": "",
+    "passed": true,
+    "elapsed_s": 0.004
+  },
+  "tests": [
+    {
+      "name": "c_alias_no_args",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "calls=1 args=''",
+      "expected": "calls>=1 args=''",
+      "notes": "c\u2192composer, min arg list"
+    },
+    {
+      "name": "c_alias_with_subcommand",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "arg1='install'",
+      "expected": "arg1='install'",
+      "notes": "c with optional subcommand"
+    },
+    {
+      "name": "ccp_create_project",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=create-project vendor/package myapp",
+      "expected": "create-project vendor/package myapp",
+      "notes": "ccp\u2192composer create-project"
+    },
+    {
+      "name": "cdo_dump_autoload_optimized",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=dump-autoload -o",
+      "expected": "dump-autoload -o",
+      "notes": "cdo bakes -o flag"
+    },
+    {
+      "name": "cdo_with_extra_flag",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=dump-autoload -o --no-dev",
+      "expected": "dump-autoload -o --no-dev",
+      "notes": "cdo accepts extra optional args"
+    },
+    {
+      "name": "ci_install",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "arg1='install'",
+      "expected": "arg1='install'",
+      "notes": "ci\u2192composer install"
+    },
+    {
+      "name": "cu_update",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "arg1='update'",
+      "expected": "arg1='update'",
+      "notes": "cu\u2192composer update"
+    },
+    {
+      "name": "cr_require_package",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=require vendor/package",
+      "expected": "require vendor/package",
+      "notes": "cr\u2192composer require <pkg>"
+    },
+    {
+      "name": "cdo_redundant_flag_forwarded",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=dump-autoload -o --optimize-autoloader",
+      "expected": "-o and --optimize-autoloader both forwarded",
+      "notes": "documented: alias passes args verbatim; real composer warns"
+    },
+    {
+      "name": "cod_outdated_direct",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=outdated --direct",
+      "expected": "outdated --direct",
+      "notes": "cod\u2192composer outdated --direct"
+    },
+    {
+      "name": "plugin_syntax_check",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "zsh -n exit=0",
+      "expected": "exit=0",
+      "notes": "plugin file parses cleanly"
+    },
+    {
+      "name": "state_isolation",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "sandbox=/var/folders/.../tmp.iJ2mM6ViJr/home",
+      "expected": "isolated from /Users/kg",
+      "notes": "no user state mutated"
+    }
+  ],
+  "summary": {
+    "total": 12,
+    "passed": 12,
+    "failed": 0,
+    "overall": "PASS"
+  }
+}
