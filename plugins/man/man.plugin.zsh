@@ -16,7 +16,7 @@ man-command-line() {
     # if there is no command typed, use the last command
     [[ -z "$BUFFER" ]] && zle up-history
 
-    # if typed command begins with man, do nothing
+    # if typed command begins with "man ", do nothing (preserve commands like manage.py)
     [[ "$BUFFER" = man\ * ]] && return
 
     # get command and possible subcommand
