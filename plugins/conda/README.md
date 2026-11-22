@@ -8,6 +8,46 @@ To use it, add `conda` to the plugins array in your zshrc file:
 plugins=(... conda)
 ```
 
+## Usage
+
+### Creating and activating an environment
+
+1. **Setup**: Create an `environment.yml` configuration file in your project directory:
+
+```yaml
+name: ml-env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+```
+
+2. **Create environment**: Use `cncf` (`conda env create -f`) to build the environment:
+
+```zsh
+$ cncf environment.yml
+Successfully created environment from environment.yml
+```
+
+3. **Activate environment**: Use `cna` (`conda activate`) to switch into the newly created environment:
+
+```zsh
+$ cna ml-env
+Activating environment: ml-env
+$ echo $CONDA_DEFAULT_ENV
+ml-env
+```
+
+4. **Return to base**: Use `cnab` (`conda activate base`) to return to the base environment:
+
+```zsh
+$ cnab
+Activating environment: base
+$ echo $CONDA_DEFAULT_ENV
+base
+```
+
 ## Aliases
 
 | Alias    | Command                                 | Description                                                                     |
@@ -28,8 +68,8 @@ plugins=(... conda)
 | `cnle`   | `conda list --export`                   | Export the list of installed packages in the current environment                |
 | `cnles`  | `conda list --explicit > spec-file.txt` | Export the list of installed packages in the current environment to a spec file |
 | `cnr`    | `conda remove`                          | Remove given package                                                            |
-| `cnrn`   | `conda remove -y -all -n`               | Remove all packages in the specified environment                                |
-| `cnrp`   | `conda remove -y -all -p`               | Remove all packages in the specified prefix                                     |
+| `cnrn`   | `conda remove -y --all -n`              | Remove all packages in the specified environment                                |
+| `cnrp`   | `conda remove -y --all -p`              | Remove all packages in the specified prefix                                     |
 | `cnry`   | `conda remove -y`                       | Remove given package without confirmation                                       |
 | `cnsr`   | `conda search`                          | Search conda repositories for package                                           |
 | `cnu`    | `conda update`                          | Update conda package manager                                                    |

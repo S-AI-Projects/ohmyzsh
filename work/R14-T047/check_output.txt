@@ -1,0 +1,48 @@
+============================================================
+R14-T047 · Executable documentation tests: plugins/conda
+Entry points: cncf, cna, cnab
+============================================================
+
+[Syntax] zsh -n plugins/conda/conda.plugin.zsh
+  [32mPASS[0m  plugin passes zsh -n syntax check
+
+[Test 1] SUCCESS - cncf creates environment from YAML file
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  arguments match ['env', 'create', '-f', 'environment.yml']
+  [32mPASS[0m  output confirms creation
+        conda argv : ['env', 'create', '-f', 'environment.yml']
+        stdout     : Successfully created environment from environment.yml
+EXIT:0
+
+[Test 2] SUCCESS - cna activates specified conda environment
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  arguments match ['activate', 'my-project']
+  [32mPASS[0m  CONDA_DEFAULT_ENV state updated to 'my-project'
+        conda argv : ['activate', 'my-project']
+        env state  : my-project ✓
+
+[Test 3] SUCCESS - cnab activates base environment
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  arguments match ['activate', 'base']
+  [32mPASS[0m  CONDA_DEFAULT_ENV state updated to 'base'
+        conda argv : ['activate', 'base']
+        env state  : base ✓
+
+[Test 4] FAILURE - cncf fails when environment file does not exist
+  [32mPASS[0m  stderr reports missing file
+  [32mPASS[0m  reported exit status is non-zero (1)
+        stderr msg : Environment file not found
+        exit code  : 1 ✓
+
+[Test 5] DOC-WORKFLOW - executes complete README usage example
+  [32mPASS[0m  create step completed with code 0
+  [32mPASS[0m  environment activated as ml-env
+  [32mPASS[0m  environment switched back to base
+        setup      : environment.yml created ✓
+        cncf run   : environment created ✓
+        cna run    : ml-env active ✓
+        cnab run   : base active ✓
+
+============================================================
+RESULT: All checks PASSED
+============================================================
