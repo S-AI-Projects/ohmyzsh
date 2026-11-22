@@ -1,0 +1,35 @@
+============================================================
+R14-T048 · Failure diagnostics tests: plugins/rails
+Entry points: devlog, rails, rake
+============================================================
+
+[Syntax] zsh -n plugins/rails/rails.plugin.zsh
+  [32mPASS[0m  plugin passes zsh -n syntax check
+
+[Test 1 & 2] FAILURE & RECOVERY - devlog missing log file, then corrected
+  [32mPASS[0m  missing log file produces non-zero exit status (1)
+  [32mPASS[0m  stderr produces diagnostic message 'No such file or directory'
+        failure verified: tail: log/development.log: No such file or directory
+  [32mPASS[0m  corrected invocation succeeds with exit status 0
+  [32mPASS[0m  tail received expected arguments ['-f', 'log/development.log']
+        recovery verified: tail succeeded on log/development.log ✓
+
+[Test 3] SUCCESS - _rails_command uses bin/rails when present
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  dispatches to local bin/rails binstub
+        binstub dispatch: local bin/rails executed ✓
+
+[Test 4] SUCCESS - _rails_command falls back to system rails when no binstub
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  falls back to system rails command
+        fallback dispatch: system rails executed ✓
+
+[Test 5] SUCCESS - _rake_command wraps with bundle exec when Gemfile present
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  bundle wrapper invoked
+  [32mPASS[0m  arguments match bundle exec rake db:migrate
+        bundle exec dispatch: bundle exec rake db:migrate ✓
+
+============================================================
+RESULT: All checks PASSED
+============================================================
