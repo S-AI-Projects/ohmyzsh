@@ -1,0 +1,46 @@
+============================================================
+R14-T045 · Environment-isolation tests: plugins/deno
+Entry points: dc (deno compile), dca (deno cache), dck (deno check)
+============================================================
+
+[Syntax] zsh -n plugins/deno/deno.plugin.zsh
+  [32mPASS[0m  plugin passes zsh -n syntax check
+
+[Test 1] dc — deno compile <file>; exit 0
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  argv == ['compile', 'main.ts']
+        deno argv  : ['compile', 'main.ts']
+        workdir    : isolated tmpdir
+        exit status: 0
+
+[Test 2] dca — deno cache <file>; exit 0
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  argv == ['cache', 'deps.ts']
+        deno argv  : ['cache', 'deps.ts']
+        exit status: 0
+
+[Test 3] dck — deno check <file>; exit 0
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  argv == ['check', 'mod.ts']
+        deno argv  : ['check', 'mod.ts']
+        exit status: 0
+
+[Test 4] MISSING-DEP — deno absent; completion skipped; aliases still defined
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  alias dc still defined (declared before guard)
+  [32mPASS[0m  completion file absent (guard returned early)
+        alias dc   : defined
+        completion : absent (correct)
+        exit status: 0
+
+[Test 5] ISOLATION — outer DENO_DIR does not leak into isolated test
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  DENO_DIR inside test is isolated tmpdir (not outer value)
+        inner DENO_DIR : '/var/folders/81/dz1h3c5d2_lfm5jfm133g10h0000gn/T/r14t045_lp1_sh8m/deno_dir'
+        outer DENO_DIR : '/var/folders/81/dz1h3c5d2_lfm5jfm133g10h0000gn/T/r14t045_lp1_sh8m/outer_deno_dir'
+        isolated       : True
+        exit status    : 0
+
+============================================================
+RESULT: All checks PASSED
+============================================================
