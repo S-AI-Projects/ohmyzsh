@@ -1,0 +1,40 @@
+============================================================
+R14-T049 · Tooling integration tests: plugins/composer
+Entry points: c, ccp, cdo
+============================================================
+
+[Syntax] zsh -n plugins/composer/composer.plugin.zsh
+  [32mPASS[0m  plugin passes zsh -n syntax check
+
+[Test 1] SUCCESS - alias c expands to 'composer'
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  arguments received match ['require', 'symfony/yaml']
+        composer argv: ['require', 'symfony/yaml']
+
+[Test 2] SUCCESS - alias ccp expands to 'composer create-project'
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  arguments received match ['create-project', 'laravel/laravel', 'myapp']
+        composer argv: ['create-project', 'laravel/laravel', 'myapp']
+
+[Test 3] SUCCESS - alias cdo expands to 'composer dump-autoload -o'
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  arguments received match ['dump-autoload', '-o']
+        composer argv: ['dump-autoload', '-o']
+
+[Test 4] FAILURE - exit code propagates non-zero when composer fails
+  [32mPASS[0m  non-zero exit code (2) propagates cleanly through alias c
+        reported exit: 2 ✓
+
+[Test 5] EDGE - plugin sourcing without composer dependency
+  [32mPASS[0m  sourcing exits 0 when composer is not installed
+  [32mPASS[0m  aliases c, ccp, cdo remain defined
+        independent of composer installation: aliases defined ✓
+
+[Test 6] CLEANUP - temporary state and directories are cleaned up
+  [32mPASS[0m  command in temporary workspace ran successfully
+  [32mPASS[0m  temporary workspace cleaned up cleanly
+        cleanup verified: /var/folders/81/dz1h3c5d2_lfm5jfm133g10h0000gn/T/r14t049_clean_q_q_w2xo removed ✓
+
+============================================================
+RESULT: All checks PASSED
+============================================================

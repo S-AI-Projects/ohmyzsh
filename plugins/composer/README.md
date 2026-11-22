@@ -12,6 +12,22 @@ plugins=(... composer)
 
 Original author: Daniel Gomes <me@danielcsgomes.com>
 
+## Usage & Tooling Integration
+
+### Key Entry Points
+
+- **`c` (`composer`)**: Shorthand for general composer invocations. Any arguments and options are forwarded directly (e.g., `c require vendor/pkg`).
+- **`ccp` (`composer create-project`)**: Creates a new project from a package (e.g., `ccp laravel/laravel myapp`).
+- **`cdo` (`composer dump-autoload -o`)**: Generates optimized classmaps for faster autoloading in production environments.
+
+### Environment & PATH Isolation
+
+- The plugin automatically checks if `composer` is on `$PATH`. If not found, it checks standard fallback directories:
+  - `~/.composer/vendor/bin`
+  - `~/.config/composer/vendor/bin`
+- When Composer is detected, its global binary directory (`composer global config bin-dir --absolute`) is retrieved, cached, and prepended to `$PATH`.
+- In environments where Composer is absent, the plugin returns early without errors, ensuring aliases remain defined while preventing unnecessary global PATH pollution.
+
 ## Aliases
 
 | Alias  | Command                            | Description                                                                             |
