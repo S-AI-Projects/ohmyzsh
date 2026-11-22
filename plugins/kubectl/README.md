@@ -14,9 +14,9 @@ plugins=(... kubectl)
 | Alias    | Command                                                 | Description                                                                                      |
 | :------- | :------------------------------------------------------ | :----------------------------------------------------------------------------------------------- |
 | k        | `kubectl`                                               | The kubectl command                                                                              |
-| kca      | `kubectl --all-namespaces`                              | The kubectl command targeting all namespaces                                                     |
-| kaf      | `kubectl apply -f`                                      | Apply a YML file                                                                                 |
-| kapk     | `kubectl apply -k`                                      | Apply a kustomization directory                                                                  |
+| kca      | `kubectl --all-namespaces`                              | The kubectl command targeting all namespaces. Forwards all positional arguments; appends `--all-namespaces` as the final argument. Implemented as a self-cleaning function (`_kca`) that unsets itself after each call. |
+| kaf      | `kubectl apply -f`                                      | Apply a YML file. Passes its single argument verbatim as: `kubectl apply -f <file>`. |
+| kapk     | `kubectl apply -k`                                      | Apply a kustomization directory. Passes its single argument verbatim as: `kubectl apply -k <dir>`. |
 | keti     | `kubectl exec -ti`                                      | Drop into an interactive terminal on a container                                                 |
 |          |                                                         | **Manage configuration quickly to switch contexts between local, dev and staging**               |
 | kcuc     | `kubectl config use-context`                            | Set the current-context in a kubeconfig file                                                     |

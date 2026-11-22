@@ -1,0 +1,50 @@
+============================================================
+R14-T043 · State-transition checks: plugins/kubectl
+Entry points: kca (_kca), kaf, kapk
+============================================================
+
+[Syntax] zsh -n plugins/kubectl/kubectl.plugin.zsh
+  [32mPASS[0m  plugin passes zsh -n syntax check
+
+[Test 1] kca — appends --all-namespaces; _kca unset after call
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  BEFORE: _kca function did not exist (clean state)
+  [32mPASS[0m  AFTER:  _kca unset itself (state transition complete)
+  [32mPASS[0m  argv[0] == 'get'
+  [32mPASS[0m  argv[1] == 'pods'
+  [32mPASS[0m  last arg == '--all-namespaces'
+        before state : _kca absent ✓
+        kubectl argv : ['get', 'pods', '--all-namespaces']
+        after  state : _kca absent ✓
+        exit status  : 0
+
+[Test 2] kca EDGE — multi-arg call; all args forwarded + --all-namespaces last
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  arg '-n' preserved
+  [32mPASS[0m  arg 'default' preserved
+  [32mPASS[0m  last arg == '--all-namespaces'
+        kubectl argv : ['get', 'pods', '-n', 'default', '--all-namespaces']
+        exit status  : 0
+
+[Test 3] kaf — kubectl apply -f <file>; exit 0
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  argv == ['apply', '-f', 'deployment.yaml']
+        kubectl argv : ['apply', '-f', 'deployment.yaml']
+        exit status  : 0
+
+[Test 4] kapk — kubectl apply -k <dir>; exit 0
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  argv == ['apply', '-k', './overlays/prod']
+        kubectl argv : ['apply', '-k', './overlays/prod']
+        exit status  : 0
+
+[Test 5] BOUNDARY — alias k=kubectl unchanged after kca is called
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  alias k unchanged after kca call
+        k alias before : k_before:k=kubectl
+        k alias after  : unchanged
+        exit status    : 0
+
+============================================================
+RESULT: All checks PASSED
+============================================================
