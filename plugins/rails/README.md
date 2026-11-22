@@ -148,3 +148,32 @@ prefix `rk` for backwards compatibility.
 | `sstat` | `thin --stats "/thin/stats" start` |
 
 - `remote_console <server> <directory>`: runs `ruby script/console production` on a remote server.
+
+## Troubleshooting & Diagnostics
+
+### Missing Log File with `devlog` / `prodlog` / `testlog`
+
+When executing `devlog` (which expands to `tail -f log/development.log`) in a newly created or uninitialized Rails application directory, `tail` may fail:
+
+```zsh
+$ devlog
+tail: log/development.log: No such file or directory
+```
+
+**Cause**: The Rails logger only creates `log/development.log` upon receiving its first logged request or server boot. Running `devlog` beforehand or from outside the Rails root directory results in exit status `1`.
+
+**Resolution**: Ensure you are in your Rails application root directory and initialize the log file:
+
+```zsh
+mkdir -p log && touch log/development.log
+devlog
+```
+
+Once initialized, `devlog` executes successfully with exit status `0`.
+
+### Command Wrapper Resolution Order
+
+The plugin wraps the `rails` and `rake` commands through `_rails_command` and `_rake_command` to automatically resolve local application binstubs:
+
+- **`rails` resolution**: `bin/stubs/rails` -> `bin/rails` -> `script/rails` -> `script/server` -> system `rails`.
+- **`rake` resolution**: `bin/stubs/rake` -> `bin/rake` -> `bundle exec rake` (if `Gemfile` or `gems.rb` is present) -> system `rake`.
