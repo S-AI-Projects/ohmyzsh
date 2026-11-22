@@ -1,0 +1,145 @@
+{
+  "task_id": "R14-T058",
+  "item": "plugins/gcloud",
+  "timestamp": "2026-11-22T17:14:38.880442+00:00",
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "python": "3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "git_commit": "7462a3d3494adf7b4dbe76296b20c519ab5f580b",
+    "git_branch": "student/e26b07f0665/R14-T058"
+  },
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "has_success_assertion": true,
+    "has_failure_assertion": true
+  },
+  "tests": [
+    {
+      "test_id": "T01_failure_invalid_cloudsdk_home",
+      "description": "Failing invocation: invalid CLOUDSDK_HOME reports diagnostic error and returns 1",
+      "mode": "failure_diagnostic",
+      "passed": true,
+      "expected_status": 1,
+      "actual_status": 1,
+      "expected_command": null,
+      "actual_command": null,
+      "expected_args": null,
+      "actual_args": null,
+      "stdout": "[oh-my-zsh] gcloud: CLOUDSDK_HOME '/var/folders/fk/tntrxbls71j1pbvt156xgcbm0000gn/T/tmp.r5Tu4aYBe3/nonexistent/google-cloud-sdk' directory not found",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T02_consequent_command_failure",
+      "description": "Failing command: gcloud invocation without valid SDK fails with status 127",
+      "mode": "missing_cmd",
+      "passed": true,
+      "expected_status": 127,
+      "actual_status": 127,
+      "expected_command": null,
+      "actual_command": null,
+      "expected_args": null,
+      "actual_args": null,
+      "stdout": "[oh-my-zsh] gcloud: CLOUDSDK_HOME '/var/folders/fk/tntrxbls71j1pbvt156xgcbm0000gn/T/tmp.r5Tu4aYBe3/nonexistent/google-cloud-sdk' directory not found",
+      "stderr": "(eval):1: command not found: gcloud",
+      "errors": []
+    },
+    {
+      "test_id": "T03_corrected_invocation_success",
+      "description": "Corrected invocation: valid CLOUDSDK_HOME loads path.zsh.inc and completion.zsh.inc",
+      "mode": "init_success",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": null,
+      "actual_command": null,
+      "expected_args": null,
+      "actual_args": null,
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T04_gcloud_command_execution",
+      "description": "Corrected command: gcloud --version executes with exit status 0",
+      "mode": "cmd_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "gcloud",
+      "actual_command": "gcloud",
+      "expected_args": [
+        "--version"
+      ],
+      "actual_args": [
+        "--version"
+      ],
+      "stdout": "Google Cloud SDK 499.0.0\nalpha 2024.11.15\nbeta 2024.11.15",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T05_argument_quoting_with_spaces",
+      "description": "Argument handling: preserves multi-word quoted argument boundaries",
+      "mode": "cmd_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "gcloud",
+      "actual_command": "gcloud",
+      "expected_args": [
+        "compute",
+        "instances",
+        "list",
+        "--project",
+        "production web cluster"
+      ],
+      "actual_args": [
+        "compute",
+        "instances",
+        "list",
+        "--project",
+        "production web cluster"
+      ],
+      "stdout": "gcloud command executed successfully",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T06_failure_invalid_flag",
+      "description": "Failure propagation: invalid flag propagates exit status 2",
+      "mode": "cmd_failure",
+      "passed": true,
+      "expected_status": 2,
+      "actual_status": 2,
+      "expected_command": "gcloud",
+      "actual_command": "gcloud",
+      "expected_args": [
+        "--invalid-flag"
+      ],
+      "actual_args": [
+        "--invalid-flag"
+      ],
+      "stdout": "",
+      "stderr": "ERROR: (gcloud) unrecognized argument: --invalid-flag",
+      "errors": []
+    },
+    {
+      "test_id": "T07_missing_sdk_clean_exit",
+      "description": "Unset CLOUDSDK_HOME: exits cleanly without error when SDK not in search locations",
+      "mode": "init_clean",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": null,
+      "actual_command": null,
+      "expected_args": null,
+      "actual_args": null,
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    }
+  ]
+}
