@@ -1,0 +1,194 @@
+{
+  "task_id": "R14-T059",
+  "item": "plugins/history",
+  "timestamp": "2026-11-22T17:49:55.602088+00:00",
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "python": "3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "git_commit": "020b936211f6b0cefddea32006e4047123e9ee72",
+    "git_branch": "student/e26b07f0665/R14-T059"
+  },
+  "summary": {
+    "total": 10,
+    "passed": 10,
+    "failed": 0,
+    "has_success_assertion": true,
+    "has_failure_assertion": true
+  },
+  "tests": [
+    {
+      "test_id": "T01_alias_availability",
+      "description": "Initialization: aliases h, hl, hs, hsi are defined after sourcing",
+      "mode": "alias_check",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": null,
+      "actual_command": null,
+      "expected_args": null,
+      "actual_args": null,
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T02_entry_h_success",
+      "description": "Entry point h: invokes history command and exits with 0",
+      "mode": "h_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "history",
+      "actual_command": "history",
+      "expected_args": [],
+      "actual_args": [],
+      "stdout": "1  git status\n    2  git commit -m \"initial commit\"\n    3  docker compose up -d\n    4  pytest tests/test_app.py\n    5  grep -rn \"TODO\" src/",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T03_entry_h_failure_invalid_flag",
+      "description": "Failure propagation: h with invalid flag propagates exit status 2",
+      "mode": "h_fail",
+      "passed": true,
+      "expected_status": 2,
+      "actual_status": 2,
+      "expected_command": "history",
+      "actual_command": "history",
+      "expected_args": [
+        "--invalid-flag"
+      ],
+      "actual_args": [
+        "--invalid-flag"
+      ],
+      "stdout": "",
+      "stderr": "history: unrecognized option '--invalid-flag'",
+      "errors": []
+    },
+    {
+      "test_id": "T04_entry_hl_success",
+      "description": "Entry point hl: pipes history output to less pager",
+      "mode": "hl_pager",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "less",
+      "actual_command": "less",
+      "expected_args": [],
+      "actual_args": [],
+      "stdout": "1  git status\n    2  git commit -m \"initial commit\"\n    3  docker compose up -d\n    4  pytest tests/test_app.py\n    5  grep -rn \"TODO\" src/",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T05_entry_hl_failure_pager",
+      "description": "Failure propagation: hl with invalid pager flag propagates exit status 2",
+      "mode": "hl_fail",
+      "passed": true,
+      "expected_status": 2,
+      "actual_status": 2,
+      "expected_command": "less",
+      "actual_command": "less",
+      "expected_args": [
+        "--invalid-flag"
+      ],
+      "actual_args": [
+        "--invalid-flag"
+      ],
+      "stdout": "",
+      "stderr": "less: unrecognized option '--invalid-flag'",
+      "errors": []
+    },
+    {
+      "test_id": "T06_entry_hs_match_success",
+      "description": "Entry point hs: pipes history to grep and returns matching line",
+      "mode": "hs_match",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "grep",
+      "actual_command": "grep",
+      "expected_args": [
+        "git commit"
+      ],
+      "actual_args": [
+        "git commit"
+      ],
+      "stdout": "2  git commit -m \"initial commit\"",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T07_entry_hs_no_match",
+      "description": "Entry point hs: non-matching search exits with status 1",
+      "mode": "hs_nomatch",
+      "passed": true,
+      "expected_status": 1,
+      "actual_status": 1,
+      "expected_command": "grep",
+      "actual_command": "grep",
+      "expected_args": [
+        "nonexistent_pattern"
+      ],
+      "actual_args": [
+        "nonexistent_pattern"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T08_entry_hs_quoted_with_spaces",
+      "description": "Argument preservation: hs preserves multi-word search string intact",
+      "mode": "cmd_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "grep",
+      "actual_command": "grep",
+      "expected_args": [
+        "docker compose up -d"
+      ],
+      "actual_args": [
+        "docker compose up -d"
+      ],
+      "stdout": "3  docker compose up -d",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T09_entry_hs_failure_invalid_flag",
+      "description": "Failure propagation: hs with invalid flag propagates exit status 2",
+      "mode": "hs_fail",
+      "passed": true,
+      "expected_status": 2,
+      "actual_status": 2,
+      "expected_command": "grep",
+      "actual_command": "grep",
+      "expected_args": [
+        "--invalid-flag"
+      ],
+      "actual_args": [
+        "--invalid-flag"
+      ],
+      "stdout": "",
+      "stderr": "grep: unrecognized option '--invalid-flag'",
+      "errors": []
+    },
+    {
+      "test_id": "T10_state_cleanup_verification",
+      "description": "Cleanup verification: temporary directory and decoy state preserved",
+      "mode": "cleanup",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": null,
+      "actual_command": null,
+      "expected_args": null,
+      "actual_args": null,
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    }
+  ]
+}
