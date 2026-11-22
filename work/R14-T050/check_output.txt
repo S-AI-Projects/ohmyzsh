@@ -1,0 +1,43 @@
+============================================================
+R14-T050 · Regression mutation tests: plugins/man
+Target condition: [[ "$BUFFER" = man\ * ]]
+============================================================
+
+[Syntax] zsh -n plugins/man/man.plugin.zsh
+  [32mPASS[0m  plugin passes zsh -n syntax check
+
+[Test 1] SUCCESS - single command without subcommand man page
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  transforms 'ls -la' to 'man ls'
+        buffer     : 'man ls'
+
+[Test 2] SUCCESS - command with valid subcommand man page (git commit)
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  transforms to 'man git commit' when git-commit man page exists
+        buffer     : 'man git commit'
+
+[Test 3] EDGE - command already prefixed with 'man '
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  leaves buffer unchanged as 'man grep'
+        buffer     : 'man grep' (early return)
+
+[Test 4] REGRESSION - command starting with 'man' letters (manage.py)
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  correctly prepends man to 'manage.py' on unmutated code
+        buffer     : 'man manage.py' ✓
+
+[Test 5] MUTATION PROBE - verify mutant 'man*' is killed by manage.py test case
+  [32mPASS[0m  mutant was killed: 'man*' prematurely returned on 'manage.py'
+        mutant buf : 'manage.py runserver' (failed to prepend man)
+        mutant kill: confirmed ✓
+
+[Test 6] EDGE - empty buffer triggers zle up-history
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  invokes zle up-history when buffer is empty
+  [32mPASS[0m  recalled command prepended with man
+        history called: yes ✓
+        recalled buf  : 'man echo' ✓
+
+============================================================
+RESULT: All checks PASSED
+============================================================
