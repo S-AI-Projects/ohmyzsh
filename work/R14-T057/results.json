@@ -1,0 +1,176 @@
+{
+  "task_id": "R14-T057",
+  "item": "plugins/autopep8",
+  "timestamp": "2026-11-23T05:36:35.319376+00:00",
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "python": "3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "git_commit": "ccc72dafae7dc6a3009d4c3a9b0114ca62aa1038",
+    "git_branch": "student/e26b07f0665/R14-T057"
+  },
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "has_success_assertion": true,
+    "has_failure_or_missing_assertion": true
+  },
+  "tests": [
+    {
+      "test_id": "T01_init_completion_registration",
+      "description": "Plugin initialization: registers completion definition in compinit",
+      "mode": "init_comp",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": null,
+      "actual_command": null,
+      "expected_args": null,
+      "actual_args": null,
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T02_missing_dependency",
+      "description": "Missing dependency: autopep8 not found in PATH fails with 127",
+      "mode": "missing_dep",
+      "passed": true,
+      "expected_status": 127,
+      "actual_status": 127,
+      "expected_command": null,
+      "actual_command": null,
+      "expected_args": null,
+      "actual_args": null,
+      "stdout": "",
+      "stderr": "(eval):1: command not found: autopep8",
+      "errors": []
+    },
+    {
+      "test_id": "T03_documented_diff_example",
+      "description": "Documented command: 'autopep8 --diff example.py' previews formatting diff",
+      "mode": "diff_example",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "autopep8",
+      "actual_command": "autopep8",
+      "expected_args": [
+        "--diff",
+        "example.py"
+      ],
+      "actual_args": [
+        "--diff",
+        "example.py"
+      ],
+      "stdout": "--- original/example.py\n+++ fixed/example.py\n@@ -1,2 +1,2 @@\n-def foo( x ):\n-    return x+1\n+def foo(x):\n+    return x + 1",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T04_documented_in_place_example",
+      "description": "Documented command: 'autopep8 --in-place --aggressive example.py' formats file",
+      "mode": "cmd_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "autopep8",
+      "actual_command": "autopep8",
+      "expected_args": [
+        "--in-place",
+        "--aggressive",
+        "example.py"
+      ],
+      "actual_args": [
+        "--in-place",
+        "--aggressive",
+        "example.py"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T05_documented_state_verification",
+      "description": "Documented verification: diff on formatted file outputs nothing and exits 0",
+      "mode": "diff_clean",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "autopep8",
+      "actual_command": "autopep8",
+      "expected_args": [
+        "--diff",
+        "clean_example.py"
+      ],
+      "actual_args": [
+        "--diff",
+        "clean_example.py"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T06_quoted_path_with_spaces",
+      "description": "Argument preservation: preserves paths containing spaces",
+      "mode": "cmd_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "autopep8",
+      "actual_command": "autopep8",
+      "expected_args": [
+        "--in-place",
+        "source code/my module.py"
+      ],
+      "actual_args": [
+        "--in-place",
+        "source code/my module.py"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T07_failure_invalid_option",
+      "description": "Failure propagation: invalid option propagates exit status 2",
+      "mode": "cmd_failure",
+      "passed": true,
+      "expected_status": 2,
+      "actual_status": 2,
+      "expected_command": "autopep8",
+      "actual_command": "autopep8",
+      "expected_args": [
+        "--invalid-flag",
+        "example.py"
+      ],
+      "actual_args": [
+        "--invalid-flag",
+        "example.py"
+      ],
+      "stdout": "",
+      "stderr": "autopep8: error: unrecognized arguments: --invalid-flag",
+      "errors": []
+    },
+    {
+      "test_id": "T08_failure_nonexistent_file",
+      "description": "Failure propagation: non-existent file propagates exit status 1",
+      "mode": "cmd_failure",
+      "passed": true,
+      "expected_status": 1,
+      "actual_status": 1,
+      "expected_command": "autopep8",
+      "actual_command": "autopep8",
+      "expected_args": [
+        "nonexistent_script.py"
+      ],
+      "actual_args": [
+        "nonexistent_script.py"
+      ],
+      "stdout": "",
+      "stderr": "[Errno 2] No such file or directory: 'nonexistent_script.py'",
+      "errors": []
+    }
+  ]
+}
