@@ -161,3 +161,11 @@ This plugin provides 3 wrappers to colorize kubectl output in JSON and YAML usin
 - `kj`: JSON, colorized with [`jq`](https://stedolan.github.io/jq/).
 - `kjx`: JSON, colorized with [`fx`](https://github.com/antonmedv/fx).
 - `ky`: YAML, colorized with [`yh`](https://github.com/andreazorzetto/yh).
+
+## Testing
+
+The plugin includes an isolated automated test suite covering command contracts, argument boundary preservation, and missing-dependency edge cases using temporary directories and stub commands without invoking real Kubernetes clusters:
+
+```zsh
+zsh -df plugins/kubectl/tests/kubectl.test.zsh
+```

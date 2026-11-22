@@ -1,0 +1,76 @@
+=================================================================
+ Oh My Zsh - R14-T056 Verification Report: plugins/kubectl
+=================================================================
+
+Timestamp:    2026-11-23T05:35:41.037319+00:00
+Git Branch:   student/e26b07f0665/R14-T056
+Git Commit:   78992863bac759d79585646a72651aa8fab18fbe
+Zsh Version:  zsh 5.9 (arm64-apple-darwin26.0)
+Python:       3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]
+
+Syntax Check: PASS (zsh -n plugins/kubectl/kubectl.plugin.zsh)
+
+Test Results Summary:
+  - Total:   11
+  - Passed:  11
+  - Failed:  0
+
+Test Assertions Detail:
+  [PASS] T01_missing_dependency: Missing dependency: kubectl not in PATH, plugin exits cleanly
+         Mode: missing_dep
+         Expected Status: 0 | Actual Status: 0
+  [PASS] T02_kca_no_args: Entry point kca: expands to 'kubectl --all-namespaces'
+         Mode: cmd_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: kubectl ['--all-namespaces']
+         Actual Command:   kubectl ['--all-namespaces']
+  [PASS] T03_kca_get_pods: Entry point kca: forwards command and appends '--all-namespaces'
+         Mode: cmd_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: kubectl ['get', 'pods', '--all-namespaces']
+         Actual Command:   kubectl ['get', 'pods', '--all-namespaces']
+  [PASS] T04_kca_with_options: Entry point kca: forwards options 'get pods -o wide --all-namespaces'
+         Mode: cmd_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: kubectl ['get', 'pods', '-o', 'wide', '--all-namespaces']
+         Actual Command:   kubectl ['get', 'pods', '-o', 'wide', '--all-namespaces']
+  [PASS] T05_kca_quoted_with_spaces: Entry point kca: preserves quoted selector containing spaces
+         Mode: cmd_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: kubectl ['get', 'pods', '-l', 'app=web frontend', '--all-namespaces']
+         Actual Command:   kubectl ['get', 'pods', '-l', 'app=web frontend', '--all-namespaces']
+  [PASS] T06_entry_kaf_basic: Entry point kaf: expands to 'kubectl apply -f manifest.yaml'
+         Mode: alias_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: kubectl ['apply', '-f', 'manifest.yaml']
+         Actual Command:   kubectl ['apply', '-f', 'manifest.yaml']
+  [PASS] T07_entry_kaf_quoted_with_spaces: Entry point kaf: preserves quoted path with spaces
+         Mode: alias_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: kubectl ['apply', '-f', 'deployments/web app.yaml']
+         Actual Command:   kubectl ['apply', '-f', 'deployments/web app.yaml']
+  [PASS] T08_entry_kapk_basic: Entry point kapk: expands to 'kubectl apply -k ./kustomize'
+         Mode: alias_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: kubectl ['apply', '-k', './kustomize']
+         Actual Command:   kubectl ['apply', '-k', './kustomize']
+  [PASS] T09_entry_kapk_quoted_with_spaces: Entry point kapk: preserves quoted kustomize directory with spaces
+         Mode: alias_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: kubectl ['apply', '-k', 'environments/staging cluster']
+         Actual Command:   kubectl ['apply', '-k', 'environments/staging cluster']
+  [PASS] T10_failure_invalid_option: Failure propagation: kca with invalid option propagates exit status 2
+         Mode: cmd_failure
+         Expected Status: 2 | Actual Status: 2
+         Expected Command: kubectl ['--invalid-flag', '--all-namespaces']
+         Actual Command:   kubectl ['--invalid-flag', '--all-namespaces']
+         Stderr: Error: unknown flag: --invalid-flag
+  [PASS] T11_kres_quoted_args: Helper kres (line 113): preserves quoted arguments in 'kubectl set env'
+         Mode: kres_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: kubectl ['set', 'env', 'deployment/web', '--namespace', 'production app']
+         Actual Command:   kubectl ['set', 'env', 'deployment/web', '--namespace', 'production app', 'REFRESHED_AT=20261123110540']
+
+=================================================================
+All assertions passed. Single responsibility clarified successfully.
+=================================================================
