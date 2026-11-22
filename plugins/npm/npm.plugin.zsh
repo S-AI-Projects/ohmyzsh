@@ -1,4 +1,4 @@
-(( $+commands[npm] )) && {
+if (( $+commands[npm] )); then
   command rm -f "${ZSH_CACHE_DIR:-$ZSH/cache}/npm_completion"
 
   _npm_completion() {
@@ -11,7 +11,7 @@
     IFS=$si
   }
   compdef _npm_completion npm
-}
+fi
 
 # Install dependencies globally
 alias npmg="npm i -g "

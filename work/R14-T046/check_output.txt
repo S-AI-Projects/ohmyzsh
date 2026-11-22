@@ -1,0 +1,48 @@
+============================================================
+R14-T046 · Characterization tests: plugins/npm
+Entry points: npmg, npmS, npmD
+============================================================
+
+[Syntax] zsh -n plugins/npm/npm.plugin.zsh
+  [32mPASS[0m  plugin passes zsh -n syntax check
+
+[Test 1] SUCCESS - npmg expands to 'npm i -g '
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  alias npmg expands to 'npm i -g '
+  [32mPASS[0m  arguments received by npm match ['i', '-g', 'typescript']
+        npm argv   : ['i', '-g', 'typescript']
+        exit status: 0
+
+[Test 2] SUCCESS - npmS expands to 'npm i -S '
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  alias npmS expands to 'npm i -S '
+  [32mPASS[0m  arguments received by npm match ['i', '-S', 'express']
+        npm argv   : ['i', '-S', 'express']
+        exit status: 0
+
+[Test 3] SUCCESS - npmD expands to 'npm i -D '
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  alias npmD expands to 'npm i -D '
+  [32mPASS[0m  arguments received by npm match ['i', '-D', 'jest']
+        npm argv   : ['i', '-D', 'jest']
+        exit status: 0
+
+[Test 4] EDGE - multi-package argument preservation with trailing space
+  [32mPASS[0m  exit status 0
+  [32mPASS[0m  all package names forwarded in order
+        npm argv   : ['i', '-D', 'eslint', 'prettier', '@types/node']
+
+[Test 5] EDGE - missing npm dependency branch
+  [32mPASS[0m  exit status 0 when npm absent
+  [32mPASS[0m  aliases npmg, npmS, npmD are still defined
+  [32mPASS[0m  _npm_completion is not registered when npm is absent
+        aliases    : defined ✓
+        completion : absent (skipped guard branch) ✓
+
+[Test 6] FAILURE - non-zero exit status propagates from npm
+  [32mPASS[0m  exit status propagates non-zero (code 1)
+        reported exit: 1
+
+============================================================
+RESULT: All checks PASSED
+============================================================
