@@ -1,0 +1,34 @@
+task: R14-T036
+command: zsh -f work/R14-T036/test.zsh (ZSH=<checkout>, HOME/TMPDIR/ZDOTDIR=<temp dir>)
+zsh: zsh 5.9 (arm64-apple-darwin26.0)
+python: 3.15.2
+platform: Darwin
+exit status: 0
+passed: 20, failed: 0
+repository state before == after: True
+
+PASS success: nvm.sh sourced eagerly :: [1]
+PASS success: completion helper removed :: [0]
+PASS success: autoload helper removed :: [0]
+PASS success: autoload off defines no load-nvmrc :: [0]
+PASS success: autoload off calls nvm never :: []
+PASS success: autoload on defines load-nvmrc :: [1]
+PASS success: autoload on registers chpwd hook :: [load-nvmrc]
+PASS success: autoload helper removed after use :: [0]
+PASS success: missing node version triggers install :: [nvm version 20
+nvm install]
+PASS edge: no .nvmrc anywhere never calls nvm :: []
+Reverting to nvm default version
+PASS success: leaving a project reverts to the default version :: [nvm version
+nvm version default
+nvm use default]
+PASS success: silent-autoload still installs :: [nvm version 20
+nvm install]
+PASS success: lazy leaves nvm.sh unsourced :: [unset]
+PASS success: lazy defines the node stub :: [1]
+PASS success: first use sources nvm.sh :: [1]
+PASS success: first use removes the node stub :: [0]
+PASS edge: existing nvm short-circuits the plugin :: [unset]
+PASS edge: no NVM_DIR and no install leaves nvm unloaded :: [unset]
+PASS success: defaults to ~/.nvm :: [home/.nvm]
+PASS edge: NVM_DIR without nvm.sh is ignored :: [unset]
