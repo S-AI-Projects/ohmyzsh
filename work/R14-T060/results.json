@@ -1,0 +1,114 @@
+{
+  "task_id": "R14-T060",
+  "plugin": "plugins/gcloud",
+  "timestamp": "2026-11-23T07:01:07.969342+00:00",
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "python": "3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "git_commit": "4ae3135b9abcd88a75e35d5980bf736d0c007361",
+    "git_branch": "student/e26b07f0665/R14-T060"
+  },
+  "condition_details": {
+    "source_file": "plugins/gcloud/gcloud.plugin.zsh",
+    "line_number": 35,
+    "original_condition": "if [[ -f \"${CLOUDSDK_HOME}/path.zsh.inc\" ]]; then",
+    "mutated_condition": "if [[ ! -f \"${CLOUDSDK_HOME}/path.zsh.inc\" ]]; then",
+    "mutation_type": "Condition inversion (negating regular file check -f to ! -f)",
+    "purpose": "Guards execution of SDK path.zsh.inc so SDK binaries are added to PATH only when file exists",
+    "protected_behavior": "When CLOUDSDK_HOME contains path.zsh.inc, it is sourced to configure PATH and environment",
+    "expected_failure_when_mutated": "When mutated with [[ ! -f ... ]], existing path.zsh.inc is skipped, leaving PATH unmodified and failing regression assertion T10"
+  },
+  "scenario_a_original": {
+    "exit_code": 0,
+    "total_tests": 10,
+    "passed_tests": 10,
+    "failed_tests": 0,
+    "tests": [
+      {
+        "name": "T01_auto_discovery_standard_path",
+        "status": "PASS",
+        "description": "Auto-discovery: discovers SDK in standard path when CLOUDSDK_HOME is unset"
+      },
+      {
+        "name": "T02_custom_cloudsdk_home_preserved",
+        "status": "PASS",
+        "description": "Option preservation: pre-configured CLOUDSDK_HOME is respected and not overwritten"
+      },
+      {
+        "name": "T03_path_inc_sourced_success",
+        "status": "PASS",
+        "description": "Initialization: path.zsh.inc is sourced, updating PATH and environment"
+      },
+      {
+        "name": "T04_path_inc_missing_clean",
+        "status": "PASS",
+        "description": "Edge-state: missing path.zsh.inc does not produce errors or non-zero status"
+      },
+      {
+        "name": "T05_completion_sourced_success",
+        "status": "PASS",
+        "description": "Completion: completion.zsh.inc is sourced when present"
+      },
+      {
+        "name": "T06_completion_missing_clean",
+        "status": "PASS",
+        "description": "Edge-state: missing completion file exits cleanly without error"
+      },
+      {
+        "name": "T07_no_sdk_installed_clean",
+        "status": "PASS",
+        "description": "Edge-state: unconfigured environment without SDK installed completes cleanly"
+      },
+      {
+        "name": "T08_argument_quoting_and_execution",
+        "status": "PASS",
+        "description": "Argument preservation: gcloud forwards multi-word arguments with spaces intact"
+      },
+      {
+        "name": "T09_failure_propagation",
+        "status": "PASS",
+        "description": "Failure propagation: gcloud propagates non-zero exit status on error"
+      },
+      {
+        "name": "T10_REGRESSION_path_inc_condition",
+        "status": "PASS",
+        "description": "Regression guard: verifies [[ -f \"${CLOUDSDK_HOME}/path.zsh.inc\" ]] protects SDK PATH initialization"
+      }
+    ],
+    "stdout": "PASS [T01_auto_discovery_standard_path] Auto-discovery: discovers SDK in standard path when CLOUDSDK_HOME is unset\nPASS [T02_custom_cloudsdk_home_preserved] Option preservation: pre-configured CLOUDSDK_HOME is respected and not overwritten\nPASS [T03_path_inc_sourced_success] Initialization: path.zsh.inc is sourced, updating PATH and environment\nPASS [T04_path_inc_missing_clean] Edge-state: missing path.zsh.inc does not produce errors or non-zero status\nPASS [T05_completion_sourced_success] Completion: completion.zsh.inc is sourced when present\nPASS [T06_completion_missing_clean] Edge-state: missing completion file exits cleanly without error\nPASS [T07_no_sdk_installed_clean] Edge-state: unconfigured environment without SDK installed completes cleanly\nPASS [T08_argument_quoting_and_execution] Argument preservation: gcloud forwards multi-word arguments with spaces intact\nPASS [T09_failure_propagation] Failure propagation: gcloud propagates non-zero exit status on error\nPASS [T10_REGRESSION_path_inc_condition] Regression guard: verifies [[ -f \"${CLOUDSDK_HOME}/path.zsh.inc\" ]] protects SDK PATH initialization\n------------------------------------------------------------\nResults: 10 / 10 passed (0 failed)\n------------------------------------------------------------",
+    "stderr": ""
+  },
+  "scenario_b_mutant": {
+    "exit_code": 1,
+    "total_tests": 10,
+    "passed_tests": 6,
+    "failed_tests": 4,
+    "failed_test_names": [
+      "T03_path_inc_sourced_success",
+      "T08_argument_quoting_and_execution",
+      "T09_failure_propagation",
+      "T10_REGRESSION_path_inc_condition"
+    ],
+    "rejected_by_intended_assertion": true,
+    "rejection_message": "REGRESSION: _GCLOUD_PATH_INC_ACTIVE is not 1; path.zsh.inc was not sourced",
+    "infrastructure_failure": false,
+    "stdout": "PASS [T01_auto_discovery_standard_path] Auto-discovery: discovers SDK in standard path when CLOUDSDK_HOME is unset\nPASS [T02_custom_cloudsdk_home_preserved] Option preservation: pre-configured CLOUDSDK_HOME is respected and not overwritten\nPASS [T04_path_inc_missing_clean] Edge-state: missing path.zsh.inc does not produce errors or non-zero status\nPASS [T05_completion_sourced_success] Completion: completion.zsh.inc is sourced when present\nPASS [T06_completion_missing_clean] Edge-state: missing completion file exits cleanly without error\nPASS [T07_no_sdk_installed_clean] Edge-state: unconfigured environment without SDK installed completes cleanly\n------------------------------------------------------------\nResults: 6 / 10 passed (4 failed)\n------------------------------------------------------------",
+    "stderr": "FAIL [T03_path_inc_sourced_success] Initialization: path.zsh.inc is sourced, updating PATH and environment (exit: 1)\n  stdout: _TEST_GCLOUD_PATH_LOADED is not 1\nFAIL [T08_argument_quoting_and_execution] Argument preservation: gcloud forwards multi-word arguments with spaces intact (exit: 1)\n  stderr: zsh:15: command not found: gcloud\nFAIL [T09_failure_propagation] Failure propagation: gcloud propagates non-zero exit status on error (exit: 1)\n  stdout: Expected exit status 2, got 127\nFAIL [T10_REGRESSION_path_inc_condition] Regression guard: verifies [[ -f \"${CLOUDSDK_HOME}/path.zsh.inc\" ]] protects SDK PATH initialization (exit: 1)\n  stdout: REGRESSION: _GCLOUD_PATH_INC_ACTIVE is not 1; path.zsh.inc was not sourced"
+  },
+  "scenario_c_post_cleanup": {
+    "exit_code": 0,
+    "total_tests": 10,
+    "passed_tests": 10,
+    "failed_tests": 0,
+    "production_source_clean": true,
+    "stdout": "PASS [T01_auto_discovery_standard_path] Auto-discovery: discovers SDK in standard path when CLOUDSDK_HOME is unset\nPASS [T02_custom_cloudsdk_home_preserved] Option preservation: pre-configured CLOUDSDK_HOME is respected and not overwritten\nPASS [T03_path_inc_sourced_success] Initialization: path.zsh.inc is sourced, updating PATH and environment\nPASS [T04_path_inc_missing_clean] Edge-state: missing path.zsh.inc does not produce errors or non-zero status\nPASS [T05_completion_sourced_success] Completion: completion.zsh.inc is sourced when present\nPASS [T06_completion_missing_clean] Edge-state: missing completion file exits cleanly without error\nPASS [T07_no_sdk_installed_clean] Edge-state: unconfigured environment without SDK installed completes cleanly\nPASS [T08_argument_quoting_and_execution] Argument preservation: gcloud forwards multi-word arguments with spaces intact\nPASS [T09_failure_propagation] Failure propagation: gcloud propagates non-zero exit status on error\nPASS [T10_REGRESSION_path_inc_condition] Regression guard: verifies [[ -f \"${CLOUDSDK_HOME}/path.zsh.inc\" ]] protects SDK PATH initialization\n------------------------------------------------------------\nResults: 10 / 10 passed (0 failed)\n------------------------------------------------------------",
+    "stderr": ""
+  },
+  "verification_summary": {
+    "original_passed": true,
+    "mutant_rejected": true,
+    "post_cleanup_passed": true,
+    "production_intact": true,
+    "zero_case_rejected": true
+  }
+}

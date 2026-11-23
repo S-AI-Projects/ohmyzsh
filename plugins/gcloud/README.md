@@ -22,3 +22,19 @@ as the base for your SDK if it finds it set already.
 `CLOUDSDK_PYTHON` environment variable at the end of your `.zshrc`. This is
 used by the SDK to call a compatible interpreter when you run one of the
 SDK commands.
+
+## Testing
+
+The plugin includes an isolated native test suite and automated regression verification harness:
+
+- **Native Test Suite**:
+  ```zsh
+  zsh -df plugins/gcloud/tests/gcloud.test.zsh
+  ```
+  Runs 10 focused tests under an isolated `ZDOTDIR` with stubbed Google Cloud SDK fixtures, asserting auto-discovery, custom `CLOUDSDK_HOME` preservation, `path.zsh.inc` execution, completion loading, argument preservation with spaces, exit code propagation, and protected condition regressions.
+
+- **Automated Regression Verification Harness**:
+  ```zsh
+  python3 work/R14-T060/check.py
+  ```
+  Runs the end-to-end regression mutation workflow: executes tests against original implementation (Scenario A), applies a temporary one-condition mutant inverting the `path.zsh.inc` guard (Scenario B) and verifies rejection, then restores the original implementation and re-tests (Scenario C).
