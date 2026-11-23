@@ -14,6 +14,15 @@ plugins=(... mvn)
 The plugin aliases mvn to a function that calls `mvnw` (the [Maven Wrapper](https://github.com/takari/maven-wrapper))
 if it's found, or the mvn command otherwise.
 
+### Maven Wrapper Lookup & Environment Isolation
+
+- **Wrapper Traversal**: Starting from `$PWD`, `mvn-or-mvnw` inspects parent directories up to root (`/`) for an executable `mvnw` script (`-x`).
+- **Wrapper Execution**: When an executable `mvnw` is found, `mvn-or-mvnw` logs ``Running `<path>/mvnw`...`` to `stderr`, forwards all arguments verbatim, and returns the wrapper's exit status.
+- **Fallback to `command mvn`**: If no executable `mvnw` is found (or if `mvnw` lacks execute permissions), `mvn-or-mvnw` falls back to `command mvn` without printing wrapper messages.
+- **Missing Dependency Branch**: If neither an executable `mvnw` nor a system `mvn` binary on `$PATH` is found, `command mvn` returns exit status 127 (`command not found`) while preserving shell state.
+- **Aliases**: Aliases like `mvnag` (`mvn archetype:generate`) and `mvnboot` (`mvn spring-boot:run`) inherit the wrapper lookup and argument forwarding guarantees.
+
+
 | Alias                | Command                                         |
 |:---------------------|:------------------------------------------------|
 | `mvn!`               | `mvn -f <root>/pom.xml`                         |
