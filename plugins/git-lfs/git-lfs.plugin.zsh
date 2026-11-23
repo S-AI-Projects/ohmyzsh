@@ -12,6 +12,5 @@ alias glfsmi='git lfs migrate import --include='
 #
 
 function gplfs() {
-  local b="$(git_current_branch)"
-  git lfs push origin "$b" --all
+  git lfs push origin "$(git_current_branch)" --all
 }

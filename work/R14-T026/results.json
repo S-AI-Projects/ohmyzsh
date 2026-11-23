@@ -1,0 +1,83 @@
+{
+  "task": "R14-T026",
+  "plugin": "git-lfs",
+  "timestamp": "2026-11-23T14:27:06Z",
+  "tool_versions": {
+    "python": "3.9.6",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "git": "git version 2.54.0 (Apple Git-157)"
+  },
+  "native_check": {
+    "name": "zsh_syntax_check",
+    "command": "zsh -n /private/tmp/ohmyzsh/plugins/git-lfs/git-lfs.plugin.zsh",
+    "exit": 0,
+    "stderr": "",
+    "passed": true,
+    "elapsed_s": 0.0043
+  },
+  "tests": [
+    {
+      "name": "sourcing_state_transition",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "glfsi, glfst, glfsls, gplfs defined; unrelated intact",
+      "expected": "aliases and gplfs function defined",
+      "notes": "plugin definitions verified"
+    },
+    {
+      "name": "glfsi_ordinary_success",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=['lfs', 'install', '--skip-smudge']",
+      "expected": "exact argv preserved",
+      "notes": "glfsi forwards install options"
+    },
+    {
+      "name": "glfst_quoted_pattern_forwarding",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=['lfs', 'track', '*.psd', 'assets/3d models/*.obj']",
+      "expected": "exact patterns preserved without word-splitting",
+      "notes": "glfst pattern argument boundaries intact"
+    },
+    {
+      "name": "glfsls_listing_with_options",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=['lfs', 'ls-files', '-s', '--all']",
+      "expected": "flags forwarded",
+      "notes": "glfsls option forwarding intact"
+    },
+    {
+      "name": "gplfs_simplified_helper_execution",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "argv=['lfs', 'push', 'origin', 'feature/lfs-pipeline', '--all']",
+      "expected": "resolved branch pushed to origin with --all",
+      "notes": "simplified gplfs helper preserves observable behavior"
+    },
+    {
+      "name": "glfsi_failure_exit_propagation",
+      "status": "PASS",
+      "exit": "1",
+      "actual": "exit=1, error captured",
+      "expected": "exit=1",
+      "notes": "documented failure: git failure status propagates cleanly"
+    },
+    {
+      "name": "state_isolation",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "sandbox=/var/folders/x_/llqg6qrj0nbgz_0zxy9ky80c0000gn/T/tmp.NxYL1ivx1A/home",
+      "expected": "isolated from /Users/kg",
+      "notes": "no user state altered"
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "overall": "PASS"
+  }
+}
