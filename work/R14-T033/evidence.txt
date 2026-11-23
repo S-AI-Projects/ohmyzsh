@@ -1,0 +1,30 @@
+task: R14-T033
+command: zsh -f work/R14-T033/test.zsh (ZSH=<checkout>, HOME/TMPDIR/ZDOTDIR=<temp dir>)
+zsh: zsh 5.9 (arm64-apple-darwin26.0)
+python: 3.15.2
+platform: Darwin
+exit status: 0
+passed: 21, failed: 0
+repository state before == after: True
+
+PASS success: emacs alias absent before loading :: [0]
+PASS success: launcher path exported :: [<ZSH>/plugins/emacs/emacsclient.sh]
+PASS success: emacs alias :: [<ZSH>/plugins/emacs/emacsclient.sh --no-wait]
+PASS success: e alias :: [emacs]
+PASS success: te alias :: [<ZSH>/plugins/emacs/emacsclient.sh -nw]
+PASS success: eeval alias :: [<ZSH>/plugins/emacs/emacsclient.sh --eval]
+PASS success: EDITOR defaults to launcher :: [<ZSH>/plugins/emacs/emacsclient.sh]
+PASS success: unrelated alias unchanged :: [ls -l]
+PASS success: unrelated variable unchanged :: [keep]
+PASS success: te keeps a spaced filename as one argument :: [--alternate-editor=|-nw|my file.txt]
+PASS success: emacs reuses an existing frame :: [--alternate-editor=|--no-wait|a b]
+PASS success: bare emacs creates a frame :: [--alternate-editor=|--create-frame|--no-wait]
+PASS success: eeval passes the form untouched :: [--alternate-editor=|--eval|(+ 1 2)]
+PASS success: efile :: [/home/me/notes.txt]
+PASS success: ecd :: [/home/me]
+PASS edge: efile without a buffer fails :: [1]
+PASS edge: efile explains why :: [Can't deduce current buffer filename.]
+PASS edge: ecd propagates the failure :: [1]
+PASS edge: preset EDITOR is kept :: [vim]
+PASS edge: emacsclient 23 defines no emacs alias :: [0]
+PASS edge: emacsclient 23 leaves EDITOR unset :: [unset]

@@ -17,14 +17,14 @@ plugins=(... emacs)
 
 ## Aliases
 
-The plugin uses a custom launcher (which we'll call here `$EMACS_LAUNCHER`) that is just a wrapper around [`emacsclient`](https://www.emacswiki.org/emacs/EmacsClient).
+The plugin uses a custom launcher (which we'll call here `$EMACS_PLUGIN_LAUNCHER`) that is just a wrapper around [`emacsclient`](https://www.emacswiki.org/emacs/EmacsClient).
 
 | Alias  | Command                                            | Description                                                    |
 |--------|----------------------------------------------------|----------------------------------------------------------------|
-| emacs  | `$EMACS_LAUNCHER --no-wait`                        | Opens a temporary emacsclient frame                            |
+| emacs  | `$EMACS_PLUGIN_LAUNCHER --no-wait`                        | Opens a temporary emacsclient frame                            |
 | e      | `emacs`                                            | Same as emacs alias                                            |
-| te     | `$EMACS_LAUNCHER -nw`                              | Open terminal emacsclient                                      |
-| eeval  | `$EMACS_LAUNCHER --eval`                           | Same as `M-x eval` but from outside Emacs                      |
+| te     | `$EMACS_PLUGIN_LAUNCHER -nw`                              | Open terminal emacsclient                                      |
+| eeval  | `$EMACS_PLUGIN_LAUNCHER --eval`                           | Same as `M-x eval` but from outside Emacs                      |
 | eframe | `emacsclient --alternate-editor="" --create-frame` | Create new X frame                                             |
 | efile  | -                                                  | Print the path to the file open in the current buffer          |
 | ecd    | -                                                  | Print the directory of the file open in the current buffer |
