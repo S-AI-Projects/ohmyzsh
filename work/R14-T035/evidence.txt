@@ -1,0 +1,21 @@
+task: R14-T035
+command: zsh -f work/R14-T035/test.zsh (ZSH=<checkout>, HOME/TMPDIR/ZDOTDIR=<temp dir>)
+zsh: zsh 5.9 (arm64-apple-darwin26.0)
+python: 3.15.2
+platform: Darwin
+exit status: 0
+passed: 12, failed: 0
+repository state before == after: True
+
+PASS success: ba runs bundle add :: [bundle|add|rails|]
+PASS success: bck runs bundle check :: [bundle|check|]
+PASS success: bck exit status :: [0]
+PASS success: bck output :: []
+PASS success: bcn runs bundle clean :: [bundle|clean|]
+PASS edge: missing dependency output :: [The following gems are missing]
+PASS edge: missing dependency exit status :: [1]
+PASS edge: missing dependency still calls bundle check once :: [bundle|check|]
+PASS success: wrapped rake inside a project goes through bundle exec :: [bundle|exec|rake|-T|spec|]
+PASS edge: wrapped rake outside a project runs directly :: [rake|-T|spec|]
+PASS edge: wrapped rake without bundler runs directly :: [rake|db:migrate|]
+PASS success: binstub is preferred over bundle exec :: [binstub|test]
