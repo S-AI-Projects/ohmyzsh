@@ -31,6 +31,7 @@ The plugin adds a wrapper for common gems, which:
 
 - Looks for a binstub under `./bin/` and executes it if present.
 - Calls `bundle exec <gem>` otherwise.
+- Runs the gem directly when `bundle` is not installed, or when the current directory is not inside a project with a `Gemfile` or `gems.rb`.
 
 Common gems wrapped by default (by name of the executable):
 
