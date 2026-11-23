@@ -1,0 +1,69 @@
+=================================================================
+ Oh My Zsh - R14-T057 Verification Report: plugins/autopep8
+=================================================================
+
+Timestamp:    2026-11-23T05:36:35.319376+00:00
+Git Branch:   student/e26b07f0665/R14-T057
+Git Commit:   ccc72dafae7dc6a3009d4c3a9b0114ca62aa1038
+Zsh Version:  zsh 5.9 (arm64-apple-darwin26.0)
+Python:       3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]
+
+Prescribed Syntax Check: PASS (zsh -n plugins/autopep8/README.md)
+Source Syntax Check:     PASS (zsh -n plugins/autopep8/_autopep8)
+
+Test Results Summary:
+  - Total:   8
+  - Passed:  8
+  - Failed:  0
+
+Test Assertions Detail:
+  [PASS] T01_init_completion_registration: Plugin initialization: registers completion definition in compinit
+         Mode: init_comp
+         Expected Status: 0 | Actual Status: 0
+  [PASS] T02_missing_dependency: Missing dependency: autopep8 not found in PATH fails with 127
+         Mode: missing_dep
+         Expected Status: 127 | Actual Status: 127
+         Stderr: (eval):1: command not found: autopep8
+  [PASS] T03_documented_diff_example: Documented command: 'autopep8 --diff example.py' previews formatting diff
+         Mode: diff_example
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: autopep8 ['--diff', 'example.py']
+         Actual Command:   autopep8 ['--diff', 'example.py']
+         Stdout: --- original/example.py
++++ fixed/example.py
+@@ -1,2 +1,2 @@
+-def foo( x ):
+-    return x+1
++def foo(x):
++    return x + 1
+  [PASS] T04_documented_in_place_example: Documented command: 'autopep8 --in-place --aggressive example.py' formats file
+         Mode: cmd_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: autopep8 ['--in-place', '--aggressive', 'example.py']
+         Actual Command:   autopep8 ['--in-place', '--aggressive', 'example.py']
+  [PASS] T05_documented_state_verification: Documented verification: diff on formatted file outputs nothing and exits 0
+         Mode: diff_clean
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: autopep8 ['--diff', 'clean_example.py']
+         Actual Command:   autopep8 ['--diff', 'clean_example.py']
+  [PASS] T06_quoted_path_with_spaces: Argument preservation: preserves paths containing spaces
+         Mode: cmd_exec
+         Expected Status: 0 | Actual Status: 0
+         Expected Command: autopep8 ['--in-place', 'source code/my module.py']
+         Actual Command:   autopep8 ['--in-place', 'source code/my module.py']
+  [PASS] T07_failure_invalid_option: Failure propagation: invalid option propagates exit status 2
+         Mode: cmd_failure
+         Expected Status: 2 | Actual Status: 2
+         Expected Command: autopep8 ['--invalid-flag', 'example.py']
+         Actual Command:   autopep8 ['--invalid-flag', 'example.py']
+         Stderr: autopep8: error: unrecognized arguments: --invalid-flag
+  [PASS] T08_failure_nonexistent_file: Failure propagation: non-existent file propagates exit status 1
+         Mode: cmd_failure
+         Expected Status: 1 | Actual Status: 1
+         Expected Command: autopep8 ['nonexistent_script.py']
+         Actual Command:   autopep8 ['nonexistent_script.py']
+         Stderr: [Errno 2] No such file or directory: 'nonexistent_script.py'
+
+=================================================================
+All assertions passed. Executable usage example verified successfully.
+=================================================================
