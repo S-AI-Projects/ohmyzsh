@@ -37,10 +37,8 @@ function _omz_nvm_setup_completion {
 }
 
 function _omz_nvm_setup_autoload {
-  if ! zstyle -t ':omz:plugins:nvm' autoload; then
-    unfunction _omz_nvm_setup_autoload
-    return
-  fi
+  unfunction _omz_nvm_setup_autoload
+  zstyle -t ':omz:plugins:nvm' autoload || return
 
   # Autoload nvm when finding a .nvmrc file in the current directory
   # Adapted from: https://github.com/nvm-sh/nvm#zsh
@@ -68,7 +66,6 @@ function _omz_nvm_setup_autoload {
   add-zsh-hook chpwd load-nvmrc
 
   load-nvmrc
-  unfunction _omz_nvm_setup_autoload
 }
 
 if zstyle -t ':omz:plugins:nvm' lazy; then
