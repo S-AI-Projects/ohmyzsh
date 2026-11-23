@@ -26,3 +26,5 @@ dash golang
 ```
 dash python:tuple
 ```
+
+The query is URL-encoded before it is handed to Dash, so `dash python:tuple` opens `dash://python%3Atuple`.

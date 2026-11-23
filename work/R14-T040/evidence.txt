@@ -1,0 +1,22 @@
+task: R14-T040
+command: zsh -f work/R14-T040/test.zsh (ZSH=<checkout>, HOME/TMPDIR/ZDOTDIR=<temp dir>)
+zsh: zsh 5.9 (arm64-apple-darwin26.0)
+python: 3.15.2
+platform: Darwin
+exit status: 0
+passed: 11, failed: 0
+repository state before == after: True
+mutant [completion position -ne 2 -> -ne 3]: rejected (5 failing assertions)
+mutant [keyword guard =~ ":" -> =~ ";"]: rejected (1 failing assertions)
+
+PASS success: keyword query is url-encoded :: [-a Dash.app dash://python%3Atuple]
+PASS success: plain query :: [-a Dash.app dash://golang]
+PASS success: no query only opens the app :: [-a Dash.app dash://]
+PASS edge: words are joined with a plus :: [-a Dash.app dash://go+lang]
+PASS success: completes the keyword in position 2 :: [-qS: -- python3]
+PASS success: reads the docset preferences once :: [defaults|read com.kapeli.dashdoc docsets]
+PASS success: explicit keyword wins over platform :: [-qS: -- py2]
+PASS edge: nothing is completed in position 3 :: [none]
+PASS edge: nothing is completed once a keyword is typed :: [none]
+PASS edge: nothing is completed in position 1 :: [none]
+PASS edge: disabled docsets offer no keywords :: [-qS: --]
