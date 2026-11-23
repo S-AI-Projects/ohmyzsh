@@ -1,0 +1,91 @@
+{
+  "task": "R14-T028",
+  "plugin": "rsync",
+  "timestamp": "2026-11-23T17:23:14Z",
+  "tool_versions": {
+    "python": "3.9.6",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "git": "git version 2.54.0 (Apple Git-157)"
+  },
+  "native_check": {
+    "name": "zsh_syntax_check",
+    "command": "zsh -n /private/tmp/ohmyzsh/plugins/rsync/rsync.plugin.zsh",
+    "exit": 0,
+    "stderr": "",
+    "passed": true,
+    "elapsed_s": 0.0034
+  },
+  "tests": [
+    {
+      "name": "sourcing_state_transition",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "4 aliases defined, unrelated alias preserved",
+      "expected": "all aliases set",
+      "notes": "pre/post state checked"
+    },
+    {
+      "name": "failing_invocation_missing_source",
+      "status": "PASS",
+      "exit": "23",
+      "actual": "exit 23, No such file or directory, code 23 reported",
+      "expected": "exit 23 on missing source",
+      "notes": "failure branch reached & verified"
+    },
+    {
+      "name": "corrected_invocation_success",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "exit 0, incremental file list transferred",
+      "expected": "exit 0",
+      "notes": "corrected invocation succeeds after creating fixture"
+    },
+    {
+      "name": "rsync_move_arguments_preservation",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "flags -avz -h --remove-source-files passed",
+      "expected": "exact flag forwarding",
+      "notes": "rsync-move preserves --remove-source-files"
+    },
+    {
+      "name": "rsync_update_arguments_preservation",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "flags -avzu --progress -h passed",
+      "expected": "exact flag forwarding",
+      "notes": "rsync-update preserves -avzu"
+    },
+    {
+      "name": "rsync_synchronize_arguments_preservation",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "flags -avzu --delete passed",
+      "expected": "exact flag forwarding",
+      "notes": "rsync-synchronize preserves --delete"
+    },
+    {
+      "name": "documented_failure_invalid_option",
+      "status": "PASS",
+      "exit": "1",
+      "actual": "exit 1, unknown option",
+      "expected": "non-zero exit on unknown option",
+      "notes": "failure edge case handled"
+    },
+    {
+      "name": "sandbox_state_isolation",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "isolated temporary workspace",
+      "expected": "isolated workspace",
+      "notes": "real environment untouched"
+    }
+  ],
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "overall": "PASS"
+  }
+}
