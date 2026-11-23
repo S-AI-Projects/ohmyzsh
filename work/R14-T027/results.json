@@ -1,0 +1,75 @@
+{
+  "task": "R14-T027",
+  "plugin": "asdf",
+  "timestamp": "2026-11-23T17:15:17Z",
+  "tool_versions": {
+    "python": "3.9.6",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "git": "git version 2.54.0 (Apple Git-157)"
+  },
+  "native_check": {
+    "name": "zsh_syntax_check",
+    "command": "zsh -n /private/tmp/ohmyzsh/plugins/asdf/asdf.plugin.zsh",
+    "exit": 0,
+    "stderr": "/private/tmp/ohmyzsh/plugins/asdf/asdf.plugin.zsh:16: nice(5) failed: operation not permitted",
+    "passed": true,
+    "elapsed_s": 0.0037
+  },
+  "tests": [
+    {
+      "name": "plugin_initialization_success",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "ASDF_DATA_DIR=/var/folders/x_/llqg6qrj0nbgz_0zxy9ky80c0000gn/T/tmp.p6FHom2IJN/home/.asdf, shims prepended, _comps[asdf]=_asdf",
+      "expected": "initialized shims and completions",
+      "notes": "standard initialization verified"
+    },
+    {
+      "name": "verified_usage_example_execution",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "commands executed and output verified against documentation",
+      "expected": "matches README documentation",
+      "notes": "verified usage example executes correctly"
+    },
+    {
+      "name": "missing_dependency_early_return",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "returns early without setting ASDF_DATA_DIR or modifying PATH",
+      "expected": "clean exit without state mutation",
+      "notes": "documented missing dependency branch verified"
+    },
+    {
+      "name": "custom_asdf_data_dir_preserved",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "custom ASDF_DATA_DIR preserved, custom shims prepended",
+      "expected": "custom dir preserved",
+      "notes": "user custom ASDF_DATA_DIR handled correctly"
+    },
+    {
+      "name": "duplicate_shims_deduplicated",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "shims appears exactly once at front of PATH",
+      "expected": "deduplicated shims",
+      "notes": "path deduplication verified"
+    },
+    {
+      "name": "state_isolation",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "sandbox=/var/folders/x_/llqg6qrj0nbgz_0zxy9ky80c0000gn/T/tmp.p6FHom2IJN/home",
+      "expected": "isolated from /Users/kg",
+      "notes": "no user state altered"
+    }
+  ],
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "overall": "PASS"
+  }
+}
