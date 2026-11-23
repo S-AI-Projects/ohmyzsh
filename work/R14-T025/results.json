@@ -1,0 +1,83 @@
+{
+  "task": "R14-T025",
+  "plugin": "mvn",
+  "timestamp": "2026-11-23T14:16:36Z",
+  "tool_versions": {
+    "python": "3.9.6",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "git": "git version 2.54.0 (Apple Git-157)"
+  },
+  "native_check": {
+    "name": "zsh_syntax_check",
+    "command": "zsh -n /private/tmp/ohmyzsh/plugins/mvn/mvn.plugin.zsh",
+    "exit": 0,
+    "stderr": "",
+    "passed": true,
+    "elapsed_s": 0.0081
+  },
+  "tests": [
+    {
+      "name": "sourcing_state_transition",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "mvn, mvnag, mvnboot defined; unrelated alias intact",
+      "expected": "aliases defined as expected",
+      "notes": "plugin alias definitions verified"
+    },
+    {
+      "name": "mvnboot_with_wrapper_in_parent",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "invoked parent mvnw with spring-boot:run and arguments",
+      "expected": "mvnw invoked with args",
+      "notes": "mvnw lookup from subdirectory verified"
+    },
+    {
+      "name": "mvnag_fallback_to_mvn",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "fallback to mvn with archetype:generate and args",
+      "expected": "mvn invoked directly",
+      "notes": "fallback to mvn verified"
+    },
+    {
+      "name": "non_executable_mvnw_skipped",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "non-executable mvnw skipped, fallback to mvn",
+      "expected": "fallback to mvn",
+      "notes": "non-executable wrapper skipped"
+    },
+    {
+      "name": "wrapper_exit_status_propagation",
+      "status": "PASS",
+      "exit": "3",
+      "actual": "exit=3 propagated from mvnw",
+      "expected": "exit=3",
+      "notes": "documented edge: wrapper non-zero exit status propagates"
+    },
+    {
+      "name": "missing_dependency_branch",
+      "status": "PASS",
+      "exit": "127",
+      "actual": "exit=127, command not found reported",
+      "expected": "exit=127",
+      "notes": "documented failure: missing mvn dependency handled cleanly"
+    },
+    {
+      "name": "state_isolation",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "sandbox=/var/folders/x_/llqg6qrj0nbgz_0zxy9ky80c0000gn/T/tmp.cK2Tq8QTUU/home",
+      "expected": "isolated from /Users/kg",
+      "notes": "no user state altered"
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "overall": "PASS"
+  }
+}
