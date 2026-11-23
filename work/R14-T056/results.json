@@ -1,0 +1,272 @@
+{
+  "task_id": "R14-T056",
+  "item": "plugins/kubectl",
+  "timestamp": "2026-11-23T05:35:41.037319+00:00",
+  "tool_versions": {
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "python": "3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "git_commit": "78992863bac759d79585646a72651aa8fab18fbe",
+    "git_branch": "student/e26b07f0665/R14-T056"
+  },
+  "summary": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0,
+    "has_success_assertion": true,
+    "has_failure_or_missing_assertion": true
+  },
+  "tests": [
+    {
+      "test_id": "T01_missing_dependency",
+      "description": "Missing dependency: kubectl not in PATH, plugin exits cleanly",
+      "mode": "missing_dep",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": null,
+      "actual_command": null,
+      "expected_args": null,
+      "actual_args": null,
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T02_kca_no_args",
+      "description": "Entry point kca: expands to 'kubectl --all-namespaces'",
+      "mode": "cmd_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "kubectl",
+      "actual_command": "kubectl",
+      "expected_args": [
+        "--all-namespaces"
+      ],
+      "actual_args": [
+        "--all-namespaces"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T03_kca_get_pods",
+      "description": "Entry point kca: forwards command and appends '--all-namespaces'",
+      "mode": "cmd_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "kubectl",
+      "actual_command": "kubectl",
+      "expected_args": [
+        "get",
+        "pods",
+        "--all-namespaces"
+      ],
+      "actual_args": [
+        "get",
+        "pods",
+        "--all-namespaces"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T04_kca_with_options",
+      "description": "Entry point kca: forwards options 'get pods -o wide --all-namespaces'",
+      "mode": "cmd_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "kubectl",
+      "actual_command": "kubectl",
+      "expected_args": [
+        "get",
+        "pods",
+        "-o",
+        "wide",
+        "--all-namespaces"
+      ],
+      "actual_args": [
+        "get",
+        "pods",
+        "-o",
+        "wide",
+        "--all-namespaces"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T05_kca_quoted_with_spaces",
+      "description": "Entry point kca: preserves quoted selector containing spaces",
+      "mode": "cmd_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "kubectl",
+      "actual_command": "kubectl",
+      "expected_args": [
+        "get",
+        "pods",
+        "-l",
+        "app=web frontend",
+        "--all-namespaces"
+      ],
+      "actual_args": [
+        "get",
+        "pods",
+        "-l",
+        "app=web frontend",
+        "--all-namespaces"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T06_entry_kaf_basic",
+      "description": "Entry point kaf: expands to 'kubectl apply -f manifest.yaml'",
+      "mode": "alias_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "kubectl",
+      "actual_command": "kubectl",
+      "expected_args": [
+        "apply",
+        "-f",
+        "manifest.yaml"
+      ],
+      "actual_args": [
+        "apply",
+        "-f",
+        "manifest.yaml"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T07_entry_kaf_quoted_with_spaces",
+      "description": "Entry point kaf: preserves quoted path with spaces",
+      "mode": "alias_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "kubectl",
+      "actual_command": "kubectl",
+      "expected_args": [
+        "apply",
+        "-f",
+        "deployments/web app.yaml"
+      ],
+      "actual_args": [
+        "apply",
+        "-f",
+        "deployments/web app.yaml"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T08_entry_kapk_basic",
+      "description": "Entry point kapk: expands to 'kubectl apply -k ./kustomize'",
+      "mode": "alias_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "kubectl",
+      "actual_command": "kubectl",
+      "expected_args": [
+        "apply",
+        "-k",
+        "./kustomize"
+      ],
+      "actual_args": [
+        "apply",
+        "-k",
+        "./kustomize"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T09_entry_kapk_quoted_with_spaces",
+      "description": "Entry point kapk: preserves quoted kustomize directory with spaces",
+      "mode": "alias_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "kubectl",
+      "actual_command": "kubectl",
+      "expected_args": [
+        "apply",
+        "-k",
+        "environments/staging cluster"
+      ],
+      "actual_args": [
+        "apply",
+        "-k",
+        "environments/staging cluster"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    },
+    {
+      "test_id": "T10_failure_invalid_option",
+      "description": "Failure propagation: kca with invalid option propagates exit status 2",
+      "mode": "cmd_failure",
+      "passed": true,
+      "expected_status": 2,
+      "actual_status": 2,
+      "expected_command": "kubectl",
+      "actual_command": "kubectl",
+      "expected_args": [
+        "--invalid-flag",
+        "--all-namespaces"
+      ],
+      "actual_args": [
+        "--invalid-flag",
+        "--all-namespaces"
+      ],
+      "stdout": "",
+      "stderr": "Error: unknown flag: --invalid-flag",
+      "errors": []
+    },
+    {
+      "test_id": "T11_kres_quoted_args",
+      "description": "Helper kres (line 113): preserves quoted arguments in 'kubectl set env'",
+      "mode": "kres_exec",
+      "passed": true,
+      "expected_status": 0,
+      "actual_status": 0,
+      "expected_command": "kubectl",
+      "actual_command": "kubectl",
+      "expected_args": [
+        "set",
+        "env",
+        "deployment/web",
+        "--namespace",
+        "production app"
+      ],
+      "actual_args": [
+        "set",
+        "env",
+        "deployment/web",
+        "--namespace",
+        "production app",
+        "REFRESHED_AT=20261123110540"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "errors": []
+    }
+  ]
+}

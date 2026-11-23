@@ -20,7 +20,9 @@ zmodload -F zsh/files b:zf_mv
 alias k=kubectl
 
 # Execute a kubectl command against all namespaces
-alias kca='_kca(){ kubectl "$@" --all-namespaces;  unset -f _kca; }; _kca'
+function kca() {
+  kubectl "$@" --all-namespaces
+}
 
 # Apply a YML file
 alias kaf='kubectl apply -f'
@@ -110,8 +112,8 @@ alias ksd='kubectl scale deployment'
 alias krsd='kubectl rollout status deployment'
 alias krrd='kubectl rollout restart deployment'
 
-function kres(){
-  kubectl set env $@ REFRESHED_AT=$(date +%Y%m%d%H%M%S)
+function kres() {
+  kubectl set env "$@" REFRESHED_AT=$(date +%Y%m%d%H%M%S)
 }
 
 # Rollout management.
