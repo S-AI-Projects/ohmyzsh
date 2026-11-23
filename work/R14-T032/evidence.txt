@@ -1,0 +1,26 @@
+task: R14-T032
+command: zsh -f work/R14-T032/test.zsh (ZSH=<checkout>, HOME/TMPDIR/ZDOTDIR=<temp dir>)
+zsh: zsh 5.9 (arm64-apple-darwin26.0)
+python: 3.15.2
+platform: Darwin
+exit status: 0
+passed: 17, failed: 0
+repository state before == after: True
+
+PASS success: fzf >= 0.48 exit status :: [0]
+PASS success: fzf --zsh output evaluated :: [1]
+PASS success: fzf argv, one call per line :: [--version|--zsh]
+PASS edge: fzf below 0.48 rejected :: [1]
+PASS edge: old fzf never asked for --zsh :: [--version]
+PASS edge: old fzf leaves shell untouched :: [unset]
+PASS edge: no fzf on PATH :: [1]
+PASS edge: termux without fzf installed :: [1]
+PASS success: termux package exit status :: [0]
+PASS success: termux key bindings sourced :: [1]
+PASS success: completion skipped in non-interactive shell :: [unset]
+PASS edge: key bindings disabled still succeeds :: [0]
+PASS edge: key bindings disabled not sourced :: [unset]
+PASS edge: no apt on PATH :: [1]
+PASS success: FZF_BASE exit status :: [0]
+PASS success: FZF_BASE key bindings sourced :: [1]
+PASS success: FZF_BASE bin appended to PATH :: [base/bin]

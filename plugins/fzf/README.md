@@ -50,3 +50,13 @@ Set whether to disable key bindings (CTRL-T, CTRL-R, ALT-C):
 ```zsh
 DISABLE_FZF_KEY_BINDINGS="true"
 ```
+
+## Installation lookup
+
+The plugin tries each of these in order and stops at the first one that works:
+
+1. `fzf --zsh`, for fzf 0.48.0 or newer found on `PATH`.
+2. The OpenBSD, Debian (including Termux), openSUSE, Fedora, Cygwin and MacPorts package locations.
+3. The directory in `FZF_BASE`, or a known install directory such as `~/.fzf` or `/opt/homebrew/opt/fzf`.
+
+If none of them works, the plugin prints a message asking you to set `FZF_BASE`.
