@@ -1,0 +1,23 @@
+task: R14-T038
+command: zsh -f work/R14-T038/test.zsh (ZSH=<checkout>, HOME/TMPDIR/ZDOTDIR=<temp dir>)
+zsh: zsh 5.9 (arm64-apple-darwin26.0)
+python: 3.15.2
+platform: Darwin
+exit status: 0
+passed: 14, failed: 0
+repository state before == after: True
+
+PASS edge: missing eza makes the plugin return 1 :: [1]
+PASS edge: missing eza diagnostic :: [zsh eza plugin: eza not found. Please install eza before using this plugin.]
+PASS edge: missing eza defines no ls alias :: [0]
+PASS edge: README explains the same message :: [1]
+PASS success: corrected PATH loads the plugin :: [0]
+PASS success: ls alias :: [eza]
+PASS success: ll alias :: [eza -l]
+PASS success: la alias :: [eza -la]
+PASS success: ldot keeps its pattern as one word :: [eza -ld .*]
+PASS success: lS alias :: [eza -l -ssize]
+PASS success: helpers are cleaned up :: [00]
+PASS success: header goes in the short flags :: [eza -hl --group-directories-first --git]
+PASS success: plain ls carries the shared flags :: [eza -h --group-directories-first --git]
+PASS edge: unsupported color-scale-mode is ignored :: [eza -Bl]

@@ -173,3 +173,16 @@ Default: `no`
 | `lsdl` | `eza -dl`         | List specified files with directories as entries, in a long list           |
 | `lS`   | `eza -l -ssize`   | List files as a long list, sorted by size                                  |
 | `lT`   | `eza -l -snewest` | List files as a long list, sorted by date (newest last)                    |
+
+## Troubleshooting
+
+### `zsh eza plugin: eza not found. Please install eza before using this plugin.`
+
+The plugin stops loading and defines no aliases when `eza` is not on your `PATH`, so `ls` keeps running the
+system command. Install `eza` and make sure its directory is in `PATH` before Oh My Zsh loads, then start a new
+shell. You can check with `command -v eza`.
+
+### My `zstyle` settings have no effect
+
+The settings are read once, while the plugin loads. Set them before Oh My Zsh is sourced and open a new shell
+to apply a change.
