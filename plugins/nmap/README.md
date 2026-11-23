@@ -25,3 +25,24 @@ plugins=(... nmap)
 - `nmap_full_with_scripts`: same as nmap_full but also runs all the scripts.
 - `nmap_web_safe_osscan`: little "safer" scan for OS version  as connecting to only HTTP and HTTPS ports doesn't look so attacking.
 - `nmap_ping_scan`: ICMP scan for active hosts.
+
+## Example
+
+Scan one host for open ports. `192.0.2.10` is an address reserved for documentation, replace it with your own target:
+
+```console
+$ nmap_open_ports 192.0.2.10
+Starting Nmap ( https://nmap.org )
+Nmap scan report for 192.0.2.10
+Host is up (0.0010s latency).
+Not shown: 998 closed tcp ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+
+Nmap done: 1 IP address (1 host up) scanned
+$ echo $?
+0
+```
+
+The alias expands to `nmap --open 192.0.2.10`. It only reads from the network and writes nothing to disk.
+Running it without a target makes `nmap` itself fail with a non-zero status.
