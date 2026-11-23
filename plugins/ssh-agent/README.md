@@ -111,6 +111,16 @@ ssh-add -K -c -a /run/user/1000/ssh-auth <identities>
 
 For valid `ssh-add` arguments run `ssh-add --help` or `man ssh-add`.
 
+### `test-mode`
+
+To test the plugin without starting background `ssh-agent` processes or unfunctioning internal entry points (`_is_agent_running`, `_start_agent`, `_add_identities`), enable `test-mode`:
+
+```zsh
+zstyle :omz:plugins:ssh-agent test-mode yes
+```
+
+This preserves the entry point definitions so automated test runners can verify behavior in isolation without external dependencies.
+
 ### Powerline 10k specific settings
 
 Powerline10k has an instant prompt setting that doesn't like when this plugin

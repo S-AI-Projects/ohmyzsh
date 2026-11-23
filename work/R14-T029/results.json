@@ -1,0 +1,91 @@
+{
+  "task": "R14-T029",
+  "plugin": "ssh-agent",
+  "timestamp": "2026-11-23T17:30:18Z",
+  "tool_versions": {
+    "python": "3.9.6",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "git": "git version 2.54.0 (Apple Git-157)"
+  },
+  "native_check": {
+    "name": "zsh_syntax_check",
+    "command": "zsh -n /private/tmp/ohmyzsh/plugins/ssh-agent/ssh-agent.plugin.zsh",
+    "exit": 0,
+    "stderr": "",
+    "passed": true,
+    "elapsed_s": 0.0036
+  },
+  "tests": [
+    {
+      "name": "is_agent_running_empty_or_invalid",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "returns 1 when socket missing",
+      "expected": "exit 1",
+      "notes": "edge/failure condition correctly handled"
+    },
+    {
+      "name": "start_agent_missing_ssh_dir",
+      "status": "PASS",
+      "exit": "1",
+      "actual": "returns 1 when ~/.ssh missing",
+      "expected": "exit 1",
+      "notes": "missing prerequisite directory handled cleanly"
+    },
+    {
+      "name": "start_agent_success",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "environment cached, PID 99999 set",
+      "expected": "exit 0",
+      "notes": "successful agent spawn and environment setup"
+    },
+    {
+      "name": "start_agent_propagates_failure_and_cleans_up",
+      "status": "PASS",
+      "exit": "1",
+      "actual": "failure code propagated and cache cleaned up",
+      "expected": "non-zero exit & no cache",
+      "notes": "failure propagation & cleanup verified"
+    },
+    {
+      "name": "start_agent_lifetime_argument",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "passed -t 4h to ssh-agent",
+      "expected": "forward -t 4h",
+      "notes": "zstyle lifetime forwarded"
+    },
+    {
+      "name": "add_identities_default_keys",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "added id_rsa and id_ed25519",
+      "expected": "exit 0 with default keys",
+      "notes": "default identity discovery works"
+    },
+    {
+      "name": "add_identities_custom_and_args",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "passed -q -c and custom_key1",
+      "expected": "exact args",
+      "notes": "quiet mode and custom args forwarded"
+    },
+    {
+      "name": "sandbox_state_isolation",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "isolated temporary workspace",
+      "expected": "isolated workspace",
+      "notes": "real environment untouched"
+    }
+  ],
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "overall": "PASS"
+  }
+}

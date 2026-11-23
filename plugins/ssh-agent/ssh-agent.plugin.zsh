@@ -1,10 +1,10 @@
 # Get the filename to store/lookup the environment from
-ssh_env_cache="$HOME/.ssh/environment-$SHORT_HOST"
+ssh_env_cache="$HOME/.ssh/environment-${SHORT_HOST:-}"
 
 # Test if $SSH_AUTH_SOCK points at a listening agent
 function _is_agent_running() {
   local REPLY
-  [[ -n "$SSH_AUTH_SOCK" && -S "$SSH_AUTH_SOCK" ]] || return 1
+  [[ -n "${SSH_AUTH_SOCK:-}" && -S "${SSH_AUTH_SOCK:-}" ]] || return 1
   zmodload zsh/net/socket 2>/dev/null || return 1
   zsocket "$SSH_AUTH_SOCK" 2>/dev/null || return 1
   exec {REPLY}>&- # close the probe connection
@@ -36,7 +36,13 @@ function _start_agent() {
 
   # start ssh-agent and setup environment
   zstyle -t :omz:plugins:ssh-agent quiet || echo >&2 "Starting ssh-agent ..."
+  local agent_status
   ssh-agent -s ${lifetime:+-t} ${lifetime} | sed '/^echo/d' >! "$ssh_env_cache"
+  agent_status=${pipestatus[1]:-$?}
+  if [[ $agent_status -ne 0 ]]; then
+    rm -f "$ssh_env_cache"
+    return $agent_status
+  fi
   chmod 600 "$ssh_env_cache"
   . "$ssh_env_cache" > /dev/null
 }
@@ -107,6 +113,11 @@ function _add_identities() {
 
   ssh-add "${args[@]}" ${^not_loaded}
 }
+
+# Don't execute startup routines or unfunction helpers if test-mode is enabled
+if zstyle -t :omz:plugins:ssh-agent test-mode; then
+  return 0
+fi
 
 # Add a nifty symlink for screen/tmux if agent forwarding is enabled
 if zstyle -t :omz:plugins:ssh-agent agent-forwarding \
