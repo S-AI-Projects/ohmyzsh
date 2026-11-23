@@ -28,10 +28,18 @@ plugins=(... conda)
 | `cnle`   | `conda list --export`                   | Export the list of installed packages in the current environment                |
 | `cnles`  | `conda list --explicit > spec-file.txt` | Export the list of installed packages in the current environment to a spec file |
 | `cnr`    | `conda remove`                          | Remove given package                                                            |
-| `cnrn`   | `conda remove -y -all -n`               | Remove all packages in the specified environment                                |
-| `cnrp`   | `conda remove -y -all -p`               | Remove all packages in the specified prefix                                     |
+| `cnrn`   | `conda remove -y --all -n`              | Remove all packages in the specified environment                                |
+| `cnrp`   | `conda remove -y --all -p`              | Remove all packages in the specified prefix                                     |
 | `cnry`   | `conda remove -y`                       | Remove given package without confirmation                                       |
 | `cnsr`   | `conda search`                          | Search conda repositories for package                                           |
 | `cnu`    | `conda update`                          | Update conda package manager                                                    |
 | `cnua`   | `conda update --all`                    | Update all installed packages                                                   |
 | `cnuc`   | `conda update conda`                    | Update conda package manager                                                    |
+
+## Regression and Mutation Testing
+
+The alias contracts for key entry points (`cna`, `cnab`, `cncf`) are covered by regression tests in `work/R14-T030/` to ensure:
+- `cna` strictly forwards `conda activate` with any target environment argument.
+- `cnab` explicitly retains the target `base` argument (`conda activate base`).
+- `cncf` preserves both the `env` sub-command and `-f` flag (`conda env create -f`).
+
