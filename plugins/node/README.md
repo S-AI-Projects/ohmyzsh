@@ -17,3 +17,11 @@ $ node-docs fs
 # Opens https://nodejs.org/docs/latest-v10.x/api/path.html
 $ node-docs path
 ```
+
+The section name is used exactly as typed, so quote it if it contains spaces or shell wildcards.
+Without an argument, `node-docs` opens the page that lists all sections (`all.html`):
+
+```zsh
+# Opens https://nodejs.org/docs/latest-v10.x/api/all.html
+$ node-docs
+```
