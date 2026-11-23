@@ -1,0 +1,23 @@
+task: R14-T039
+command: zsh -f work/R14-T039/test.zsh (ZSH=<checkout>, HOME/TMPDIR/ZDOTDIR=<temp dir>)
+zsh: zsh 5.9 (arm64-apple-darwin26.0)
+python: 3.15.2
+platform: Darwin
+exit status: 0
+passed: 14, failed: 0
+repository state before == after: True
+
+PASS success: widget registered :: [-N sudo-command-line]
+PASS success: bound in emacs, vicmd and viins :: [-M emacs \e\e sudo-command-line|-M vicmd \e\e sudo-command-line|-M viins \e\e sudo-command-line]
+PASS success: prefix is added :: [sudo apt install build-essential]
+PASS success: prefix is toggled off :: [apt install build-essential]
+PASS success: -e prefix is toggled off :: [/etc/hosts]
+PASS success: leading space is preserved :: [ sudo ls -l]
+PASS success: empty buffer reuses the last history entry :: [sudo systemctl restart nginx]
+PASS success: editor command becomes sudo -e :: [sudo -e /etc/hosts]
+PASS success: sudo -e goes back to the editor :: [vim /etc/hosts]
+PASS success: non-editor command still gets sudo :: [sudo ls /root]
+PASS edge: editor with a longer name is not matched :: [sudo vimdiff a b]
+PASS edge: SUDO_EDITOR wins over EDITOR :: [sudo -e /etc/hosts]
+PASS edge: another editor is a plain command :: [sudo vim /etc/hosts]
+PASS success: alias to the editor becomes sudo -e :: [sudo -e /etc/hosts]
