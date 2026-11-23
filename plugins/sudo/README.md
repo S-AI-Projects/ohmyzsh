@@ -38,6 +38,9 @@ By pressing the <kbd>esc</kbd> key twice, you will have the same command with `s
 $ sudo -e /etc/hosts
 ```
 
+Only the editor itself, or an alias to it, is replaced by `sudo -e`. Any other command, including one that merely starts
+with the editor's name such as `vimdiff`, just gets `sudo` prefixed.
+
 ### Previous executed commands
 
 Say you want to delete a system file and denied:
