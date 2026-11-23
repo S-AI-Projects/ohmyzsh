@@ -1,0 +1,55 @@
+=================================================================
+ R14-T060 Regression Mutation Verification Report: gcloud
+=================================================================
+
+Task ID: R14-T060
+Plugin: plugins/gcloud/gcloud.plugin.zsh
+Timestamp: 2026-11-23T07:01:07.969342+00:00
+
+Runtime Environment:
+  Zsh: zsh 5.9 (arm64-apple-darwin26.0)
+  Python: 3.14.5 (v3.14.5:5607950ef23, May 10 2026, 07:38:09) [Clang 21.0.0 (clang-2100.0.123.102)]
+  Git Commit: 4ae3135b9abcd88a75e35d5980bf736d0c007361
+  Git Branch: student/e26b07f0665/R14-T060
+
+Protected Condition:
+  Source File: plugins/gcloud/gcloud.plugin.zsh
+  Line: 35
+  Original: if [[ -f "${CLOUDSDK_HOME}/path.zsh.inc" ]]; then
+  Mutated:  if [[ ! -f "${CLOUDSDK_HOME}/path.zsh.inc" ]]; then
+  Type:     Condition inversion (negating regular file check -f to ! -f)
+  Purpose:  Guards execution of SDK path.zsh.inc so SDK binaries are added to PATH only when file exists
+
+Scenario Execution Summary:
+  Scenario A (Original Implementation):
+    Exit Status: 0
+    Tests Run: 10 (Passed: 10, Failed: 0)
+    Outcome: PASS
+
+  Scenario B (Temporary One-Condition Mutant):
+    Exit Status: 1
+    Tests Run: 10 (Passed: 6, Failed: 4)
+    Mutant Rejection: CONFIRMED
+    Intended Assertion: 'REGRESSION: _GCLOUD_PATH_INC_ACTIVE is not 1; path.zsh.inc was not sourced'
+    Infrastructure Failure: False
+    Outcome: REJECTED AS EXPECTED
+
+  Scenario C (Restore & Cleanup Retest):
+    Production Source Clean: True
+    Exit Status: 0
+    Tests Run: 10 (Passed: 10, Failed: 0)
+    Outcome: PASS
+
+Tests Executed in Native Fixture Suite:
+  [PASS] T01_auto_discovery_standard_path: Auto-discovery: discovers SDK in standard path when CLOUDSDK_HOME is unset
+  [PASS] T02_custom_cloudsdk_home_preserved: Option preservation: pre-configured CLOUDSDK_HOME is respected and not overwritten
+  [PASS] T03_path_inc_sourced_success: Initialization: path.zsh.inc is sourced, updating PATH and environment
+  [PASS] T04_path_inc_missing_clean: Edge-state: missing path.zsh.inc does not produce errors or non-zero status
+  [PASS] T05_completion_sourced_success: Completion: completion.zsh.inc is sourced when present
+  [PASS] T06_completion_missing_clean: Edge-state: missing completion file exits cleanly without error
+  [PASS] T07_no_sdk_installed_clean: Edge-state: unconfigured environment without SDK installed completes cleanly
+  [PASS] T08_argument_quoting_and_execution: Argument preservation: gcloud forwards multi-word arguments with spaces intact
+  [PASS] T09_failure_propagation: Failure propagation: gcloud propagates non-zero exit status on error
+  [PASS] T10_REGRESSION_path_inc_condition: Regression guard: verifies [[ -f "${CLOUDSDK_HOME}/path.zsh.inc" ]] protects SDK PATH initialization
+
+All verification checks completed successfully.
