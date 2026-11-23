@@ -1,0 +1,91 @@
+{
+  "task": "R14-T030",
+  "plugin": "conda",
+  "timestamp": "2026-11-23T17:35:43Z",
+  "tool_versions": {
+    "python": "3.9.6",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "zsh": "zsh 5.9 (arm64-apple-darwin26.0)",
+    "git": "git version 2.54.0 (Apple Git-157)"
+  },
+  "native_check": {
+    "name": "zsh_syntax_check",
+    "command": "zsh -n /private/tmp/ohmyzsh/plugins/conda/conda.plugin.zsh",
+    "exit": 0,
+    "stderr": "",
+    "passed": true,
+    "elapsed_s": 0.0035
+  },
+  "tests": [
+    {
+      "name": "sourcing_state_transition",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "all conda aliases registered, unrelated preserved",
+      "expected": "all aliases set",
+      "notes": "pre/post state checked"
+    },
+    {
+      "name": "cna_activate_environment",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "passed activate my_dev_env",
+      "expected": "exact args forwarded",
+      "notes": "cna entry point verified"
+    },
+    {
+      "name": "cnab_activate_base_regression",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "passed activate base",
+      "expected": "exact args forwarded",
+      "notes": "cnab retains base environment"
+    },
+    {
+      "name": "cncf_env_create_regression",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "passed env create -f environment.yml",
+      "expected": "exact args forwarded",
+      "notes": "cncf preserves env subcommand and -f flag"
+    },
+    {
+      "name": "mutation_rejection_cnab_dropped_base",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "mutant detected: missing base argument rejected",
+      "expected": "reject mutant",
+      "notes": "mutation killed by regression assertion"
+    },
+    {
+      "name": "mutation_rejection_cncf_dropped_env",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "mutant detected: missing env subcommand rejected",
+      "expected": "reject mutant",
+      "notes": "mutation killed by regression assertion"
+    },
+    {
+      "name": "documented_failure_invalid_flag",
+      "status": "PASS",
+      "exit": "2",
+      "actual": "exit 2, unrecognized arguments rejected",
+      "expected": "exit 2",
+      "notes": "failure branch verified"
+    },
+    {
+      "name": "sandbox_state_isolation",
+      "status": "PASS",
+      "exit": "0",
+      "actual": "isolated temporary workspace",
+      "expected": "isolated workspace",
+      "notes": "real environment untouched"
+    }
+  ],
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "overall": "PASS"
+  }
+}
