@@ -1,0 +1,23 @@
+task: R14-T031
+command: zsh -f work/R14-T031/test.zsh (ZSH=<checkout>, HOME/TMPDIR/ZDOTDIR=<temp dir>)
+zsh: zsh 5.9 (arm64-apple-darwin26.0)
+python: 3.15.2
+platform: Darwin
+exit status: 0
+passed: 14, failed: 0
+repository state before == after: True
+
+PASS success: completion bound to ufw :: [_ufw]
+PASS success: README command 'allow' is completed :: [0]
+PASS success: README command 'default' is completed :: [0]
+PASS success: README command 'delete' is completed :: [0]
+PASS success: README command 'deny' is completed :: [0]
+PASS success: README command 'disable' is completed :: [0]
+PASS success: README command 'enable' is completed :: [0]
+PASS success: README command 'route' is completed :: [0]
+PASS edge: inactive firewall prints no rules :: []
+PASS edge: inactive firewall exit status :: [0]
+PASS edge: inactive firewall probed once with status only :: [status]
+PASS success: active firewall lists numbered rule :: ["1[22/tcp                     ALLOW IN    Anywhere]" ]
+PASS success: active firewall exit status :: [0]
+PASS success: ufw argv :: [status|status numbered]
