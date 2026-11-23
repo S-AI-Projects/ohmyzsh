@@ -31,3 +31,12 @@ plugins=(... ruby)
 | gel     | `gem lock`                             | Generate a lockdown list of gems                     |
 | geo     | `gem open`                             | Open gem source in default editor                    |
 | geoe    | `gem open -e`                          | Open gem sources in preferred editor                 |
+
+### Alias Argument Contract & Path Quoting
+
+The plugin aliases preserve exact argument boundaries when quoting is used:
+
+- **`rb` (`ruby`)**: Invokes Ruby directly. Quoted paths containing spaces (e.g. `rb "my scripts/app runner.rb"`) and arguments containing wildcards (e.g. `rb -e "puts Dir['*.rb']"`) are preserved as distinct single arguments without word-splitting.
+- **`sgem` (`sudo gem`)**: Invokes `sudo gem`. Preserves quoted gem paths containing spaces and wildcards (e.g. `sgem install "my gems/custom-*.gem"`).
+- **`rfind`**: Piped command `find . -name "*.rb" -print0 | xargs -0 grep -n`. Search patterns with spaces and wildcards (e.g. `rfind "def *initialize"`) are passed to `grep` with argument boundaries intact, without triggering premature shell file expansion.
+
